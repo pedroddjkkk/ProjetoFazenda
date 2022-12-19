@@ -9,15 +9,15 @@ import {
 const root = ReactDOM.createRoot(document.getElementById('root'));
 let arr = [];
 
-arr.push({id: 12, name: 'Doe', path: '/about', element: <div>about</div>});
-arr.push({id: 13, name: 'Doe', path: '/contact', element: <div>contact</div>});
-arr.push({id: 14, name: 'Doe', path: '/home', element: <div>home</div>});
+arr.push({name: 'Relatorios', path: '/about', element: <div>about</div>, icon: ""});
+arr.push({name: 'Bois', path: '/contact', element: <div>contact</div>, icon: ""});
+arr.push({name: 'Home', path: '/home', element: <div>home</div>, icon: ""});
 
 const router = createBrowserRouter(arr);
 
 root.render(
   <React.StrictMode>
-    <RouterProvider router={router} />
     <Navbar content={arr} />
+    <RouterProvider router={router} />
   </React.StrictMode>
 );

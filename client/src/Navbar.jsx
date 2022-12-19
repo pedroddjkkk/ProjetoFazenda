@@ -1,5 +1,4 @@
 import "./App.css";
-import "bootstrap/dist/css/bootstrap.min.css";
 import { useEffect } from "react";
 
 function App({content}) {
@@ -9,11 +8,11 @@ function App({content}) {
   }, [content]);
 
   return (
-    <div className="App">      
+    <nav>
       {content.map((item) => (
-        <button>{item.id}</button>
-        ))}
-    </div>
+        <a class=""  href={item.path} >{item.name}</a>
+      ))}
+  </nav>
   );
 }
 
