@@ -1,4 +1,5 @@
 import "../App.css";
+import "./Navbar.css"
 
 function App({content}) {
   return (
