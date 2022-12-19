@@ -1,20 +1,30 @@
 body{
   padding: 0;
   margin: 0;
+  background-color: #f1f1f1;
 }
-
 nav {
   position: absolute;
   overflow-y: auto;
   display: flex;
+  background-color: #e2e2e2;
   flex-direction: column;
-  border: 1px solid black;
+  border: 1px solid rgb(153, 149, 149);
   height: 100vh;
 }
 
 nav a {
-  color: rgb(0, 0, 0);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: rgb(27, 26, 26);
   text-decoration: none;
   padding: 0 1rem;
-  border: 1px solid gray;
+  width: 20px;
+  height: 50px;
+  border-bottom: 1px solid rgb(153, 149, 149);
+}
+
+nav a i {
+  font-size: 22px;
 }
