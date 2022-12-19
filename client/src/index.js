@@ -1,24 +1,23 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import App from './App';
+import Navbar from './Navbar';
+import {
+  createBrowserRouter,
+  RouterProvider,
+} from "react-router-dom";
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 let arr = [];
-arr.push({id: 1, name: 'John'});
-arr.push({id: 2, name: 'Doe'});
-arr.push({id: 3, name: 'Jane'});
-arr.push({id: 4, name: 'Doe'});
-arr.push({id: 5, name: 'John'});
-arr.push({id: 6, name: 'Doe'});
-arr.push({id: 7, name: 'Jane'});
-arr.push({id: 8, name: 'Doe'});
-arr.push({id: 9, name: 'John'});
-arr.push({id: 10, name: 'Doe'});
-arr.push({id: 11, name: 'Jane'});
-arr.push({id: 12, name: 'Doe'});
+
+arr.push({id: 12, name: 'Doe', path: '/about', element: <div>about</div>});
+arr.push({id: 13, name: 'Doe', path: '/contact', element: <div>contact</div>});
+arr.push({id: 14, name: 'Doe', path: '/home', element: <div>home</div>});
+
+const router = createBrowserRouter(arr);
 
 root.render(
   <React.StrictMode>
-    <App pages={arr}/>
+    <RouterProvider router={router} />
+    <Navbar content={arr} />
   </React.StrictMode>
 );
