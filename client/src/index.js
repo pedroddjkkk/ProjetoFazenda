@@ -19,28 +19,28 @@ pages.push({
   navigable: true,
   name: "Home",
   path: "/home",
-  element: <div className="main">home</div>,
+  element: <Navbar content={pages}><div className="main">home</div></Navbar>,
   icon: "fa-solid fa-house",
 });
 pages.push({
   navigable: true,
   name: "Relatorios",
   path: "/relatorios",
-  element: <div className="main">about</div>,
+  element: <Navbar content={pages}><div className="main">about</div></Navbar>,
   icon: "fa-solid fa-flag",
 });
 pages.push({
   navigable: true,
   name: "Bois",
   path: "/bois",
-  element: <div className="main">contact</div>,
+  element: <Navbar content={pages}><div className="main">contact</div></Navbar>,
   icon: "fa-solid fa-cow",
 });
 pages.push({
   navigable: true,
   name: "Cavalos",
   path: "/cavalos",
-  element: <div className="main">contact</div>,
+  element: <Navbar content={pages}><div className="main">contact</div></Navbar>,
   icon: "fa-solid fa-horse",
 });
 
@@ -49,7 +49,6 @@ const router = createBrowserRouter(pages);
 root.render(
   <React.StrictMode>
     <Provider store={store}>
-      <Navbar content={pages} />
       <RouterProvider router={router} />
     </Provider>
   </React.StrictMode>
