@@ -1,16 +1,15 @@
-const axios = require('axios');
+import axios from 'axios';
 
-const Buscar = async (tabela, pk, filtro) => {
-    const response = await axios.post('http://localhost:3001/buscar', { tabela: tabela, pk: pk, filtro: filtro});
-    return response.data;
+const api = axios.create({
+    baseURL: 'http://localhost:3001'
+});
+
+export const Buscar = async (tabela, pk, filtro) => {
+    const response = await api.post('/buscar', {tabela, pk, filtro}).then(res => res.data).catch(err => console.log(err));
+    return response;
 }
 
-const Salvar = async (tabela, where, registro) => {
-    const response = await axios.post('http://localhost:3001/salvar', { tabela: tabela, where: where, registro: registro});
+export const Salvar = async (tabela, where, registro) => {
+    const response = await api.post('/salvar', { tabela: tabela, where: where, registro: registro});
     return response.data;
 }
-
-module.exports = {
-    Buscar,
-    Salvar
-};

@@ -1,12 +1,14 @@
 import { useEffect } from "react";
 import { useFetcher } from "react-router-dom";
-import api from "../../services/api";
+import {Buscar, Salvar} from "../../services/api.js";
 
 export default function Login() {
 
     useEffect(() => {
-        const ret = api.Buscar("tab_user", "", "");
-        console.log(ret);
+        async function fetchData() {
+            return await Buscar("tab_user", "", "");
+        }
+        console.log(fetchData());
     }, []);
 
     return (
