@@ -1,5 +1,5 @@
 const modelBuscar = require("./model/buscar");
-
+const bodyParser = require("body-parser");
 const express = require("express");
 const path = require("path");
 const cors = require("cors");
@@ -10,6 +10,8 @@ const PORT = process.env.PORT || 3001;
 const app = express();
 
 app.use(cors());
+
+app.use(bodyParser.json())
 
 app.listen(PORT, () => {
   console.log(`Server listening on ${PORT}`);
@@ -30,5 +32,6 @@ app.get("/teste", (req, res) => {
 
 app.post("/buscar", async (req, res) => {
   const ret = await modelBuscar(req);
+  console.log(req);
   res.send(ret);
 });

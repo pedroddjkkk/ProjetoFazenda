@@ -6,7 +6,7 @@ const api = axios.create({
 
 export const Buscar = async (tabela, pk, filtro) => {
     const response = await api.post('/buscar', {tabela, pk, filtro}).then(res => res.data).catch(err => console.log(err));
-    return response;
+    return await response;
 }
 
 export const Salvar = async (tabela, where, registro) => {
