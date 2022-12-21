@@ -9,17 +9,23 @@ var pool = mysql.createPool({
 });
 
 function query(sql, callback) {
-    pool.getConnection(function(err, connection) {
-        if (err) {
-            callback(err, null);
-        } else {
-            connection.query(sql
-                , function(err, rows) {
-                    callback(err, rows);
-                    connection.release();
-                }
-            );
-        }
+    return new Promise((resolve, reject) => {
+        pool.getConnection(function (err, connection) {
+            if (err) {
+                reject(err);
+            } else {
+                connection.query(sql
+                    , function (err, rows) {
+                        connection.release();
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(rows);
+                        }
+                    }
+                );
+            }
+        });
     });
 }
 
