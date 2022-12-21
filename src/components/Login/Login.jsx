@@ -1,6 +1,11 @@
+import { useEffect } from "react";
 
 
 export default function Login() {
+
+    useEffect(() => {
+        console.log("aasd")
+    }, []);
 
     return (
         <div class="container">
@@ -10,7 +15,7 @@ export default function Login() {
                         <div class="card-body p-0">
                             <div class="row">
                                 <div class="col-lg-6 d-none d-lg-flex">
-                                    <div class="flex-grow-1 bg-login-image" style={{backgroundImage: "url(../src/assets/img/dogs/image3.jpeg)"}}></div>
+                                    <div class="flex-grow-1 bg-login-image" style={{backgroundImage: 'url("hhtp://localhost:3001/nature.jpg")'}}></div>
                                 </div>
                                 <div class="col-lg-6">
                                     <div class="p-5">
