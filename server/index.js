@@ -1,3 +1,5 @@
+const modelBuscar = require("./model/buscar");
+
 const express = require("express");
 const path = require("path");
 var dbUtils = require("./utils/dbUtils");
@@ -13,12 +15,17 @@ app.listen(PORT, () => {
 app.use(express.static(path.join(__dirname, "client", "build")));
 
 app.get("/teste", (req, res) => {
-    dbUtils.query("SELECT * FROM users", function(err, rows) {
-        if (err) {
-            console.log(err);
-        } else {
-            console.log(rows);
-            res.send(rows);
-        }
-    });
+  dbUtils.query("SELECT * FROM users", function (err, rows) {
+    if (err) {
+      console.log(err);
+    } else {
+      console.log(rows);
+      res.send(rows);
+    }
+  });
+});
+
+app.post("/buscar", async (req, res) => {
+  const ret = await modelBuscar(req);
+  res.send(ret);
 });
