@@ -4,12 +4,11 @@ const api = axios.create({
     baseURL: 'http://localhost:3001'
 });
 
-export const Buscar = async (tabela, pk, filtro) => {
-    const response = await api.post('/buscar', {tabela, pk, filtro}).then(res => res.data).catch(err => console.log(err));
-    return await response;
+export const apiBuscar = async (tabela, pk, filtro) => {
+    return await api.post('/buscar', {tabela, pk, filtro});
 }
 
-export const Salvar = async (tabela, where, registro) => {
+export const apiSalvar = async (tabela, where, registro) => {
     const response = await api.post('/salvar', { tabela: tabela, where: where, registro: registro});
     return response.data;
 }
