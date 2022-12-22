@@ -1,9 +1,12 @@
 import { useEffect, useState } from "react";
+import { connect, useDispatch } from "react-redux";
+import { changeUser, selectUser } from "../../redux/actions/userSlice.js";
 import { apiBuscar, apiSalvar } from "../../services/api.js";
 
-export default function Login() {
+function Login() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const dispatch = useDispatch();
 
     useEffect(() => {
         console.log(password);
@@ -18,11 +21,11 @@ export default function Login() {
         const response = await apiBuscar("tab_user", "", data);
 
         console.log(response);
-        
+
         if (response.data.length > 0) {
             const user = response.data[0];
-            localStorage.setItem("user", JSON.stringify(user));
-            window.location.href = "/";
+            dispatch(changeUser(user));
+            window.location.href = "/home";
         } else {
             alert("Usuário não encontrado");
         }
@@ -43,7 +46,6 @@ export default function Login() {
                                         <div className="text-center">
                                             <h4 className="text-dark mb-4">Bem Vindo de Volta!</h4>
                                         </div>
-                                        <form className="user">
                                             <div className="mb-3"><input className="form-control form-control-user" type="email" id="exampleInputEmail" aria-describedby="emailHelp" placeholder="Insira o email..." name="email" onChange={(target) => setEmail(target.target.value)} value={email}/></div>
                                             <div className="mb-3"><input className="form-control form-control-user" type="password" id="exampleInputPassword" placeholder="Senha" name="password" onChange={((target) => setPassword(target.target.value))} value={password} /></div>
                                             <div className="mb-3">
@@ -52,7 +54,6 @@ export default function Login() {
                                             </div><button className="btn btn-primary d-block btn-user w-100" onClick={() => handleSubmit()}>Login</button>
                                             <hr /><a className="btn btn-primary d-block btn-google btn-user w-100 mb-2" role="button"><i className="fab fa-google"></i>&nbsp; Login com Google</a><a className="btn btn-primary d-block btn-facebook btn-user w-100" role="button"><i className="fab fa-facebook-f"></i>&nbsp; Login com Facebook</a>
                                             <hr />
-                                        </form>
                                         <div className="text-center"><a className="small" href="forgot-password.html">Esqueceu a senha?</a></div>
                                         <div className="text-center"><a className="small" href="register.html">Crie uma conta!</a></div>
                                     </div>
@@ -65,3 +66,5 @@ export default function Login() {
         </div>
     );
 }
+
+export default Login;

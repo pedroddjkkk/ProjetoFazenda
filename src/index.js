@@ -5,6 +5,7 @@ import { Provider } from "react-redux";
 import store from "./redux/store";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Login from "./components/Login/Login";
+import Home from "./components/Home/Home";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 let pages = [];
@@ -19,7 +20,7 @@ pages.push({
   navigable: true,
   name: "Home",
   path: "/home",
-  element: <Navbar content={pages}><div className="main">home</div></Navbar>,
+  element: <Home />,
   icon: "fa-solid fa-house",
 });
 pages.push({
