@@ -27,23 +27,25 @@ pages.push({
   navigable: true,
   name: "Relatorios",
   path: "/relatorios",
-  element: <Navbar content={pages}><div className="main">about</div></Navbar>,
+  element: <div className="main">about</div>,
   icon: "fa-solid fa-flag",
 });
 pages.push({
   navigable: true,
   name: "Bois",
   path: "/bois",
-  element: <Navbar content={pages}><div className="main">contact</div></Navbar>,
+  element: <div className="main">contact</div>,
   icon: "fa-solid fa-cow",
 });
 pages.push({
   navigable: true,
   name: "Cavalos",
   path: "/cavalos",
-  element: <Navbar content={pages}><div className="main">contact</div></Navbar>,
+  element: <div className="main">contact</div>,
   icon: "fa-solid fa-horse",
 });
+
+localStorage.setItem("pages", JSON.stringify(pages));
 
 const router = createBrowserRouter(pages);
 
