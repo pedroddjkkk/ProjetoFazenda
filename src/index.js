@@ -45,13 +45,16 @@ pages.push({
   icon: "fa-solid fa-horse",
 });
 
-localStorage.setItem("pages", JSON.stringify(pages));
+if(localStorage.getItem("pages") === null) {
+  localStorage.setItem("pages", JSON.stringify(pages));
+}
 
 const router = createBrowserRouter(pages);
 
 root.render(
   <React.StrictMode>
     <Provider store={store}>
+      <Navbar routes={pages}/>
       <RouterProvider router={router} />
     </Provider>
   </React.StrictMode>
