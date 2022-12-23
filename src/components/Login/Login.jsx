@@ -2,6 +2,9 @@ import { useEffect, useState } from "react";
 import { connect, useDispatch } from "react-redux";
 import { changeUser, selectUser } from "../../redux/actions/userSlice.js";
 import { apiBuscar, apiSalvar } from "../../services/api.js";
+import "./Login.css";
+
+const image = require("../../assets/img/nature.jpg");
 
 function Login() {
     const [email, setEmail] = useState("");
@@ -42,7 +45,7 @@ function Login() {
                         <div className="card-body p-0">
                             <div className="row">
                                 <div className="col-lg-6 d-none d-lg-flex">
-                                    <div className="flex-grow-1 bg-login-image" style={{backgroundImage: 'url("hhtp://localhost:3001/nature.jpg")'}}></div>
+                                    <div className="flex-grow-1 bg-login-image nature-image"></div>
                                 </div>
                                 <div className="col-lg-6">
                                     <div className="p-5">
