@@ -8,7 +8,12 @@ export default function Cadastro() {
   const selectedTab = useSelector((state) => state.tabs.selectedTab);
 
   useEffect(() => {
-    dispatch(newTabs(["Listar", "Cadastrar"]));
+    dispatch(
+      newTabs([
+        { name: "Listar", content: <h1>xingling</h1> },
+        { name: "Cadastrar", content: <h4>asdsad</h4> },
+      ])
+    );
   }, []);
 
   return (
@@ -19,25 +24,36 @@ export default function Cadastro() {
             return (
               <li class="nav-item" role="presentation">
                 <a
-                  class={selectedTab == tab ? "nav-link active" : "nav-link"}
+                  class={
+                    selectedTab == tab.name ? "nav-link active" : "nav-link"
+                  }
                   role="tab"
                   data-bs-toggle="tab"
                   href="#tab-1"
-                  onClick={() => dispatch(selectTab(tab))}
+                  onClick={() => dispatch(selectTab(tab.name))}
                 >
-                  {tab}
+                  {tab.name}
                 </a>
               </li>
             );
           })}
         </ul>
         <div class="tab-content">
-          <div id="tab-1" class="tab-pane active" role="tabpanel">
-            <p>Content for tab 1.</p>
-          </div>
-          <div id="tab-2" class="tab-pane" role="tabpanel">
-            <p>Content for tab 2.</p>
-          </div>
+          {tabs.map((tab, index) => {
+            return (
+              <div
+                class={
+                  selectedTab == tab.name
+                    ? "tab-pane fade show active"
+                    : "tab-pane fade"
+                }
+                role="tabpanel"
+                data-bs-parent="#myTabContent"
+              >
+                {tab.content}
+              </div>
+            );
+          })}
         </div>
       </div>
     </div>
