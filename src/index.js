@@ -7,59 +7,52 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Login from "./components/Login/Login";
 import Home from "./components/Home/Home";
 
-const root = ReactDOM.createRoot(document.getElementById("page-top"));
+const root = ReactDOM.createRoot(document.getElementById("root"));
 let pages = [];
 
 pages.push({
-  navigable: false,
-  name: "Login",
-  path: "/login",
-  element: <Login />,
-});
-pages.push({
+  navigable: true,
   element: <Navbar />,
   children: [
-    {
-      navigable: true,
-      name: "Home",
-      path: "/home",
-      element: <Home />,
-      icon: "fa-solid fa-house",
-    },
+      {
+          navigable: true,
+          name: "Home",
+          path: "/home",
+          element: <Home />,
+          icon: "fa-solid fa-house",
+      },
+      {
+          navigable: true,
+          name: "Profile",
+          path: "/profile",
+          element: <Home />,
+          icon: "fa-solid fa-user",
+      },
+      {
+          navigable: true,
+          name: "Settings",
+          path: "/settings",
+          element: <Home />,
+          icon: "fa-solid fa-cog",
+      },
   ],
 });
 pages.push({
-  navigable: true,
-  name: "Relatorios",
-  path: "/relatorios",
-  element: <div className="main">about</div>,
-  icon: "fa-solid fa-flag",
-});
-pages.push({
-  navigable: true,
-  name: "Bois",
-  path: "/bois",
-  element: <div className="main">contact</div>,
-  icon: "fa-solid fa-cow",
-});
-pages.push({
-  navigable: true,
-  name: "Cavalos",
-  path: "/cavalos",
-  element: <div className="main">contact</div>,
-  icon: "fa-solid fa-horse",
+    navigable: false,
+    name: "Login",
+    path: "/login",
+    element: <Login />,
 });
 
-if(localStorage.getItem("pages") === null) {
-  localStorage.setItem("pages", JSON.stringify(pages));
-}
+
+localStorage.setItem("pages", JSON.stringify(pages));
 
 const router = createBrowserRouter(pages);
 
 root.render(
-  <React.StrictMode>
-    <Provider store={store}>
-      <RouterProvider router={router} />
-    </Provider>
-  </React.StrictMode>
+    <React.StrictMode>
+        <Provider store={store}>
+            <RouterProvider router={router} />
+        </Provider>
+    </React.StrictMode>
 );
