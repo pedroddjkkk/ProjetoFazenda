@@ -1,5 +1,6 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router";
 import { changeUser } from "../../redux/actions/userSlice.js";
 import { apiBuscar } from "../../services/api.js";
 import "./Login.css";
@@ -8,10 +9,7 @@ function Login() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const dispatch = useDispatch();
-
-    useEffect(() => {
-        console.log(password);
-    }, [password]);
+    const navigate = useNavigate();
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -23,13 +21,11 @@ function Login() {
 
         const response = await apiBuscar("tab_user", "", data);
 
-        console.log(response);
-
         if (response.data.length > 0) {
             const user = response.data[0];
             dispatch(changeUser(user));
             localStorage.setItem("user", JSON.stringify(user));
-            window.location.href = "/home";
+            navigate("/home")
         } else {
             alert("Usuário não encontrado");
         }

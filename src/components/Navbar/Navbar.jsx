@@ -87,6 +87,7 @@ function Navbar(teste) {
                         </footer> */}
                     </div>
                 </div>
+                <script src="../../assets/js/script.min" />
             </div>
         );
 }
