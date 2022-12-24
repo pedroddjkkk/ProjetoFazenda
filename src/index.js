@@ -7,7 +7,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Login from "./components/Login/Login";
 import Home from "./components/Home/Home";
 
-const root = ReactDOM.createRoot(document.getElementById("root"));
+const root = ReactDOM.createRoot(document.getElementById("page-top"));
 let pages = [];
 
 pages.push({
@@ -17,11 +17,16 @@ pages.push({
   element: <Login />,
 });
 pages.push({
-  navigable: true,
-  name: "Home",
-  path: "/home",
-  element: <Home />,
-  icon: "fa-solid fa-house",
+  element: <Navbar />,
+  children: [
+    {
+      navigable: true,
+      name: "Home",
+      path: "/home",
+      element: <Home />,
+      icon: "fa-solid fa-house",
+    },
+  ],
 });
 pages.push({
   navigable: true,
@@ -54,7 +59,6 @@ const router = createBrowserRouter(pages);
 root.render(
   <React.StrictMode>
     <Provider store={store}>
-      <Navbar routes={pages}/>
       <RouterProvider router={router} />
     </Provider>
   </React.StrictMode>
