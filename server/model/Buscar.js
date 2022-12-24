@@ -1,12 +1,14 @@
 const modelUser = require("./User");
+const modelBoi = require("./Boi");
 
 async function buscar(req, res) {
     const { tabela, pk, filtro } = req.body;
 
     if (tabela === "tab_user") {
-        const ret = await modelUser.buscar(pk, filtro);
-        console.log(ret);
-        return ret;
+      return await modelUser.buscar(pk, filtro); 
+    }
+    if(tabela === "tab_bois") {
+      return await modelBoi.buscar(pk, filtro); 
     }
 }
 

@@ -1,14 +1,29 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { newTabs, selectTab } from "../../redux/actions/tabsSlice";
+import { apiBuscar } from "../../services/api";
 import TableComponent from "../Table/Table";
 import Table from "../Table/Table";
 
 
-export default function Cadastro() {
+export default function Cadastro({ columns = [], table}) {
   const dispatch = useDispatch();
   const tabs = useSelector((state) => state.tabs.tabs);
   const selectedTab = useSelector((state) => state.tabs.selectedTab);
+  const [data, setData] = useState([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const ret = await apiBuscar(table, "", "");
+      return ret
+    };
+
+    setData(fetchData());
+  }, []);
+
+  useEffect(() => {
+    console.log(data);
+  }, [data]);
 
   return (
     <div>

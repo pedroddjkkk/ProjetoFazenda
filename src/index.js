@@ -42,7 +42,7 @@ pages.push({
             navigable: true,
             name: "Bois",
             path: "/bois",
-            element: <Bois></Bois>,
+            element: <Bois />,
             icon: "fa-solid fa-cow",
         },
     ],

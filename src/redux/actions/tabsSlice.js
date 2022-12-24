@@ -11,15 +11,15 @@ export const tabsSlice = createSlice({
         name: "Listar",
         content: (
           <BasicTable
-            cells={["name", "Proteina"]}
+            cells={["Name", "Proteina"]}
             rows={[
-              { name: "asd", Proteina: "sd" },
-              { name: "dsada", Proteina: "dsafsdfs  " },
+              { Name: "asd", Proteina: "fgh" },
+              { Name: "dsada", Proteina: "dsafsdfs  " },
             ]}
           />
         ),
       },
-      { name: "Cadastrar", content: <h4>asdsad</h4> },
+      { name: "Adicionar", content: <h4>asdsad</h4> },
     ],
   },
   reducers: {
