@@ -1,20 +1,14 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { newTabs, selectTab } from "../../redux/actions/tabsSlice";
+import TableComponent from "../Table/Table";
+import Table from "../Table/Table";
+
 
 export default function Cadastro() {
   const dispatch = useDispatch();
   const tabs = useSelector((state) => state.tabs.tabs);
   const selectedTab = useSelector((state) => state.tabs.selectedTab);
-
-  useEffect(() => {
-    dispatch(
-      newTabs([
-        { name: "Listar", content: <h1>xingling</h1> },
-        { name: "Cadastrar", content: <h4>asdsad</h4> },
-      ])
-    );
-  }, []);
 
   return (
     <div>
