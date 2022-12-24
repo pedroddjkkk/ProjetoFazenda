@@ -3,14 +3,14 @@ import { createSlice } from "@reduxjs/toolkit";
 export const tabsSlice = createSlice({
     name: "tabs",
     initialState: {
-        selectedTab: "listTab",
+        selectedTab: "Listar",
     },
     reducers: {
         newTabs: (state, { payload }) => {
             return {...state, tabs: [...payload]};
         },
         removeTabs: (state, { payload }) => {
-            return {...state, tabs: state.tabs.filter(tab => tab !== payload)};
+            return {...state, tabs: [...payload]};
         },
         selectTab: (state, { payload }) => {
             return {...state, selectedTab: payload};
