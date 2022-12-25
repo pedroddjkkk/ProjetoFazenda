@@ -1,4 +1,4 @@
-import { Paper, TextField } from "@mui/material";
+import { Box, Paper, TextField } from "@mui/material";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { newTabs, selectTab } from "../../redux/actions/tabsSlice";
@@ -71,11 +71,11 @@ export default function Cadastro({ columns = [], table }) {
                   }
                   role="tabpanel"
                   data-bs-parent="#myTabContent"
-                >
-                  <Paper elevation={2}>
-                    <TextField fullWidth label="Filtro" variant="filled"/>
+                > <Paper elevation={1} style={{borderRadius: 0, borderLeft: "1px solid #dddfeb"}}>
+                    { selectedTab == "Listar" && <TextField fullWidth label="Filtro" variant="standard" style={{marginTop: "20px"}} />}
                     {tab.content}
                   </Paper>
+                  
                   
                 </div>
               );
