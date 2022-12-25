@@ -10,16 +10,16 @@ export default function BasicTable({ cells, rows }) {
     >
       <thead>
         <tr>
-          {cells.map((cell) => {
+          {cells && cells.map((cell) => {
             return <th>{cell}</th>;
           })}
         </tr>
       </thead>
       <tbody>
-        {rows.map((row) => {
+        {rows && rows.map((row) => {
           return (
             <tr>
-              {cells.map((cell) => {
+              {cells && cells.map((cell) => {
                 return <td>{row[cell]}</td>;
               })}
             </tr>

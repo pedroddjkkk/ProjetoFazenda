@@ -6,21 +6,6 @@ export const tabsSlice = createSlice({
   name: "tabs",
   initialState: {
     selectedTab: "Listar",
-    tabs: [
-      {
-        name: "Listar",
-        content: (
-          <BasicTable
-            cells={["Name", "Proteina"]}
-            rows={[
-              { Name: "asd", Proteina: "fgh" },
-              { Name: "dsada", Proteina: "dsafsdfs  " },
-            ]}
-          />
-        ),
-      },
-      { name: "Adicionar", content: <h4>asdsad</h4> },
-    ],
   },
   reducers: {
     newTabs: (state, { payload }) => {

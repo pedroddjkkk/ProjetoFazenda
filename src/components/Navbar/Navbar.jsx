@@ -5,17 +5,7 @@ import "../../assets/css/styles.min.css";
 
 function Navbar(teste) {
   const pages = JSON.parse(localStorage.getItem("pages"));
-  const location = window.location.pathname;
-  var show = true;
 
-  console.log("location", teste);
-
-  pages.forEach((item) => {
-    if (item.path === location && !item.navigable) show = false;
-  });
-
-  if (!show) return <div></div>;
-  else
     return (
       <div id="page-top">
         <div id="wrapper">
