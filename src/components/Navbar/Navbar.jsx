@@ -1,10 +1,12 @@
+import { useEffect } from "react";
+import { useSelector } from "react-redux";
 import { NavLink, Outlet } from "react-router-dom";
 import "../../App.css";
 import "../../assets/bootstrap/css/bootstrap.min.css";
 import "../../assets/css/styles.min.css";
 
 function Navbar(teste) {
-  const pages = JSON.parse(localStorage.getItem("pages"));
+  const pages = useSelector((state) => state.nav)
 
     return (
       <div id="page-top">
@@ -24,11 +26,11 @@ function Navbar(teste) {
               </a>
               <hr class="sidebar-divider my-0" />
               <ul id="accordionSidebar" class="navbar-nav text-light">
-                {pages[0].children.map((item) => {
+                {pages[0].children.map((item, index) => {
                   if (item.navigable)
                     return (
                       <li className="nav-item">
-                        <NavLink className="nav-link" to={item.path}>
+                        <NavLink className="nav-link" key={index} to={item.path}>
                           <i className={"fas " + item.icon}></i>
                           <span>{item.name}</span>
                         </NavLink>

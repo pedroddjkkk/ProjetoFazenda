@@ -1,6 +1,4 @@
 import { createSlice } from "@reduxjs/toolkit";
-import BasicTable from "../../components/Table/Table";
-import TableComponent from "../../components/Table/Table";
 
 export const tabsSlice = createSlice({
   name: "tabs",

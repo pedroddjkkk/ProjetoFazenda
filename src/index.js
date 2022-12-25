@@ -7,9 +7,9 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Login from "./components/Login/Login";
 import Home from "./components/Home/Home";
 import Bois from "./components/Bois/Bois";
-import TableComponent from "./components/Table/Table";
-import BasicTable from "./components/Table/Table";
+import { selectNavTabs } from "./redux/actions/navSlice";
 
+const dispatch = store.dispatch;
 const root = ReactDOM.createRoot(document.getElementById("root"));
 let pages = [];
 
@@ -50,11 +50,11 @@ pages.push({
 pages.push({
     navigable: false,
     name: "Login",
-    path: "/login",
+    path: "/",
     element: <Login />,
 });
 
-localStorage.setItem("pages", JSON.stringify(pages));
+dispatch(selectNavTabs(pages))
 
 const router = createBrowserRouter(pages);
 

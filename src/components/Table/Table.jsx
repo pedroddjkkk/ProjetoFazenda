@@ -10,17 +10,17 @@ export default function BasicTable({ cells, rows }) {
     >
       <thead>
         <tr>
-          {cells && cells.map((cell) => {
-            return <th>{cell}</th>;
+          {cells && cells.map((cell, index) => {
+            return <th key={index}>{cell.name}</th>;
           })}
         </tr>
       </thead>
       <tbody>
-        {rows && rows.map((row) => {
+        {rows && rows.map((row, index) => {
           return (
-            <tr>
-              {cells && cells.map((cell) => {
-                return <td>{row[cell]}</td>;
+            <tr key={index}>
+              {cells && cells.map((cell, indexc) => {
+                return <td key={indexc}>{row[cell.field]}</td>;
               })}
             </tr>
           );
