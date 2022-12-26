@@ -10,6 +10,7 @@ export default function Cadastro({ columns = [], table }) {
   const tabs = useSelector((state) => state.tabs.tabs);
   const selectedTab = useSelector((state) => state.tabs.selectedTab);
   const [data, setData] = useState();
+  const [filtro, setFiltro] = useState();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -35,6 +36,14 @@ export default function Cadastro({ columns = [], table }) {
   useEffect(() => {
     console.log(selectedTab);
   }, [selectedTab]);
+
+  async function handleKeyDown(event){
+    if(event.key === 'Enter'){
+      event.preventDefault();
+      const ret = await apiBuscar(table, "", filtro);
+      setData(ret.data);
+    }
+  }
 
   return (
     <div>
@@ -71,12 +80,24 @@ export default function Cadastro({ columns = [], table }) {
                   }
                   role="tabpanel"
                   data-bs-parent="#myTabContent"
-                > <Paper elevation={1} style={{borderRadius: 0, borderLeft: "1px solid #dddfeb"}}>
-                    { selectedTab == "Listar" && <TextField fullWidth label="Filtro" variant="standard" style={{marginTop: "20px"}} />}
+                >
+                  {" "}
+                  <Paper
+                    elevation={1}
+                    style={{ borderRadius: 0, borderLeft: "1px solid #dddfeb" }}
+                  >
+                    {selectedTab == "Listar" && (
+                      <TextField
+                        onKeyDown={(e) => handleKeyDown(e)}
+                        fullWidth
+                        label="Filtro"
+                        variant="standard"
+                        style={{ marginTop: "20px" }}
+                        onChange={(e) => setFiltro(e.target.value)}
+                      />
+                    )}
                     {tab.content}
                   </Paper>
-                  
-                  
                 </div>
               );
             })}

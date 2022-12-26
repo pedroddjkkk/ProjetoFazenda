@@ -15,7 +15,7 @@ let pages = [];
 
 pages.push({
     navigable: true,
-    element: <Navbar />,
+    element: <Navbar pages={pages}/>,
     children: [
         {
             navigable: true,
@@ -53,8 +53,6 @@ pages.push({
     path: "/",
     element: <Login />,
 });
-
-dispatch(selectNavTabs(pages))
 
 const router = createBrowserRouter(pages);
 

@@ -5,8 +5,7 @@ import "../../App.css";
 import "../../assets/bootstrap/css/bootstrap.min.css";
 import "../../assets/css/styles.min.css";
 
-function Navbar(teste) {
-  const pages = useSelector((state) => state.nav)
+function Navbar({pages}) {
 
     return (
       <div id="page-top">

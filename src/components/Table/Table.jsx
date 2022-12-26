@@ -1,4 +1,5 @@
 import * as React from "react";
+import "./Table.css"
 
 export default function BasicTable({ cells, rows }) {
   return (
@@ -18,7 +19,7 @@ export default function BasicTable({ cells, rows }) {
       <tbody>
         {rows && rows.map((row, index) => {
           return (
-            <tr key={index}>
+            <tr className="table-content">
               {cells && cells.map((cell, indexc) => {
                 return <td key={indexc}>{row[cell.field]}</td>;
               })}
