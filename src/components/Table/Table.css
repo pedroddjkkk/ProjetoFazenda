@@ -1,4 +1,13 @@
-tr:hover{
+.table-content:hover{
   background-color: #f5f5f5;
   cursor: pointer;
+}
+
+.table-content:nth-child(even){
+  background-color: #bcc6e6;
+  color: #fff;
+}
+
+.table-content:nth-child(odd){
+  background-color: #f5f5f5;
 }

@@ -5,7 +5,7 @@ export default function BasicTable({ cells, rows }) {
   return (
     <table
       id="example"
-      class="table table-striped table-bordered"
+      class="table table-bordered"
       cellspacing="0"
       width="100%"
     >
