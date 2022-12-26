@@ -8,6 +8,7 @@ import Login from "./components/Login/Login";
 import Home from "./components/Home/Home";
 import Bois from "./components/Bois/Bois";
 import { selectNavTabs } from "./redux/actions/navSlice";
+import Usuarios from "./components/Usuarios/Usuarios";
 
 const dispatch = store.dispatch;
 const root = ReactDOM.createRoot(document.getElementById("root"));
@@ -19,16 +20,16 @@ pages.push({
     children: [
         {
             navigable: true,
-            name: "Home",
+            name: "Dashboard",
             path: "/home",
             element: <Home />,
             icon: "fa-solid fa-house",
         },
         {
             navigable: true,
-            name: "Profile",
-            path: "/profile",
-            element: <></>,
+            name: "Usuários",
+            path: "/users",
+            element: <Usuarios></Usuarios>,
             icon: "fa-solid fa-user",
         },
         {
