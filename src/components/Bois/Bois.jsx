@@ -10,8 +10,24 @@ export default function Bois() {
     ];
   }
 
+  function getAddColumns() {
+    return (  
+      <div>
+        <div className="form-group">
+          <label htmlFor="peso">Peso (Kg)</label>
+          <input type="number" className="form-control" id="peso" />
+        </div>
+        <div className="form-group">
+          <label htmlFor="raca">Raça</label>
+          <input type="text" className="form-control" id="raca" />
+        </div>
+      </div>
+    );
+  }
+
   return <Cadastro 
     columns={getColumns()}
     table="tab_bois"
+    addColumns={getAddColumns()}
   />;
 }

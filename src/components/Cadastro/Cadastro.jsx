@@ -5,7 +5,7 @@ import { newTabs, selectTab } from "../../redux/actions/tabsSlice";
 import { apiBuscar } from "../../services/api";
 import BasicTable from "../Table/Table";
 
-export default function Cadastro({ columns = [], table }) {
+export default function Cadastro({ columns, table, addColumns }) {
   const dispatch = useDispatch();
   const tabs = useSelector((state) => state.tabs.tabs);
   const selectedTab = useSelector((state) => state.tabs.selectedTab);
@@ -28,7 +28,7 @@ export default function Cadastro({ columns = [], table }) {
           name: "Listar",
           content: <BasicTable cells={columns} rows={data} />,
         },
-        { name: "Adicionar", content: <h4>asdsad</h4> },
+        { name: "Adicionar", content: addColumns },
       ])
     );
   }, [data]);
