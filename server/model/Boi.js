@@ -10,7 +10,7 @@ async function buscar(pk, filtro) {
       FROM 
         tab_bois AS a 
       WHERE 
-        a.raca = '${filtro}'`;
+        a.raca like '${filtro}'`;
     } else {
       sql = `
       SELECT 

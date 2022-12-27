@@ -1,12 +1,24 @@
 const dbUtils = require("../utils/dbUtils");
 
 async function buscar(pk, filtro) {
-  if(filtro){
-    const sql = `SELECT * FROM tab_user WHERE email = '${filtro.email}' AND password = md5('${filtro.password}')`;
+  if (filtro) {
+    const sql = `
+    SELECT 
+      * 
+    FROM 
+      tab_user 
+    WHERE 
+      email = '${filtro.email}' 
+    AND 
+      password = md5('${filtro.password}')`;
     const ret = await dbUtils.query(sql);
     return ret;
   } else {
-    const sql = `SELECT * FROM tab_user`;
+    const sql = `
+    SELECT 
+      * 
+    FROM 
+      tab_user`;
     const ret = await dbUtils.query(sql);
     return ret;
   }
