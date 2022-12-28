@@ -1,4 +1,35 @@
-const dbUtils = require("../utils/dbUtils");
+const sequelize = require("../utils/dbUtils").sequelize;
+
+const { DataTypes, Model } = require("sequelize");
+
+class Boi extends Model {
+  otherPublicField;
+}
+
+Boi.init(
+  {
+    id_pk: {
+      type: DataTypes.INTEGER,
+      autoIncrement: true,
+      primaryKey: true,
+    },
+    raca: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    peso: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+    },
+  },
+  {
+    sequelize,
+    tableName: "tab_bois",
+    timestamps: true,
+    updatedAt: "dr_hr_atualizacao",
+    createdAt: "dr_hr_criacao",
+  }
+);
 
 async function buscar(pk, filtro) {
   if (filtro) {
