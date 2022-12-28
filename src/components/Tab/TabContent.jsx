@@ -1,20 +1,19 @@
-import { Children } from "react";
+import { Paper } from "@mui/material";
 import { useSelector } from "react-redux";
 
-export default function TabContent({ id, children }){
+export default function TabContent({ id, children }) {
   const selectedTab = useSelector((state) => state.tabs.selectedTab);
 
-  if(id == selectedTab) {
+  if (id == selectedTab) {
     return (
-      <div className="tab-pane fade show active" id="tab-1" role="tabpanel">
+      <Paper
+        elevation={1}
+        style={{ borderRadius: 0, borderLeft: "1px solid #dddfeb" }}
+      >
         {children}
-      </div>
+      </Paper>
     );
   } else {
-    return (
-      <div className="tab-pane fade" id="tab-1" role="tabpanel">
-        {children}
-      </div>
-    );
+    return null;
   }
 }

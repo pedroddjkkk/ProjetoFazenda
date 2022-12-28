@@ -23,12 +23,7 @@ export default function Cadastro({ columns, table, addColumns }) {
   }, []);
 
   useEffect(() => {
-    dispatch(
-      newTabs([
-        { name: "Listar", },
-        { name: "Adicionar" },
-      ])
-    );
+    dispatch(newTabs([{ name: "Listar" }, { name: "Adicionar" }]));
   }, [data]);
 
   useEffect(() => {
@@ -67,8 +62,23 @@ export default function Cadastro({ columns, table, addColumns }) {
             })}
         </ul>
         <div className="tab-content">
-          <TabContent id="Listar" children={<h2>asdasd</h2>}/>
-          <TabContent id="Adicionar" children={<h1>adssdsdadas</h1>} />
+          <TabContent
+            id="Listar"
+            children={
+              <>
+                <TextField
+                  onKeyDown={(e) => handleKeyDown(e)}
+                  fullWidth
+                  label="Filtro"
+                  variant="standard"
+                  style={{ marginTop: "20px" }}
+                  onChange={(e) => setFiltro(e.target.value)}
+                />
+                <BasicTable cells={columns} rows={data} />
+              </>
+            }
+          />
+          <TabContent id="Adicionar" children={ addColumns } />
         </div>
       </div>
     </div>
