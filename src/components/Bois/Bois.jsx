@@ -1,6 +1,9 @@
 import Cadastro from "../Cadastro/Cadastro";
+import BasicTable from "../Table/Table";
 
 export default function Bois() {
+
+
 
   function getColumns() {
     return [

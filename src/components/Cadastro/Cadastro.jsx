@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { newTabs, selectTab } from "../../redux/actions/tabsSlice";
 import { apiBuscar } from "../../services/api";
+import TabContent from "../Tab/TabContent";
 import BasicTable from "../Table/Table";
 
 export default function Cadastro({ columns, table, addColumns }) {
@@ -24,11 +25,8 @@ export default function Cadastro({ columns, table, addColumns }) {
   useEffect(() => {
     dispatch(
       newTabs([
-        {
-          name: "Listar",
-          content: <BasicTable cells={columns} rows={data} />,
-        },
-        { name: "Adicionar", content: addColumns },
+        { name: "Listar", },
+        { name: "Adicionar" },
       ])
     );
   }, [data]);
@@ -37,8 +35,8 @@ export default function Cadastro({ columns, table, addColumns }) {
     console.log(selectedTab);
   }, [selectedTab]);
 
-  async function handleKeyDown(event){
-    if(event.key === 'Enter'){
+  async function handleKeyDown(event) {
+    if (event.key === "Enter") {
       event.preventDefault();
       const ret = await apiBuscar(table, "", filtro);
       setData(ret.data);
@@ -69,38 +67,8 @@ export default function Cadastro({ columns, table, addColumns }) {
             })}
         </ul>
         <div className="tab-content">
-          {tabs &&
-            tabs.map((tab, index) => {
-              return (
-                <div
-                  className={
-                    selectedTab == tab.name
-                      ? "tab-pane fade show active"
-                      : "tab-pane fade"
-                  }
-                  role="tabpanel"
-                  data-bs-parent="#myTabContent"
-                >
-                  {" "}
-                  <Paper
-                    elevation={1}
-                    style={{ borderRadius: 0, borderLeft: "1px solid #dddfeb" }}
-                  >
-                    {selectedTab == "Listar" && (
-                      <TextField
-                        onKeyDown={(e) => handleKeyDown(e)}
-                        fullWidth
-                        label="Filtro"
-                        variant="standard"
-                        style={{ marginTop: "20px" }}
-                        onChange={(e) => setFiltro(e.target.value)}
-                      />
-                    )}
-                    {tab.content}
-                  </Paper>
-                </div>
-              );
-            })}
+          <TabContent id="Listar" children={<h2>asdasd</h2>}/>
+          <TabContent id="Adicionar" children={<h1>adssdsdadas</h1>} />
         </div>
       </div>
     </div>
