@@ -28,7 +28,7 @@ function Login() {
       };
       dispatch(changeUser(user));
       localStorage.setItem("user", JSON.stringify(user));
-      navigate("/home");
+      navigate("/users");
     } else {
       alert("Usuário não encontrado");
     }

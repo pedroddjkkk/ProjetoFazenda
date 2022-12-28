@@ -20,15 +20,23 @@ app.listen(PORT, () => {
 
 app.use(express.static(path.join(__dirname, "client", "build")));
 
-app.post("/buscar", async (req, res) => {
-  const ret = await modelBuscar(req, res);
-  res.send(ret);
-});
+try {
+  app.post("/buscar", async (req, res) => {
+    const ret = await modelBuscar(req, res);
+    res.send(ret);
+  });
+} catch (error) {
+  console.log("Erro na rota buscar: ", error);
+}
 
-app.post("/salvar", async (req, res) => {
-  const ret = await modelSalvar(req, res);
-  res.send(ret);
-});
+try {
+  app.post("/salvar", async (req, res) => {
+    const ret = await modelSalvar(req, res);
+    res.send(ret);
+  });
+} catch (error) {
+  console.log("Erro na rota salvar: ", error);
+}
 
 dbUtils.tryConnection();
 

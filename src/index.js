@@ -5,12 +5,10 @@ import { Provider } from "react-redux";
 import store from "./redux/store";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Login from "./components/Login/Login";
-import Home from "./components/Home/Home";
 import Bois from "./components/Bois/Bois";
-import { selectNavTabs } from "./redux/actions/navSlice";
 import Usuarios from "./components/Usuarios/Usuarios";
+import Fazendas from "./components/Fazendas/Fazendas";
 
-const dispatch = store.dispatch;
 const root = ReactDOM.createRoot(document.getElementById("root"));
 let pages = [];
 
@@ -20,24 +18,10 @@ pages.push({
     children: [
         {
             navigable: true,
-            name: "Dashboard",
-            path: "/home",
-            element: <Home />,
-            icon: "fa-solid fa-house",
-        },
-        {
-            navigable: true,
             name: "Usuários",
             path: "/users",
-            element: <Usuarios></Usuarios>,
+            element: <Usuarios />,
             icon: "fa-solid fa-user",
-        },
-        {
-            navigable: true,
-            name: "Settings",
-            path: "/settings",
-            element: <h1>Settingsaaaa</h1>,
-            icon: "fa-solid fa-cog",
         },
         {
             navigable: true,
@@ -46,6 +30,13 @@ pages.push({
             element: <Bois />,
             icon: "fa-solid fa-cow",
         },
+        {
+            navigable: true,
+            name: "Fazendas",
+            path: "/fazendas",
+            element: <Fazendas />,
+            icon: "fa-solid fa-farm",
+        }
     ],
 });
 pages.push({

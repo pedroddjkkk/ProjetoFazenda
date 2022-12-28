@@ -2,18 +2,19 @@ import { TextField } from "@mui/material";
 import { useState } from "react";
 import Cadastro from "../Cadastro/Cadastro";
 
-export default function Usuarios() {
+export default function Fazendas() {
   const [nome, setNome] = useState();
-  const [email, setEmail] = useState();
-  const [login, setLogin] = useState();
-  const [senha, setSenha] = useState();
+  const [cnpj, setCnpj] = useState();
+  const [endereco, setEndereco] = useState();
+  const [telefone, setTelefone] = useState();
 
   function getColumns() {
     return [
       { name: "Identificação", field: "id_pk" },
-      { name: "Email", field: "email" },
-      { name: "Login", field: "login" },
       { name: "Nome", field: "nome" },
+      { name: "Cnpj", field: "cnpj" },
+      { name: "Endereço", field: "endereco" },
+      { name: "Telefone", field: "telefone" },
     ];
   }
 
@@ -31,29 +32,29 @@ export default function Usuarios() {
             variant="standard"
           />
           <TextField
-            label="Email"
+            label="Cnpj"
             id="standard-start-adornment"
             className="col-sm-2"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            value={cnpj}
+            onChange={(e) => setCnpj(e.target.value)}
             style={{ marginRight: "40px" }}
             variant="standard"
           />
           <TextField
-            label="Login"
+            label="Endereço"
             id="standard-start-adornment"
             className="col-sm-2"
-            value={login}
-            onChange={(e) => setLogin(e.target.value)}
+            value={endereco}
+            onChange={(e) => setEndereco(e.target.value)}
             style={{ marginRight: "40px" }}
             variant="standard"
           />
           <TextField
-            label="Senha"
+            label="telefone"
             id="standard-start-adornment"
             className="col-sm-2"
-            value={senha}
-            onChange={(e) => setSenha(e.target.value)}
+            value={telefone}
+            onChange={(e) => setTelefone(e.target.value)}
             style={{ marginRight: "40px" }}
             variant="standard"
           />
@@ -65,23 +66,23 @@ export default function Usuarios() {
   function getData(){
     return {
       nome: nome,
-      email: email,
-      login: login,
-      senha: senha
+      cnpj: cnpj,
+      endereco: endereco,
+      telefone: telefone
     }
   }
 
   function clearData(){
     setNome("");
-    setEmail("");
-    setLogin("");
-    setSenha("");
+    setCnpj("");
+    setEndereco("");
+    setTelefone("");
   }
 
   return <Cadastro 
     columns={getColumns()}
     addColumns={getAddColumns()}
-    table="tab_user"
+    table="tab_fazendas"
     getData={getData()}
     clearData={clearData}
   />;
