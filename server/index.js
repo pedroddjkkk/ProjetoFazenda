@@ -31,3 +31,5 @@ app.post("/salvar", async (req, res) => {
 });
 
 dbUtils.tryConnection();
+
+dbUtils.sequelize.sync({alter: true})
