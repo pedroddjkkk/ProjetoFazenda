@@ -7,3 +7,8 @@ body{
 .main{
   margin-left: 55px;
 }
+
+.add-div-group{
+  width: 94% !important;
+  padding: 30px;
+}

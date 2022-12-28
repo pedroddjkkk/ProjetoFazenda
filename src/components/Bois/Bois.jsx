@@ -1,10 +1,9 @@
 import Cadastro from "../Cadastro/Cadastro";
-import BasicTable from "../Table/Table";
+import "../../App.css";
+import "../../assets/bootstrap/css/bootstrap.min.css"
+import { InputAdornment, TextField } from "@mui/material";
 
 export default function Bois() {
-
-
-
   function getColumns() {
     return [
       { name: "Identificação", field: "id_pk" },
@@ -14,23 +13,43 @@ export default function Bois() {
   }
 
   function getAddColumns() {
-    return (  
-      <div>
-        <div className="form-group">
-          <label htmlFor="peso">Peso (Kg)</label>
-          <input type="number" className="form-control" id="peso" />
-        </div>
-        <div className="form-group">
-          <label htmlFor="raca">Raça</label>
-          <input type="text" className="form-control" id="raca" />
+    return (
+      <div className="add-div-group container">
+        <div className="row">
+          <TextField
+            label="Peso"
+            id="standard-start-adornment"
+            className="col-sm-2"
+            style={{ marginRight: "40px" }}
+            InputProps={{
+              endAdornment: (
+                <InputAdornment position="end">kg</InputAdornment>
+              ),
+            }}
+            variant="standard"
+          />
+          <TextField
+            label="Raça"
+            id="standard-start-adornment"
+            className="col-sm-2"
+            style={{ marginRight: "40px" }}
+            InputProps={{
+              endAdornment: (
+                <InputAdornment position="end">kg</InputAdornment>
+              ),
+            }}
+            variant="standard"
+          />
         </div>
       </div>
     );
   }
 
-  return <Cadastro 
-    columns={getColumns()}
-    table="tab_bois"
-    addColumns={getAddColumns()}
-  />;
+  return (
+    <Cadastro
+      columns={getColumns()}
+      table="tab_bois"
+      addColumns={getAddColumns()}
+    />
+  );
 }

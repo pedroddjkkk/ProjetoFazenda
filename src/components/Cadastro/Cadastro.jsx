@@ -26,10 +26,6 @@ export default function Cadastro({ columns, table, addColumns }) {
     dispatch(newTabs([{ name: "Listar" }, { name: "Adicionar" }]));
   }, [data]);
 
-  useEffect(() => {
-    console.log(selectedTab);
-  }, [selectedTab]);
-
   async function handleKeyDown(event) {
     if (event.key === "Enter") {
       event.preventDefault();
