@@ -1,5 +1,4 @@
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { Box, Paper, TextField } from "@mui/material";
+import { Box, TextField } from "@mui/material";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { newTabs, selectTab } from "../../redux/actions/tabsSlice";
@@ -14,13 +13,13 @@ export default function Cadastro({ columns, table, addColumns, getData }) {
   const [data, setData] = useState();
   const [filtro, setFiltro] = useState();
 
+  const reloadData = async () => {
+    const ret = await apiBuscar(table);
+    setData(ret.data);
+  };
+  
   useEffect(() => {
-    const fetchData = async () => {
-      const ret = await apiBuscar(table);
-      setData(ret.data);
-    };
-
-    fetchData();
+    reloadData();
   }, []);
 
   useEffect(() => {
@@ -35,9 +34,9 @@ export default function Cadastro({ columns, table, addColumns, getData }) {
     }
   }
 
-  function onConfirm() {
-    setData([...data, getData]);
-    apiSalvar(table, "", getData);
+  async function onConfirm() {
+    await apiSalvar(table, "", getData);
+    await reloadData();
     dispatch(selectTab("Listar"));
   }
 
