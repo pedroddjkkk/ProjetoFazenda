@@ -33,11 +33,6 @@ export default function Bois() {
             id="standard-start-adornment"
             className="col-sm-2"
             style={{ marginRight: "40px" }}
-            InputProps={{
-              endAdornment: (
-                <InputAdornment position="end">kg</InputAdornment>
-              ),
-            }}
             variant="standard"
           />
         </div>

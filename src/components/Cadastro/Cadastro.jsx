@@ -1,3 +1,4 @@
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Box, Paper, TextField } from "@mui/material";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -74,7 +75,15 @@ export default function Cadastro({ columns, table, addColumns }) {
               </>
             }
           />
-          <TabContent id="Adicionar" children={ addColumns } />
+          <TabContent id="Adicionar" children={ 
+            <div>
+              {addColumns}
+              <hr style={{width: "95%", margin: "2% auto"}}/>
+              <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
+                <button className="btn btn-primary" style={{margin: "0 30px 30px 30px"}}>Confirmar <i class="fa-solid fa-check"></i></button>
+              </Box>
+            </div>
+            } />
         </div>
       </div>
     </div>
