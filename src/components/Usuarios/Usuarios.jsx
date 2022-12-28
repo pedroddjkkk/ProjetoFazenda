@@ -71,10 +71,18 @@ export default function Usuarios() {
     }
   }
 
+  function clearData(){
+    setNome("");
+    setEmail("");
+    setLogin("");
+    setSenha("");
+  }
+
   return <Cadastro 
     columns={getColumns()}
     addColumns={getAddColumns()}
     table="tab_user"
     getData={getData()}
+    clearData={clearData}
   />;
 }

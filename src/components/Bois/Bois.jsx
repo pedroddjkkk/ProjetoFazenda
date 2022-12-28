@@ -55,12 +55,18 @@ export default function Bois() {
     }
   }
 
+  function clearData(){
+    setPeso("");
+    setRaca("");
+  }
+
   return (
     <Cadastro
       columns={getColumns()}
       table="tab_bois"
       addColumns={getAddColumns()}
       getData={getData()}
+      clearData={clearData}
     />
   );
 }
