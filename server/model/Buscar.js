@@ -6,8 +6,8 @@ async function buscar(req, res) {
 
     if (tabela === "tab_user") {
       return await modelUser.buscar(pk, filtro); 
-    }
-    if(tabela === "tab_bois") {
+    } 
+    else if(tabela === "tab_bois") {
       return await modelBoi.buscar(pk, filtro); 
     }
 }

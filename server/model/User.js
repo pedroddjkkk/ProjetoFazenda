@@ -24,6 +24,20 @@ async function buscar(pk, filtro) {
   }
 }
 
+async function salvar(where, registro) {
+  const sql = `
+  INSERT INTO
+    tab_user
+  SET
+    nome = '${registro.nome}',
+    login = '${registro.login}',
+    password = md5('${registro.senha}'),
+    email = '${registro.email}'`;
+  const ret = await dbUtils.query(sql);
+  return ret;
+}
+
 module.exports = {
   buscar,
+  salvar,
 };
