@@ -29,3 +29,5 @@ app.post("/salvar", async (req, res) => {
   const ret = await modelSalvar(req, res);
   res.send(ret);
 });
+
+dbUtils.tryConnection();

@@ -75,6 +75,7 @@ function Navbar({ pages }) {
                     to="/"
                     onClick={() => {
                       localStorage.removeItem("user");
+                      dispatch(changeUser(null));
                     }}
                   >
                     <i className="fas fa-sign-out-alt"></i>

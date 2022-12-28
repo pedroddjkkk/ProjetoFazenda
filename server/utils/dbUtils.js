@@ -1,32 +1,17 @@
-var mysql = require("mysql");
+const { Sequelize } = require("sequelize");
 
-var pool = mysql.createPool({
-  connectionLimit: 10,
+const sequelize = new Sequelize("fazenda", "root", "", {
   host: "localhost",
-  user: "root",
-  password: "",
-  database: "fazenda",
+  dialect: "mysql",
 });
 
-function query(sql, callback) {
-  return new Promise((resolve, reject) => {
-    pool.getConnection(function (err, connection) {
-      if (err) {
-        console.log(err);
-      } else {
-        connection.query(sql, function (err, rows) {
-          connection.release();
-          if (err) {
-            reject(err);
-          } else {
-            resolve(rows);
-          }
-        });
-      }
-    });
-  });
+async function tryConnection() {
+  try {
+    await sequelize.authenticate();
+    console.log("Conexão com o banco de dados estabelecida com sucesso.");
+  } catch (error) {
+    console.error("Erro na conexão com o banco de dados: ", error);
+  }
 }
 
-module.exports = {
-  query: query,
-};
+module.exports = { tryConnection, sequelize };
