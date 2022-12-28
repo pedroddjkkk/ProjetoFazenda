@@ -33,6 +33,17 @@ async function buscar(pk, filtro) {
   }
 }
 
+async function salvar(where, registro) {
+  const sql = `
+  INSERT INTO
+    tab_bois
+  SET
+    peso = ${registro.peso},
+    raca = '${registro.raca}'`;
+  const ret = await dbUtils.query(sql);
+  return ret;
+}
 module.exports = {
   buscar,
+  salvar,
 };

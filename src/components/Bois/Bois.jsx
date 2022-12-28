@@ -2,8 +2,12 @@ import Cadastro from "../Cadastro/Cadastro";
 import "../../App.css";
 import "../../assets/bootstrap/css/bootstrap.min.css"
 import { InputAdornment, TextField } from "@mui/material";
+import { useState } from "react";
 
 export default function Bois() {
+  const [peso, setPeso] = useState();
+  const [raca, setRaca] = useState();
+
   function getColumns() {
     return [
       { name: "Identificação", field: "id_pk" },
@@ -21,6 +25,8 @@ export default function Bois() {
             id="standard-start-adornment"
             className="col-sm-2"
             style={{ marginRight: "40px" }}
+            value={peso}
+            onChange={(e) => setPeso(e.target.value)}
             InputProps={{
               endAdornment: (
                 <InputAdornment position="end">kg</InputAdornment>
@@ -32,6 +38,8 @@ export default function Bois() {
             label="Raça"
             id="standard-start-adornment"
             className="col-sm-2"
+            value={raca}
+            onChange={(e) => setRaca(e.target.value)}
             style={{ marginRight: "40px" }}
             variant="standard"
           />
@@ -40,11 +48,19 @@ export default function Bois() {
     );
   }
 
+  function getData(){
+    return {
+      peso: peso,
+      raca: raca
+    }
+  }
+
   return (
     <Cadastro
       columns={getColumns()}
       table="tab_bois"
       addColumns={getAddColumns()}
+      getData={getData()}
     />
   );
 }

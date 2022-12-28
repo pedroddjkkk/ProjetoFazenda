@@ -1,4 +1,5 @@
 const modelBuscar = require("./model/buscar");
+const modelSalvar = require("./model/salvar");
 const bodyParser = require("body-parser");
 const express = require("express");
 const path = require("path");
@@ -20,6 +21,11 @@ app.listen(PORT, () => {
 app.use(express.static(path.join(__dirname, "client", "build")));
 
 app.post("/buscar", async (req, res) => {
-  const ret = await modelBuscar(req);
+  const ret = await modelBuscar(req, res);
+  res.send(ret);
+});
+
+app.post("/salvar", async (req, res) => {
+  const ret = await modelSalvar(req, res);
   res.send(ret);
 });

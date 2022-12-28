@@ -10,10 +10,6 @@ export const apiBuscar = async (tabela, pk, filtro) => {
 };
 
 export const apiSalvar = async (tabela, where, registro) => {
-  const response = await api.post("/salvar", {
-    tabela: tabela,
-    where: where,
-    registro: registro,
-  });
-  return response.data;
+  const ret = await api.post("/salvar", { tabela, where, registro })
+  return ret;
 };

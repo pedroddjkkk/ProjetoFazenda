@@ -3,11 +3,11 @@ import { Box, Paper, TextField } from "@mui/material";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { newTabs, selectTab } from "../../redux/actions/tabsSlice";
-import { apiBuscar } from "../../services/api";
+import { apiBuscar, apiSalvar } from "../../services/api";
 import TabContent from "../Tab/TabContent";
 import BasicTable from "../Table/Table";
 
-export default function Cadastro({ columns, table, addColumns }) {
+export default function Cadastro({ columns, table, addColumns, getData }) {
   const dispatch = useDispatch();
   const tabs = useSelector((state) => state.tabs.tabs);
   const selectedTab = useSelector((state) => state.tabs.selectedTab);
@@ -36,6 +36,8 @@ export default function Cadastro({ columns, table, addColumns }) {
   }
 
   function onConfirm() {
+    setData([...data, getData]);
+    apiSalvar(table, "", getData);
     dispatch(selectTab("Listar"));
   }
 
