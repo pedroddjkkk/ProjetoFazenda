@@ -12,7 +12,7 @@ function query(sql, callback) {
   return new Promise((resolve, reject) => {
     pool.getConnection(function (err, connection) {
       if (err) {
-        log(err);
+        console.log(err);
       } else {
         connection.query(sql, function (err, rows) {
           connection.release();
