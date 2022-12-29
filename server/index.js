@@ -1,5 +1,5 @@
-const modelBuscar = require("./model/buscar");
-const modelSalvar = require("./model/salvar");
+const modelBuscar = require("./model/Buscar");
+const modelSalvar = require("./model/Salvar");
 const bodyParser = require("body-parser");
 const express = require("express");
 const path = require("path");
