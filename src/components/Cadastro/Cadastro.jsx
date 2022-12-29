@@ -40,7 +40,9 @@ export default function Cadastro({
     }
   }
 
-  async function onConfirm() {
+  async function onConfirm(e) {
+    e.preventDefault();
+    console.log("aaaaaaaaaaaa");
     await apiSalvar(table, "", getData);
     await reloadData();
     dispatch(selectTab("Listar"));
@@ -90,6 +92,7 @@ export default function Cadastro({
           <TabContent
             id="Adicionar"
             children={
+              <form onSubmit={onConfirm}>
               <div>
                 {addColumns}
                 <hr style={{ width: "95%", margin: "2% auto" }} />
@@ -102,14 +105,15 @@ export default function Cadastro({
                     Cancelar <i class="fa-solid fa-times"></i>
                   </button>
                   <button
+                    type="submit"
                     className="btn btn-primary"
                     style={{ margin: "0 30px 30px 0px" }}
-                    onClick={onConfirm}
                   >
                     Confirmar <i class="fa-solid fa-check"></i>
                   </button>
                 </Box>
               </div>
+            </form>
             }
           />
         </div>
