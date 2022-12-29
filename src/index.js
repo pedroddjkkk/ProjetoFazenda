@@ -35,7 +35,7 @@ pages.push({
             name: "Fazendas",
             path: "/fazendas",
             element: <Fazendas />,
-            icon: "fa-solid fa-farm",
+            icon: "fa-solid fa-house-user",
         }
     ],
 });

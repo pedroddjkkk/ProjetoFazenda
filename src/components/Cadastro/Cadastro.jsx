@@ -6,7 +6,13 @@ import { apiBuscar, apiSalvar } from "../../services/api";
 import TabContent from "../Tab/TabContent";
 import BasicTable from "../Table/Table";
 
-export default function Cadastro({ columns, table, addColumns, getData, clearData}) {
+export default function Cadastro({
+  columns,
+  table,
+  addColumns,
+  getData,
+  clearData,
+}) {
   const dispatch = useDispatch();
   const tabs = useSelector((state) => state.tabs.tabs);
   const selectedTab = useSelector((state) => state.tabs.selectedTab);
@@ -17,7 +23,7 @@ export default function Cadastro({ columns, table, addColumns, getData, clearDat
     const ret = await apiBuscar(table);
     setData(ret.data);
   };
-  
+
   useEffect(() => {
     reloadData();
   }, []);
