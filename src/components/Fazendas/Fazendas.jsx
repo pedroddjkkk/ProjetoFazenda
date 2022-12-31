@@ -79,11 +79,19 @@ export default function Fazendas() {
     setTelefone("");
   }
 
+  function setData(data){
+    setNome(data.nome);
+    setCnpj(data.cnpj);
+    setEndereco(data.endereco);
+    setTelefone(data.telefone);
+  }
+
   return <Cadastro 
     columns={getColumns()}
     addColumns={getAddColumns()}
     table="tab_fazendas"
     getData={getData()}
     clearData={clearData}
+    setDataProp={setData}
   />;
 }

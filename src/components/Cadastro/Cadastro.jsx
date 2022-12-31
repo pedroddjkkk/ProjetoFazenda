@@ -59,6 +59,8 @@ export default function Cadastro({
     e.target.parentElement.childNodes.forEach((element) => {
       dataTemp[element.id] = element.innerText;
     });
+
+    setDataProp(dataTemp);
   }
 
   return (
@@ -114,6 +116,36 @@ export default function Cadastro({
                     className="btn btn-danger"
                     style={{ margin: "0 30px 30px 0px" }}
                     onClick={() => dispatch(selectTab("Listar"))}
+                  >
+                    Cancelar <i class="fa-solid fa-times"></i>
+                  </button>
+                  <button
+                    type="submit"
+                    className="btn btn-primary"
+                    style={{ margin: "0 30px 30px 0px" }}
+                  >
+                    Confirmar <i class="fa-solid fa-check"></i>
+                  </button>
+                </Box>
+              </div>
+            </form>
+            }
+          />
+          <TabContent
+            id="Editar"
+            children={
+              <form onSubmit={onConfirm}>
+              <div>
+                {addColumns}
+                <hr style={{ width: "95%", margin: "2% auto" }} />
+                <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
+                  <button
+                    className="btn btn-danger"
+                    style={{ margin: "0 30px 30px 0px" }}
+                    onClick={() => {
+                      dispatch(newTabs([{ name: "Listar", icon: "fa-solid fa-list" }, { name: "Adicionar", icon: "fa-solid fa-plus" }]))
+                      clearData();
+                      dispatch(selectTab("Listar"))}}
                   >
                     Cancelar <i class="fa-solid fa-times"></i>
                   </button>
