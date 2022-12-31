@@ -29,7 +29,7 @@ export default function Cadastro({
   }, []);
 
   useEffect(() => {
-    dispatch(newTabs([{ name: "Listar" }, { name: "Adicionar" }]));
+    dispatch(newTabs([{ name: "Listar", icon: "fa-solid fa-list" }, { name: "Adicionar", icon: "fa-solid fa-plus" }]));
     dispatch(selectTab("Listar"));
   }, [data]);
 
@@ -51,7 +51,7 @@ export default function Cadastro({
   }
 
   function handleClickTable(){
-    dispatch(newTabs([{ name: "Editar"}]));
+    dispatch(newTabs([{ name: "Editar", icon: "fa-solid fa-edit"}]));
     dispatch(selectTab("Editar"));
   }
 
@@ -72,7 +72,8 @@ export default function Cadastro({
                     href="#tab-1"
                     onClick={() => dispatch(selectTab(tab.name))}
                   >
-                    {tab.name}
+                    <i class={tab.icon ? tab.icon: ""}></i>
+                    {" " + tab.name}
                   </a>
                 </li>
               );
