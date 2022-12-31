@@ -12,6 +12,7 @@ export default function Cadastro({
   addColumns,
   getData,
   clearData,
+  setDataProp,
 }) {
   const dispatch = useDispatch();
   const tabs = useSelector((state) => state.tabs.tabs);
@@ -50,9 +51,14 @@ export default function Cadastro({
     clearData();
   }
 
-  function handleClickTable(){
+  function handleClickTable(e){
     dispatch(newTabs([{ name: "Editar", icon: "fa-solid fa-edit"}]));
     dispatch(selectTab("Editar"));
+
+    let dataTemp = {};
+    e.target.parentElement.childNodes.forEach((element) => {
+      dataTemp[element.id] = element.innerText;
+    });
   }
 
   return (
@@ -65,14 +71,14 @@ export default function Cadastro({
                 <li className="nav-item" role="presentation">
                   <a
                     className={
-                      selectedTab == tab.name ? "nav-link active" : "nav-link"
+                      selectedTab === tab.name ? "nav-link active" : "nav-link"
                     }
                     role="tab"
                     data-bs-toggle="tab"
                     href="#tab-1"
                     onClick={() => dispatch(selectTab(tab.name))}
                   >
-                    <i class={tab.icon ? tab.icon: ""}></i>
+                    <i class={tab.icon && tab.icon}></i>
                     {" " + tab.name}
                   </a>
                 </li>

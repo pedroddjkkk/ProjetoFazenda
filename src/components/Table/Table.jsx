@@ -15,13 +15,13 @@ export default function BasicTable({ cells, rows, onClick }) {
             return <th key={index}>{cell.name}</th>;
           })}
         </tr>
-      </thead>
+      </thead>  
       <tbody>
         {rows && rows.map((row, index) => {
           return (
-            <tr className="table-content" onClick={onClick ? onClick : ""}>
+            <tr className="table-content" onClick={onClick && onClick}>
               {cells && cells.map((cell, indexc) => {
-                return <td key={indexc}>{row[cell.field]}</td>;
+                return <td key={indexc} id={cell.field}>{row[cell.field]}</td>;
               })}
             </tr>
           );

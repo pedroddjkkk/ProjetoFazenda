@@ -60,6 +60,11 @@ export default function Bois() {
     setRaca("");
   }
 
+  function setData(data){
+    setPeso(data.peso);
+    setRaca(data.raca);
+  }
+
   return (
     <Cadastro
       columns={getColumns()}
@@ -67,6 +72,7 @@ export default function Bois() {
       addColumns={getAddColumns()}
       getData={getData()}
       clearData={clearData}
+      setDataProp={setData}
     />
   );
 }
