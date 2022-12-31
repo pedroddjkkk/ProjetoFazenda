@@ -30,6 +30,7 @@ export default function Cadastro({
 
   useEffect(() => {
     dispatch(newTabs([{ name: "Listar" }, { name: "Adicionar" }]));
+    dispatch(selectTab("Listar"));
   }, [data]);
 
   async function handleKeyDown(event) {
