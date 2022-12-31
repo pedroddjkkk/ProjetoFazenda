@@ -1,7 +1,7 @@
 import * as React from "react";
 import "./Table.css"
 
-export default function BasicTable({ cells, rows }) {
+export default function BasicTable({ cells, rows, onClick }) {
   return (
     <table
       id="example"
@@ -19,7 +19,7 @@ export default function BasicTable({ cells, rows }) {
       <tbody>
         {rows && rows.map((row, index) => {
           return (
-            <tr className="table-content">
+            <tr className="table-content" onClick={onClick ? onClick : ""}>
               {cells && cells.map((cell, indexc) => {
                 return <td key={indexc}>{row[cell.field]}</td>;
               })}

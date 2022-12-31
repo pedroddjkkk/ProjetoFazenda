@@ -49,6 +49,11 @@ export default function Cadastro({
     clearData();
   }
 
+  function handleClickTable(){
+    dispatch(newTabs([{ name: "Editar"}]));
+    dispatch(selectTab("Editar"));
+  }
+
   return (
     <div>
       <div>
@@ -85,7 +90,7 @@ export default function Cadastro({
                   style={{ marginTop: "20px" }}
                   onChange={(e) => setFiltro(e.target.value)}
                 />
-                <BasicTable cells={columns} rows={data} />
+                <BasicTable cells={columns} rows={data} onClick={handleClickTable}/>
               </>
             }
           />
