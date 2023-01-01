@@ -82,7 +82,7 @@ export default function Usuarios() {
     setNome(data.nome);
     setEmail(data.email);
     setLogin(data.login);
-    setSenha(data.senha);
+    setSenha(data.password);
   }
 
   return <Cadastro 

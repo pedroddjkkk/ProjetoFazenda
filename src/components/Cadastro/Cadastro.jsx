@@ -44,23 +44,25 @@ export default function Cadastro({
 
   async function onConfirm(e) {
     e.preventDefault();
-    console.log("aaaaaaaaaaaa");
     await apiSalvar(table, "", getData);
     await reloadData();
     dispatch(selectTab("Listar"));
     clearData();
   }
 
-  function handleClickTable(e){
+  async function onConfirmEdit(e) {
+    e.preventDefault();
+    await apiSalvar(table, getData.id_pk, getData);
+    await reloadData();
+    dispatch(selectTab("Listar"));
+    clearData();
+  }
+
+  async function handleClickTable(e){
     dispatch(newTabs([{ name: "Editar", icon: "fa-solid fa-edit"}]));
     dispatch(selectTab("Editar"));
-
-    let dataTemp = {};
-    e.target.parentElement.childNodes.forEach((element) => {
-      dataTemp[element.id] = element.innerText;
-    });
-
-    setDataProp(dataTemp);
+    let id = e.target.parentElement.childNodes[0].innerText;
+    setDataProp(data[id-1]);
   }
 
   return (
@@ -134,7 +136,7 @@ export default function Cadastro({
           <TabContent
             id="Editar"
             children={
-              <form onSubmit={onConfirm}>
+              <form onSubmit={onConfirmEdit}>
               <div>
                 {addColumns}
                 <hr style={{ width: "95%", margin: "2% auto" }} />

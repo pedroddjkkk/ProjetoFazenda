@@ -57,12 +57,25 @@ async function buscar(pk, filtro) {
 }
 
 async function salvar(where, registro) {
-  const ret = await Boi.create({
-    raca: registro.raca,
-    peso: registro.peso,
-  });
+  if(registro.id_pk) {
+    const ret = await Boi.update({
+      raca: registro.raca,
+      peso: registro.peso,
+    }, {
+      where: {
+        id_pk: registro.id_pk,
+      }
+    });
 
-  return ret;
+    return ret;
+  } else {
+    const ret = await Boi.create({
+      raca: registro.raca,
+      peso: registro.peso,
+    });
+
+    return ret;
+  }
 }
 module.exports = {
   buscar,
