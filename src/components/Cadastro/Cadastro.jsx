@@ -19,6 +19,7 @@ export default function Cadastro({
   const selectedTab = useSelector((state) => state.tabs.selectedTab);
   const [data, setData] = useState();
   const [filtro, setFiltro] = useState();
+  const [selectedId, setSelectedId] = useState();
 
   const reloadData = async () => {
     const ret = await apiBuscar(table);
@@ -44,15 +45,7 @@ export default function Cadastro({
 
   async function onConfirm(e) {
     e.preventDefault();
-    await apiSalvar(table, "", getData);
-    await reloadData();
-    dispatch(selectTab("Listar"));
-    clearData();
-  }
-
-  async function onConfirmEdit(e) {
-    e.preventDefault();
-    await apiSalvar(table, getData.id_pk, getData);
+    await apiSalvar(table, selectedId ? selectedId : "", getData);
     await reloadData();
     dispatch(selectTab("Listar"));
     clearData();
@@ -62,6 +55,7 @@ export default function Cadastro({
     dispatch(newTabs([{ name: "Editar", icon: "fa-solid fa-edit"}]));
     dispatch(selectTab("Editar"));
     let id = e.target.parentElement.childNodes[0].innerText;
+    setSelectedId(id);
     setDataProp(data[id-1]);
   }
 
@@ -136,7 +130,7 @@ export default function Cadastro({
           <TabContent
             id="Editar"
             children={
-              <form onSubmit={onConfirmEdit}>
+              <form onSubmit={onConfirm}>
               <div>
                 {addColumns}
                 <hr style={{ width: "95%", margin: "2% auto" }} />
