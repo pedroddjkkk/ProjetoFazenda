@@ -2,7 +2,7 @@ import { Box, TextField } from "@mui/material";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { newTabs, selectTab } from "../../redux/actions/tabsSlice";
-import { apiBuscar, apiSalvar } from "../../services/api";
+import { apiBuscar, apiExcluir, apiSalvar } from "../../services/api";
 import TabContent from "../Tab/TabContent";
 import BasicTable from "../Table/Table";
 
@@ -60,8 +60,17 @@ export default function Cadastro({
     dispatch(newTabs([{ name: "Editar", icon: "fa-solid fa-edit" }]));
     dispatch(selectTab("Editar"));
     let id = e.target.parentElement.childNodes[0].innerText;
+    let target = await apiBuscar(table, id);
     setSelectedId(id);
-    setDataProp(data[id - 1]);
+    setDataProp(target.data[0]);
+  }
+
+  async function onDelete(e){
+    e.preventDefault();
+    await apiExcluir(table, selectedId);
+    await reloadData();
+    dispatch(selectTab("Listar"));
+    clearData();
   }
 
   return (
@@ -163,7 +172,7 @@ export default function Cadastro({
                     <button
                       className="btn btn-danger"
                       style={{ margin: "0 30px 30px 0px" }}
-                      onClick={() => {}}
+                      onClick={onDelete}
                     >
                       <i class="fa-solid fa-trash" /> Deletar
                     </button>

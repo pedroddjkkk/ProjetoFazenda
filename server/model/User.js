@@ -49,6 +49,14 @@ async function buscar(pk, filtro) {
     });
 
     return ret;
+  } else if (pk) {
+    const ret = await User.findAll({
+      where: {
+        id_pk: pk,
+      },
+    });
+
+    return ret;
   } else {
     const ret = await User.findAll();
     return ret;
@@ -84,7 +92,18 @@ async function salvar(where, registro) {
   }
 }
 
+async function excluir(pk, filtro) {
+  const ret = await User.destroy({
+    where: {
+      id_pk: pk,
+    },
+  });
+
+  return ret;
+}
+
 module.exports = {
   buscar,
   salvar,
+  excluir,
 };
