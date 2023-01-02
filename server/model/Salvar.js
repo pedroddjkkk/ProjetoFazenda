@@ -16,7 +16,7 @@ async function salvar(req, res) {
       return await modelFazendas.salvar(where, registro);
     }
     else if (tabela === "tab_racoes"){
-      return await modelRacoes.salvar(pk, filtro);
+      return await modelRacoes.salvar(where, registro);
     }
 }
 

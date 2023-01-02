@@ -8,6 +8,7 @@ import Login from "./components/Login/Login";
 import Bois from "./components/Bois/Bois";
 import Usuarios from "./components/Usuarios/Usuarios";
 import Fazendas from "./components/Fazendas/Fazendas";
+import Racoes from "./components/Rações/Racoes";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 let pages = [];
@@ -36,6 +37,13 @@ pages.push({
             path: "/fazendas",
             element: <Fazendas />,
             icon: "fa-solid fa-house-user",
+        },
+        {
+            navigable: true,
+            name: "Rações",
+            path: "/racoes",
+            element: <Racoes />,
+            icon: "fa-solid fa-utensils",
         }
     ],
 });
