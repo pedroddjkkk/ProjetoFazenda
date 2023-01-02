@@ -1,12 +1,19 @@
+import { Visibility, VisibilityOff } from "@mui/icons-material";
+import { IconButton, InputAdornment, TextField } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import { apiBuscar } from "../../services/api";
 import BasicTable from "../Table/Table";
 
-export default function ComboEdit({ tabela, label, columns }) {
+export default function ComboEdit({ tabela, label, columns, className }) {
   const [show, setShow] = useState(false);
   const [data, setData] = useState();
+  const [id, setId] = useState();
+
+  const handleMouseDownSearch = (event) => {
+    event.preventDefault();
+  };
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -22,10 +29,25 @@ export default function ComboEdit({ tabela, label, columns }) {
 
   return (
     <>
-      <Button variant="primary" onClick={handleShow}>
-        Launch demo modal
-      </Button>
-
+      <TextField
+        label={label}
+        className="col-sm-2"
+        value={id}
+        onChange={(e) => setId(e.target.value)}
+        InputProps={{
+          endAdornment: (
+            <InputAdornment position="end">
+              <IconButton
+                onClick={handleShow}
+                onMouseDown={handleMouseDownSearch}
+              >
+                <i class="fa-solid fa-magnifying-glass"></i>
+              </IconButton>
+            </InputAdornment>
+          )
+        }}
+        variant="standard"
+      />
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
           <Modal.Title>{label}</Modal.Title>
