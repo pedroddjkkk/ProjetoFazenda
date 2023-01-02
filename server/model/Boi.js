@@ -33,7 +33,7 @@ Boi.init(
 
 async function buscar(pk, filtro) {
   if (filtro) {
-    if(isNaN(filtro)) {
+    if (isNaN(filtro)) {
       const ret = await Boi.findAll({
         where: {
           raca: {
@@ -50,6 +50,13 @@ async function buscar(pk, filtro) {
       });
       return ret;
     }
+  } else if (pk) {
+    const ret = await Boi.findAll({
+      where: {
+        id_pk: pk,
+      },
+    });
+    return ret;
   } else {
     const ret = await Boi.findAll();
     return ret;
@@ -57,15 +64,18 @@ async function buscar(pk, filtro) {
 }
 
 async function salvar(where, registro) {
-  if(where) {
-    const ret = await Boi.update({
-      raca: registro.raca,
-      peso: registro.peso,
-    }, {
-      where: {
-        id_pk: where,
+  if (where) {
+    const ret = await Boi.update(
+      {
+        raca: registro.raca,
+        peso: registro.peso,
+      },
+      {
+        where: {
+          id_pk: where,
+        },
       }
-    });
+    );
 
     return ret;
   } else {

@@ -40,8 +40,19 @@ Fazenda.init(
 );
 
 async function buscar(pk, filtro) {
-  const ret = await Fazenda.findAll();
-  return ret;
+  if (pk){
+    const ret = await Fazenda.findAll({
+      where: {
+        id_pk: pk,
+      },
+    });
+
+    return ret;
+  } else {
+    const ret = await Fazenda.findAll();
+    
+    return ret;
+  }
 }
 
 async function salvar(where, registro) {
