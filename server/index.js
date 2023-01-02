@@ -1,5 +1,6 @@
 const modelBuscar = require("./model/Buscar");
 const modelSalvar = require("./model/Salvar");
+const modelExcluir = require("./model/Excluir");
 const bodyParser = require("body-parser");
 const express = require("express");
 const path = require("path");
@@ -36,6 +37,15 @@ try {
   });
 } catch (error) {
   console.log("Erro na rota salvar: ", error);
+}
+
+try {
+  app.post("/excluir", async (req, res) => {
+    const ret = await modelExcluir(req, res);
+    res.send(ret);
+  });
+} catch (error) {
+  console.log("Erro na rota excluir: ", error);
 }
 
 dbUtils.tryConnection();
