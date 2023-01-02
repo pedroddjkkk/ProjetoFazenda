@@ -53,7 +53,7 @@ export default function Bois() {
           />
           <ComboEdit
             label="Ração"
-            tabela="tab_fazendas"
+            tabela="tab_racoes"
             className="col-sm-2"
             columns={getComboColumns()}
           />

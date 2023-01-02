@@ -27,12 +27,19 @@ export default function ComboEdit({ tabela, label, columns, className }) {
     setData(ret.data);
   }
 
+  async function handleClickTable(e) {
+    let id = e.target.parentElement.childNodes[0].innerText;
+    setId(id);
+    handleClose();
+  }
+
   return (
     <>
       <TextField
         label={label}
         className="col-sm-2"
         value={id}
+        focused={id ? true : false}
         onChange={(e) => setId(e.target.value)}
         InputProps={{
           endAdornment: (
@@ -53,14 +60,11 @@ export default function ComboEdit({ tabela, label, columns, className }) {
           <Modal.Title>{label}</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <BasicTable cells={columns} rows={data} />
+          <BasicTable cells={columns} rows={data} onClick={handleClickTable}/>
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleClose}>
-            Close
-          </Button>
-          <Button variant="primary" onClick={handleClose}>
-            Save Changes
+            Fechar
           </Button>
         </Modal.Footer>
       </Modal>
