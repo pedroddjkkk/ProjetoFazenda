@@ -41,8 +41,7 @@ try {
 
 try {
   app.post("/excluir", async (req, res) => {
-    const ret = await modelExcluir(req, res);
-    res.send(ret);
+    await modelExcluir(req, res);
   });
 } catch (error) {
   console.log("Erro na rota excluir: ", error);

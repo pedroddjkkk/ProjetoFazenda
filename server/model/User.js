@@ -93,13 +93,11 @@ async function salvar(where, registro) {
 }
 
 async function excluir(pk, filtro) {
-  const ret = await User.destroy({
+  await User.destroy({
     where: {
       id_pk: pk,
     },
   });
-
-  return ret;
 }
 
 module.exports = {

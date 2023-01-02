@@ -50,7 +50,6 @@ async function buscar(pk, filtro) {
     return ret;
   } else {
     const ret = await Fazenda.findAll();
-    
     return ret;
   }
 }
@@ -84,7 +83,16 @@ async function salvar(where, registro) {
   }
 }
 
+async function excluir(pk, filtro){
+  await Fazenda.destroy({
+    where: {
+      id_pk: pk,
+    },
+  });
+}
+
 module.exports = {
   buscar,
   salvar,
+  excluir,
 };

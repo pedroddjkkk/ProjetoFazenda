@@ -87,7 +87,16 @@ async function salvar(where, registro) {
     return ret;
   }
 }
+
+async function excluir(pk, filtro){
+  await Boi.destroy({
+    where: {
+      id_pk: pk,
+    },
+  });
+}
 module.exports = {
   buscar,
   salvar,
+  excluir,
 };

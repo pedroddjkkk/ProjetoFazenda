@@ -66,9 +66,14 @@ export default function Cadastro({
   }
 
   async function onDelete(e){
-    e.preventDefault();
     await apiExcluir(table, selectedId);
     await reloadData();
+    dispatch(
+      newTabs([
+        { name: "Listar", icon: "fa-solid fa-list" },
+        { name: "Adicionar", icon: "fa-solid fa-plus" },
+      ])
+    );
     dispatch(selectTab("Listar"));
     clearData();
   }
