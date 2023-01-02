@@ -56,14 +56,32 @@ async function buscar(pk, filtro) {
 }
 
 async function salvar(where, registro) {
-  const ret = await User.create({
-    nome: registro.nome,
-    login: registro.login,
-    password: registro.senha,
-    email: registro.email,
-  });
+  if (where) {
+    const ret = await User.update(
+      {
+        nome: registro.nome,
+        login: registro.login,
+        password: registro.senha,
+        email: registro.email,
+      },
+      {
+        where: {
+          id_pk: where,
+        },
+      }
+    );
 
-  return ret;
+    return ret;
+  } else {
+    const ret = await User.create({
+      nome: registro.nome,
+      login: registro.login,
+      password: registro.senha,
+      email: registro.email,
+    });
+
+    return ret;
+  }
 }
 
 module.exports = {

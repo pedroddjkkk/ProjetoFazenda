@@ -45,13 +45,32 @@ async function buscar(pk, filtro) {
 }
 
 async function salvar(where, registro) {
-  const ret = await Fazenda.create({
-    nome: registro.nome,
-    endereco: registro.endereco,
-    telefone: registro.telefone,
-    cnpj: registro.cnpj,
-  });
-  return ret;
+  if (where) {
+    const ret = await Fazenda.update(
+      {
+        nome: registro.nome,
+        endereco: registro.endereco,
+        telefone: registro.telefone,
+        cnpj: registro.cnpj,
+      },
+      {
+        where: {
+          id_pk: where,
+        },
+      }
+    );
+
+    return ret;
+  } else {
+    const ret = await Fazenda.create({
+      nome: registro.nome,
+      endereco: registro.endereco,
+      telefone: registro.telefone,
+      cnpj: registro.cnpj,
+    });
+
+    return ret;
+  }
 }
 
 module.exports = {
