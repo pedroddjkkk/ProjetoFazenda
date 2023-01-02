@@ -31,7 +31,12 @@ export default function Cadastro({
   }, []);
 
   useEffect(() => {
-    dispatch(newTabs([{ name: "Listar", icon: "fa-solid fa-list" }, { name: "Adicionar", icon: "fa-solid fa-plus" }]));
+    dispatch(
+      newTabs([
+        { name: "Listar", icon: "fa-solid fa-list" },
+        { name: "Adicionar", icon: "fa-solid fa-plus" },
+      ])
+    );
     dispatch(selectTab("Listar"));
   }, [data]);
 
@@ -51,12 +56,12 @@ export default function Cadastro({
     clearData();
   }
 
-  async function handleClickTable(e){
-    dispatch(newTabs([{ name: "Editar", icon: "fa-solid fa-edit"}]));
+  async function handleClickTable(e) {
+    dispatch(newTabs([{ name: "Editar", icon: "fa-solid fa-edit" }]));
     dispatch(selectTab("Editar"));
     let id = e.target.parentElement.childNodes[0].innerText;
     setSelectedId(id);
-    setDataProp(data[id-1]);
+    setDataProp(data[id - 1]);
   }
 
   return (
@@ -96,7 +101,11 @@ export default function Cadastro({
                   style={{ marginTop: "20px" }}
                   onChange={(e) => setFiltro(e.target.value)}
                 />
-                <BasicTable cells={columns} rows={data} onClick={handleClickTable}/>
+                <BasicTable
+                  cells={columns}
+                  rows={data}
+                  onClick={handleClickTable}
+                />
               </>
             }
           />
@@ -104,57 +113,70 @@ export default function Cadastro({
             id="Adicionar"
             children={
               <form onSubmit={onConfirm}>
-              <div>
-                {addColumns}
-                <hr style={{ width: "95%", margin: "2% auto" }} />
-                <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
-                  <button
-                    className="btn btn-danger"
-                    style={{ margin: "0 30px 30px 0px" }}
-                    onClick={() => dispatch(selectTab("Listar"))}
-                  >
-                    Cancelar <i class="fa-solid fa-times"></i>
-                  </button>
-                  <button
-                    type="submit"
-                    className="btn btn-primary"
-                    style={{ margin: "0 30px 30px 0px" }}
-                  >
-                    Confirmar <i class="fa-solid fa-check"></i>
-                  </button>
-                </Box>
-              </div>
-            </form>
+                <div>
+                  {addColumns}
+                  <hr style={{ width: "95%", margin: "2% auto" }} />
+                  <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
+                    <button
+                      className="btn btn-danger"
+                      style={{ margin: "0 30px 30px 0px" }}
+                      onClick={() => dispatch(selectTab("Listar"))}
+                    >
+                      <i class="fa-solid fa-times" /> Cancelar
+                    </button>
+                    <button
+                      type="submit"
+                      className="btn btn-primary"
+                      style={{ margin: "0 30px 30px 0px" }}
+                    >
+                      <i class="fa-solid fa-check" /> Confirmar
+                    </button>
+                  </Box>
+                </div>
+              </form>
             }
           />
           <TabContent
             id="Editar"
             children={
               <form onSubmit={onConfirm}>
-              <div>
-                {addColumns}
-                <hr style={{ width: "95%", margin: "2% auto" }} />
-                <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
-                  <button
-                    className="btn btn-danger"
-                    style={{ margin: "0 30px 30px 0px" }}
-                    onClick={() => {
-                      dispatch(newTabs([{ name: "Listar", icon: "fa-solid fa-list" }, { name: "Adicionar", icon: "fa-solid fa-plus" }]))
-                      clearData();
-                      dispatch(selectTab("Listar"))}}
-                  >
-                    Cancelar <i class="fa-solid fa-times"></i>
-                  </button>
-                  <button
-                    type="submit"
-                    className="btn btn-primary"
-                    style={{ margin: "0 30px 30px 0px" }}
-                  >
-                    Confirmar <i class="fa-solid fa-check"></i>
-                  </button>
-                </Box>
-              </div>
-            </form>
+                <div>
+                  {addColumns}
+                  <hr style={{ width: "95%", margin: "2% auto" }} />
+                  <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
+                    <button
+                      className="btn btn-danger"
+                      style={{ margin: "0 30px 30px 0px" }}
+                      onClick={() => {
+                        dispatch(
+                          newTabs([
+                            { name: "Listar", icon: "fa-solid fa-list" },
+                            { name: "Adicionar", icon: "fa-solid fa-plus" },
+                          ])
+                        );
+                        clearData();
+                        dispatch(selectTab("Listar"));
+                      }}
+                    >
+                      <i class="fa-solid fa-times" /> Cancelar
+                    </button>
+                    <button
+                      className="btn btn-danger"
+                      style={{ margin: "0 30px 30px 0px" }}
+                      onClick={() => {}}
+                    >
+                      <i class="fa-solid fa-trash" /> Deletar
+                    </button>
+                    <button
+                      type="submit"
+                      className="btn btn-primary"
+                      style={{ margin: "0 30px 30px 0px" }}
+                    >
+                      <i class="fa-solid fa-check" /> Confirmar
+                    </button>
+                  </Box>
+                </div>
+              </form>
             }
           />
         </div>
