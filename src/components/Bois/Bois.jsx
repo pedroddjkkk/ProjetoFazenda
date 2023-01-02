@@ -3,6 +3,7 @@ import "../../App.css";
 import "../../assets/bootstrap/css/bootstrap.min.css"
 import { InputAdornment, TextField } from "@mui/material";
 import { useState } from "react";
+import ComboEdit from "../ComboEdit/ComboEdit";
 
 export default function Bois() {
   const [peso, setPeso] = useState();
@@ -13,6 +14,13 @@ export default function Bois() {
       { name: "Identificação", field: "id_pk" },
       { name: "Peso (Kg)", field: "peso" },
       { name: "Raça", field: "raca" },
+    ];
+  }
+
+  function getComboColumns() {
+    return [
+      { name: "Identificação", field: "id_pk" },
+      { name: "Nome", field: "nome" },
     ];
   }
 
@@ -42,6 +50,12 @@ export default function Bois() {
             onChange={(e) => setRaca(e.target.value)}
             style={{ marginRight: "40px" }}
             variant="standard"
+          />
+          <ComboEdit
+            label="Rações"
+            tabela="tab_fazendas"
+            className="col-sm-2"
+            columns={getComboColumns()}
           />
         </div>
       </div>
