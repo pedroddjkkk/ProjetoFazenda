@@ -2,6 +2,8 @@ const sequelize = require("../utils/dbUtils").sequelize;
 
 const { DataTypes, Model, Op } = require("sequelize");
 
+const Racoes = require("./Racoes").Racoes;
+
 class Boi extends Model {
   otherPublicField;
 }
@@ -21,10 +23,6 @@ Boi.init(
       type: DataTypes.INTEGER,
       allowNull: false,
     },
-    id_racao: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-    }
   },
   {
     sequelize,
@@ -34,6 +32,13 @@ Boi.init(
     createdAt: "dr_hr_criacao",
   }
 );
+
+Boi.belongsTo(Racoes, {
+  foreignKey: {
+    allowNull: true,
+    name: "id_racao",
+  }
+});
 
 async function buscar(pk, filtro) {
   if (filtro) {
@@ -60,6 +65,7 @@ async function buscar(pk, filtro) {
         id_pk: pk,
       },
     });
+
     return ret;
   } else {
     const ret = await Boi.findAll();

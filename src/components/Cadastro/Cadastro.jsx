@@ -28,6 +28,7 @@ export default function Cadastro({
 
   useEffect(() => {
     reloadData();
+    console.log(data);
   }, []);
 
   useEffect(() => {

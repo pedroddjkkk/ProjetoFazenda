@@ -76,4 +76,5 @@ module.exports = {
   buscar,
   salvar,
   excluir,
+  Racoes,
 };
