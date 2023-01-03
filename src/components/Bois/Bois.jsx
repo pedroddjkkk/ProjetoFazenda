@@ -25,6 +25,10 @@ export default function Bois() {
     ];
   }
 
+  useEffect(() => {
+    console.log(id_racao);
+  }, [id_racao]);
+
   function getAddColumns() {
     return (
       <div className="add-div-group container">
@@ -56,6 +60,7 @@ export default function Bois() {
             label="Ração"
             tabela="tab_racoes"
             setValue={setId_racao}
+            value={id_racao}
             className="col-sm-2"
             columns={getComboColumns()}
           />
@@ -79,6 +84,7 @@ export default function Bois() {
   }
 
   function setData(data){
+    console.log(data);
     setPeso(data.peso);
     setRaca(data.raca);
     setId_racao(data.id_racao);

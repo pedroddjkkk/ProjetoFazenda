@@ -6,7 +6,7 @@ import Modal from "react-bootstrap/Modal";
 import { apiBuscar } from "../../services/api";
 import BasicTable from "../Table/Table";
 
-export default function ComboEdit({ tabela, label, columns, className, setValue }) {
+export default function ComboEdit({ tabela, label, columns, className, setValue, value }) {
   const [show, setShow] = useState(false);
   const [data, setData] = useState();
   const [id, setId] = useState();
@@ -42,10 +42,10 @@ export default function ComboEdit({ tabela, label, columns, className, setValue 
       <TextField
         label={label}
         className="col-sm-2"
-        value={id}
+        value={value}
         focused={id ? true : false}
         onChange={(e) => {
-          setId(e.target.value)
+          setId(id);
         }}
         InputProps={{
           endAdornment: (
