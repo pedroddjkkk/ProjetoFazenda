@@ -21,6 +21,10 @@ Boi.init(
       type: DataTypes.INTEGER,
       allowNull: false,
     },
+    id_racao: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+    }
   },
   {
     sequelize,
@@ -69,6 +73,7 @@ async function salvar(where, registro) {
       {
         raca: registro.raca,
         peso: registro.peso,
+        id_racao: registro.id_racao,
       },
       {
         where: {
@@ -82,6 +87,7 @@ async function salvar(where, registro) {
     const ret = await Boi.create({
       raca: registro.raca,
       peso: registro.peso,
+      id_racao: registro.id_racao,
     });
 
     return ret;

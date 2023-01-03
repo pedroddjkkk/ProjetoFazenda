@@ -6,7 +6,7 @@ import Modal from "react-bootstrap/Modal";
 import { apiBuscar } from "../../services/api";
 import BasicTable from "../Table/Table";
 
-export default function ComboEdit({ tabela, label, columns, className }) {
+export default function ComboEdit({ tabela, label, columns, className, setValue }) {
   const [show, setShow] = useState(false);
   const [data, setData] = useState();
   const [id, setId] = useState();
@@ -22,12 +22,16 @@ export default function ComboEdit({ tabela, label, columns, className }) {
     reloadData();
   }, []);
 
+  useEffect(() => {
+    setValue(id);
+  }, [id]);
+
   async function reloadData() {
     const ret = await apiBuscar(tabela);
     setData(ret.data);
   }
 
-  async function handleClickTable(e) {
+  function handleClickTable(e) {
     let id = e.target.parentElement.childNodes[0].innerText;
     setId(id);
     handleClose();
@@ -40,7 +44,9 @@ export default function ComboEdit({ tabela, label, columns, className }) {
         className="col-sm-2"
         value={id}
         focused={id ? true : false}
-        onChange={(e) => setId(e.target.value)}
+        onChange={(e) => {
+          setId(e.target.value)
+        }}
         InputProps={{
           endAdornment: (
             <InputAdornment position="end">

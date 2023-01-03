@@ -2,12 +2,13 @@ import Cadastro from "../Cadastro/Cadastro";
 import "../../App.css";
 import "../../assets/bootstrap/css/bootstrap.min.css"
 import { InputAdornment, TextField } from "@mui/material";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import ComboEdit from "../ComboEdit/ComboEdit";
 
 export default function Bois() {
   const [peso, setPeso] = useState();
   const [raca, setRaca] = useState();
+  const [id_racao, setId_racao] = useState();
 
   function getColumns() {
     return [
@@ -54,6 +55,7 @@ export default function Bois() {
           <ComboEdit
             label="Ração"
             tabela="tab_racoes"
+            setValue={setId_racao}
             className="col-sm-2"
             columns={getComboColumns()}
           />
@@ -65,18 +67,21 @@ export default function Bois() {
   function getData(){
     return {
       peso: peso,
-      raca: raca
+      raca: raca,
+      id_racao: id_racao
     }
   }
 
   function clearData(){
     setPeso("");
     setRaca("");
+    setId_racao("");
   }
 
   function setData(data){
     setPeso(data.peso);
     setRaca(data.raca);
+    setId_racao(data.id_racao);
   }
 
   return (
