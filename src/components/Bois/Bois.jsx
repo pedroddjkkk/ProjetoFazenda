@@ -15,6 +15,7 @@ export default function Bois() {
       { name: "Identificação", field: "id_pk" },
       { name: "Peso (Kg)", field: "peso" },
       { name: "Raça", field: "raca" },
+      { name: "Ração", field: {parent: "racao", name: "nome"} },
     ];
   }
 

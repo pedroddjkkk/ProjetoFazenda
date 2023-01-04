@@ -21,7 +21,11 @@ export default function BasicTable({ cells, rows, onClick }) {
           return (
             <tr className="table-content" onClick={onClick && onClick}>
               {cells && cells.map((cell, indexc) => {
-                return <td key={indexc} id={cell.field}>{row[cell.field]}</td>;
+                if(cell.field.parent){
+                  return <td key={indexc} id={cell.field.name}>{row[cell.field.parent][cell.field.name]}</td>;
+                } else {
+                  return <td key={indexc} id={cell.field}>{row[cell.field]}</td>;
+                }
               })}
             </tr>
           );
