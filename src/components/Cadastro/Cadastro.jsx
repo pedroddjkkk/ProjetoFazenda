@@ -1,6 +1,7 @@
 import { Box, TextField } from "@mui/material";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { toast } from "react-toastify";
 import { newTabs, selectTab } from "../../redux/actions/tabsSlice";
 import { apiBuscar, apiExcluir, apiSalvar } from "../../services/api";
 import TabContent from "../Tab/TabContent";
@@ -51,7 +52,12 @@ export default function Cadastro({
 
   async function onConfirm(e) {
     e.preventDefault();
-    await apiSalvar(table, selectedId ? selectedId : "", getData);
+    const ret = await apiSalvar(table, selectedId ? selectedId : "", getData);
+    if (ret.status === 200) {
+      toast.success("Salvo com sucesso!");
+    } else {
+      toast.error("Erro ao salvar!");
+    }
     await reloadData();
     dispatch(selectTab("Listar"));
     clearData();

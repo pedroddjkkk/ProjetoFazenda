@@ -9,6 +9,8 @@ import Bois from "./components/Bois/Bois";
 import Usuarios from "./components/Usuarios/Usuarios";
 import Fazendas from "./components/Fazendas/Fazendas";
 import Racoes from "./components/Rações/Racoes";
+import { ToastContainer } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 let pages = [];
@@ -61,5 +63,6 @@ root.render(
         <Provider store={store}>
             <RouterProvider router={router} />
         </Provider>
+        <ToastContainer />
     </React.StrictMode>
 );
