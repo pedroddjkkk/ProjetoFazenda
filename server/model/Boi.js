@@ -68,8 +68,9 @@ async function buscar(pk, filtro) {
 
     return ret;
   } else {
-    const ret = await Boi.findAll();
-    return ret;
+    const ret = await Boi.findAll({include: Racoes});
+
+    return {...ret, };
   }
 }
 
