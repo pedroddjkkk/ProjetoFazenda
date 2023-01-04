@@ -2,7 +2,7 @@ const sequelize = require("../utils/dbUtils").sequelize;
 
 const { DataTypes, Model, Op } = require("sequelize");
 
-const Racoes = require("./Racoes").Racoes;
+var Racoes = require("./Racoes").Racoes;
 
 class Boi extends Model {
   otherPublicField;
@@ -37,7 +37,8 @@ Boi.belongsTo(Racoes, {
   foreignKey: {
     allowNull: true,
     name: "id_racao",
-  }
+  },
+  as: "racao",
 });
 
 async function buscar(pk, filtro) {
@@ -68,9 +69,17 @@ async function buscar(pk, filtro) {
 
     return ret;
   } else {
-    const ret = await Boi.findAll({include: Racoes});
+    const ret = await Boi.findAll({
+      include: [
+        {
+          model: Racoes,
+          required: false,
+          as: "racao",
+        },
+      ],
+    });
 
-    return {...ret, };
+    return ret;
   }
 }
 
