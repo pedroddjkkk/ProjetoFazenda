@@ -12,6 +12,7 @@ import Racoes from "./components/Rações/Racoes";
 import { ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 import Dashboard from "./components/DashBoard";
+import "./App.css"
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 let pages = [];

@@ -85,7 +85,7 @@ export default function Cadastro({
   }
 
   return (
-    <div>
+    <div className="cadastro-main-div">
       <div>
         <ul className="nav nav-tabs" role="tablist">
           {tabs &&
@@ -135,7 +135,7 @@ export default function Cadastro({
               <form onSubmit={onConfirm}>
                 <div>
                   {addColumns}
-                  <hr style={{ width: "95%", margin: "2% auto" }} />
+                  <hr style={{ width: "95%", margin: "2% auto", backgroundColor: "black" }} />
                   <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
                     <button
                       className="btn btn-danger"
@@ -162,7 +162,7 @@ export default function Cadastro({
               <form onSubmit={onConfirm}>
                 <div>
                   {addColumns}
-                  <hr style={{ width: "95%", margin: "2% auto" }} />
+                  <hr style={{ width: "95%", margin: "2% auto", backgroundColor: "black" }} />
                   <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
                     <button
                       className="btn btn-danger"
