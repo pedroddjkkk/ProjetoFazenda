@@ -3,10 +3,18 @@ import { IconButton, InputAdornment, TextField } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
+import DataTable from "react-data-table-component";
 import { apiBuscar } from "../../services/api";
 import BasicTable from "../Table/Table";
 
-export default function ComboEdit({ tabela, label, columns, className, setValue, value }) {
+export default function ComboEdit({
+  tabela,
+  label,
+  columns,
+  className,
+  setValue,
+  value,
+}) {
   const [show, setShow] = useState(false);
   const [data, setData] = useState();
   const [id, setId] = useState();
@@ -32,8 +40,7 @@ export default function ComboEdit({ tabela, label, columns, className, setValue,
   }
 
   function handleClickTable(e) {
-    let id = e.target.parentElement.childNodes[0].innerText;
-    setId(id);
+    setId(e.id_pk);
     handleClose();
   }
 
@@ -57,7 +64,7 @@ export default function ComboEdit({ tabela, label, columns, className, setValue,
                 <i class="fa-solid fa-magnifying-glass"></i>
               </IconButton>
             </InputAdornment>
-          )
+          ),
         }}
         variant="standard"
       />
@@ -66,7 +73,16 @@ export default function ComboEdit({ tabela, label, columns, className, setValue,
           <Modal.Title>{label}</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <BasicTable cells={columns} rows={data} onClick={handleClickTable}/>
+          <DataTable
+            columns={columns}
+            data={data}
+            onRowClicked={handleClickTable}
+            pagination
+            highlightOnHover
+            pointerOnHover
+            paginationPerPage={5}
+            paginationRowsPerPageOptions={[5, 10, 15, 20]}
+          />
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleClose}>
