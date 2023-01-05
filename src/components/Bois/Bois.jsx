@@ -12,10 +12,10 @@ export default function Bois() {
 
   function getColumns() {
     return [
-      { name: "Identificação", field: "id_pk" },
-      { name: "Peso (Kg)", field: "peso" },
-      { name: "Raça", field: "raca" },
-      { name: "Ração", field: {parent: "racao", name: "nome"} },
+      { name: "Identificação", selector: row => row.id_pk, sortable: true, width: "250px" },
+      { name: "Peso (Kg)", sortable: true, right: true, selector: row => row.peso, width: "100px" },
+      { name: "Raça", selector: row => row.raca },
+      { name: "Ração", selector: row => row.racao.nome },
     ];
   }
 

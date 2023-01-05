@@ -130,7 +130,7 @@ export default function Cadastro({
                   highlightOnHover
                   pointerOnHover
                   paginationPerPage={5}
-                  paginationRowsPerPageOptions={[1, 10, 15, 20]}
+                  paginationRowsPerPageOptions={[3, 10, 15, 20]}
                 />
               </>
             }
