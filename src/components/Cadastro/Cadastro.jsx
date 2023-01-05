@@ -69,10 +69,8 @@ export default function Cadastro({
   async function handleClickTable(e) {
     dispatch(newTabs([{ name: "Editar", icon: "fa-solid fa-edit" }]));
     dispatch(selectTab("Editar"));
-    let id = e.target.parentElement.childNodes[0].innerText;
-    let target = await apiBuscar(table, id);
-    setSelectedId(id);
-    setDataProp(target.data[0]);
+    setSelectedId(e.id_pk);
+    setDataProp(e);
   }
 
   async function onDelete(e) {
