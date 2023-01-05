@@ -24,7 +24,6 @@ export default function Cadastro({
 
   const reloadData = async () => {
     const ret = await apiBuscar(table);
-    console.log(ret.data);
     setData(ret.data);
   };
 
