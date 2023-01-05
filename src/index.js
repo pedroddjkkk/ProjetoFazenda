@@ -11,6 +11,7 @@ import Fazendas from "./components/Fazendas/Fazendas";
 import Racoes from "./components/Rações/Racoes";
 import { ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
+import Dashboard from "./components/DashBoard";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 let pages = [];
@@ -19,6 +20,13 @@ pages.push({
     navigable: true,
     element: <Navbar pages={pages}/>,
     children: [
+        {
+          navigable: true,
+          name: "Dashboard",
+          path: "/dashboard",
+          element: <Dashboard />,
+          icon: "fa-solid fa-gauge",
+        },
         {
             navigable: true,
             name: "Usuários",
