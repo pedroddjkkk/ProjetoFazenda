@@ -18,6 +18,7 @@ export default function ComboEdit({
   const [show, setShow] = useState(false);
   const [data, setData] = useState();
   const [id, setId] = useState();
+  const [nome, setNome] = useState();
 
   const handleMouseDownSearch = (event) => {
     event.preventDefault();
@@ -41,6 +42,7 @@ export default function ComboEdit({
 
   function handleClickTable(e) {
     setId(e.id_pk);
+    setNome(e.nome);
     handleClose();
   }
 
@@ -49,7 +51,7 @@ export default function ComboEdit({
       <TextField
         label={label}
         className="col-sm-2"
-        value={value}
+        value={nome}
         focused={id ? true : false}
         onChange={(e) => {
           setId(id);

@@ -57,7 +57,6 @@ export default function Bois() {
             label="Ração"
             tabela="tab_racoes"
             setValue={setId_racao}
-            value={id_racao}
             className="col-sm-2"
             columns={getComboColumns()}
           />

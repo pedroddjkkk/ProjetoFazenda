@@ -1,5 +1,5 @@
 import { Box, TextField } from "@mui/material";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { Button } from "react-bootstrap";
 import { CSVLink } from "react-csv";
 import DataTable from "react-data-table-component";
@@ -8,6 +8,7 @@ import { toast } from "react-toastify";
 import { newTabs, selectTab } from "../../redux/actions/tabsSlice";
 import { apiBuscar, apiExcluir, apiSalvar } from "../../services/api";
 import exportToExcel from "../../utils/exportToExcel";
+import fadeIn from "../../utils/fadeIn";
 import TabContent from "../Tab/TabContent";
 import BasicTable from "../Table/Table";
 
@@ -23,6 +24,7 @@ export default function Cadastro({
   const tabs = useSelector((state) => state.tabs.tabs);
   const selectedTab = useSelector((state) => state.tabs.selectedTab);
   const [data, setData] = useState();
+  const fadeInRef = useRef(null);
   const [filtro, setFiltro] = useState();
   const [selectedId, setSelectedId] = useState();
 
@@ -32,6 +34,7 @@ export default function Cadastro({
   };
 
   useEffect(() => {
+    fadeIn(fadeInRef.current)
     reloadData();
   }, []);
 
@@ -96,7 +99,7 @@ export default function Cadastro({
   );
 
   return (
-    <div className="cadastro-main-div">
+    <div className="cadastro-main-div" ref={fadeInRef}>
       <div>
         <ul className="nav nav-tabs" role="tablist">
           {tabs &&

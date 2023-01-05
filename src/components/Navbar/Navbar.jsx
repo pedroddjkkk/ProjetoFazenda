@@ -1,16 +1,20 @@
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink, Outlet } from "react-router-dom";
 import "../../App.css";
 import "../../assets/bootstrap/css/bootstrap.min.css";
 import "../../assets/css/styles.min.css";
 import { changeUser } from "../../redux/actions/userSlice";
+import fadeIn from "../../utils/fadeIn";
 
 function Navbar({ pages }) {
   const dispatch = useDispatch();
   const selectedUser = useSelector((state) => state.user.user);
+  const fadeInRef = useRef(null);
+  const selectedTab = useSelector((state) => state.tabs.selectedTab);
 
   useEffect(() => {
+    fadeIn(fadeInRef.current)
     const user = localStorage.getItem("user");
     if (!user) {
       window.location.href = "/";
@@ -84,7 +88,7 @@ function Navbar({ pages }) {
                 </div>
               </div>
             </nav>
-            <div class="container-fluid">
+            <div class="container-fluid" ref={fadeInRef}>
               <Outlet />
             </div>
           </div>
