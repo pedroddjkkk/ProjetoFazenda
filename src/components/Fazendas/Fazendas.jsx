@@ -10,11 +10,11 @@ export default function Fazendas() {
 
   function getColumns() {
     return [
-      { name: "Identificação", field: "id_pk" },
-      { name: "Nome", field: "nome" },
-      { name: "Cnpj", field: "cnpj" },
-      { name: "Endereço", field: "endereco" },
-      { name: "Telefone", field: "telefone" },
+      { name: "Identificação", selector: row => row.id_pk },
+      { name: "Nome", selector: row => row.nome },
+      { name: "Cnpj", selector: row => row.cnpj },
+      { name: "Endereço", selector: row => row.endereco },
+      { name: "Telefone", selector: row => row.telefone },
     ];
   }
 
