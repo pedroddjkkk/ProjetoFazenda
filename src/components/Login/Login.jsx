@@ -4,6 +4,7 @@ import { useNavigate } from "react-router";
 import { changeUser } from "../../redux/actions/userSlice.js";
 import { apiBuscar } from "../../services/api.js";
 import "./Login.css";
+import "../../assets/bootstrap/css/bootstrap.min.css"
 
 function Login() {
   const [email, setEmail] = useState("");

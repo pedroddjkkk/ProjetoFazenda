@@ -67,7 +67,7 @@ function Navbar({ pages }) {
                   <div class="input-gro up"></div>
                 </form>
                 <div className="column" style={{textAlign: "center"}}>
-                  <span class="text-gray-600 small">
+                  <span style={{fontSize: "16px"}}>
                     {selectedUser && selectedUser.nome}
                   </span>
                   <NavLink

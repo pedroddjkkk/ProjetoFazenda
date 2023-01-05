@@ -1,23 +1,42 @@
 import 'admin-lte/dist/css/adminlte.min.css';
+import { useEffect, useState } from 'react';
+import { NavLink } from 'react-router-dom';
+import { apiBuscar } from '../../services/api';
 
 export default function Dashboard() {
-  return (
-    <section class="content">
-      <div class="container-fluid">
-        <div class="row">
-          <div class="col-lg-3 col-6">
-            <div class="small-box bg-info">
-              <div class="inner">
-                <h3>150</h3>
+  const [bois, setBois] = useState([]);
+  const [numBois, setNumBois] = useState(0);
 
-                <p>New Orders</p>
+  const fetchData = async () => {
+    const ret = await apiBuscar("tab_bois");
+    setBois(ret.data);
+  }
+  
+  useEffect(() => {
+    fetchData();
+  }, [])
+
+  useEffect(() => {
+    setNumBois(bois.length);
+  }, [bois])
+
+  return (
+    <section className="content">
+      <div className="container-fluid">
+        <div className="row">
+          <div className="col-lg-3 col-6">
+            <div className="small-box bg-info">
+              <div className="inner">
+                <h3>{numBois}</h3>
+
+                <p>Bois</p>
               </div>
-              <div class="icon">
-                <i class="ion ion-bag"></i>
+              <div className="icon">
+                <i className="ion ion-bag"></i>
               </div>
-              <a href="#" class="small-box-footer">
-                More info <i class="fas fa-arrow-circle-right"></i>
-              </a>
+              <NavLink to="/bois" className="small-box-footer">
+                Mais Informações <i className="fas fa-arrow-circle-right"></i>
+              </NavLink>
             </div>
           </div>
         </div>
