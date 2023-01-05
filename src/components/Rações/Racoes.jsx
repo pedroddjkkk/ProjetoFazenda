@@ -7,8 +7,8 @@ export default function Racoes() {
 
   function getColumns() {
     return [
-      { name: "Identificação", field: "id_pk" },
-      { name: "Nome", field: "nome" },
+      { name: "Identificação", selector: row => row.id_pk },
+      { name: "Nome", selector: row => row.nome },
     ];
   }
 

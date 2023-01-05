@@ -1,5 +1,6 @@
 import { Box, TextField } from "@mui/material";
 import { useEffect, useState } from "react";
+import DataTable from "react-data-table-component";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import { newTabs, selectTab } from "../../redux/actions/tabsSlice";
@@ -121,10 +122,15 @@ export default function Cadastro({
                   style={{ marginTop: "20px" }}
                   onChange={(e) => setFiltro(e.target.value)}
                 />
-                <BasicTable
-                  cells={columns}
-                  rows={data}
-                  onClick={handleClickTable}
+                <DataTable
+                  columns={columns}
+                  data={data}
+                  onRowClicked={handleClickTable}
+                  pagination
+                  highlightOnHover
+                  pointerOnHover
+                  paginationPerPage={5}
+                  paginationRowsPerPageOptions={[1, 10, 15, 20]}
                 />
               </>
             }
