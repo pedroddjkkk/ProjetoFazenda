@@ -1,10 +1,13 @@
 import { Box, TextField } from "@mui/material";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
+import { Button } from "react-bootstrap";
+import { CSVLink } from "react-csv";
 import DataTable from "react-data-table-component";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import { newTabs, selectTab } from "../../redux/actions/tabsSlice";
 import { apiBuscar, apiExcluir, apiSalvar } from "../../services/api";
+import exportToExcel from "../../utils/exportToExcel";
 import TabContent from "../Tab/TabContent";
 import BasicTable from "../Table/Table";
 
@@ -85,6 +88,8 @@ export default function Cadastro({
     clearData();
   }
 
+  const actionsMemo = useMemo(() => <Button className="btn" onClick={() => exportToExcel(columns, data)}>Exportar</Button>, [data]);
+
   return (
     <div className="cadastro-main-div">
       <div>
@@ -131,6 +136,7 @@ export default function Cadastro({
                   pointerOnHover
                   paginationPerPage={5}
                   paginationRowsPerPageOptions={[3, 10, 15, 20]}
+                  actions={actionsMemo}
                 />
               </>
             }
