@@ -75,7 +75,7 @@ export default function Cadastro({
     setDataProp(target.data[0]);
   }
 
-  async function onDelete(e){
+  async function onDelete(e) {
     await apiExcluir(table, selectedId);
     await reloadData();
     dispatch(
@@ -88,7 +88,14 @@ export default function Cadastro({
     clearData();
   }
 
-  const actionsMemo = useMemo(() => <Button className="btn" onClick={() => exportToExcel(columns, data)}>Exportar</Button>, [data]);
+  const actionsMemo = useMemo(
+    () => (
+      <Button className="btn" onClick={() => exportToExcel(columns, data)}>
+        Exportar
+      </Button>
+    ),
+    [data]
+  );
 
   return (
     <div className="cadastro-main-div">
@@ -119,23 +126,16 @@ export default function Cadastro({
             id="Listar"
             children={
               <>
-                <TextField
-                  onKeyDown={(e) => handleKeyDown(e)}
-                  fullWidth
-                  label="Filtro"
-                  variant="standard"
-                  style={{ marginTop: "20px" }}
-                  onChange={(e) => setFiltro(e.target.value)}
-                />
                 <DataTable
                   columns={columns}
                   data={data}
+                  title="Lista de registros"
                   onRowClicked={handleClickTable}
                   pagination
                   highlightOnHover
                   pointerOnHover
                   paginationPerPage={5}
-                  paginationRowsPerPageOptions={[3, 10, 15, 20]}
+                  paginationRowsPerPageOptions={[5, 10, 15, 20]}
                   actions={actionsMemo}
                 />
               </>
@@ -147,7 +147,13 @@ export default function Cadastro({
               <form onSubmit={onConfirm}>
                 <div>
                   {addColumns}
-                  <hr style={{ width: "95%", margin: "2% auto", backgroundColor: "black" }} />
+                  <hr
+                    style={{
+                      width: "95%",
+                      margin: "2% auto",
+                      backgroundColor: "black",
+                    }}
+                  />
                   <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
                     <button
                       className="btn btn-danger"
@@ -174,7 +180,13 @@ export default function Cadastro({
               <form onSubmit={onConfirm}>
                 <div>
                   {addColumns}
-                  <hr style={{ width: "95%", margin: "2% auto", backgroundColor: "black" }} />
+                  <hr
+                    style={{
+                      width: "95%",
+                      margin: "2% auto",
+                      backgroundColor: "black",
+                    }}
+                  />
                   <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
                     <button
                       className="btn btn-danger"
