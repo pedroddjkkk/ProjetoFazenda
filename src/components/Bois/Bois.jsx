@@ -63,11 +63,12 @@ export default function Bois() {
       { name: "Nome", selector: (row) => row.nome },
     ];
   }
-
-  useEffect(() => {
-    console.log(getData())
-  }, [peso])
   
+  useEffect(() => {
+    if (selectedTab === "Editar") {
+      setPesoConfirmed(false);
+    }
+  }, [selectedTab]);
 
   function getAddColumns() {
     return (
