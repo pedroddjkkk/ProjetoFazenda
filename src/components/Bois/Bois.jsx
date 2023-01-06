@@ -5,12 +5,13 @@ import { IconButton, InputAdornment, TextField } from "@mui/material";
 import ComboEdit from "../ComboEdit/ComboEdit";
 import { useSelector } from "react-redux";
 import { Button, Modal } from "react-bootstrap";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function Bois() {
   const [peso, setPeso] = useState();
   const [raca, setRaca] = useState();
   const [show, setShow] = useState(false);
+  const [peso_confirmed, setPesoConfirmed] = useState();
   const [id_racao, setId_racao] = useState();
   const [new_peso, setNewPeso] = useState();
   const selectedTab = useSelector((state) => state.tabs.selectedTab);
@@ -39,7 +40,16 @@ export default function Bois() {
     event.preventDefault();
   };
 
-  const handleClose = () => setShow(false);
+  const handleClose = () => {
+    setShow(false);
+    setNewPeso();
+  };
+
+  const handleConfirm = () => {
+    setShow(false);
+    setPesoConfirmed(true);
+  }
+
   const handleShow = () => setShow(true);
 
   function getComboColumns() {
@@ -54,6 +64,11 @@ export default function Bois() {
     ];
   }
 
+  useEffect(() => {
+    console.log(getData())
+  }, [peso])
+  
+
   function getAddColumns() {
     return (
       <>
@@ -64,7 +79,7 @@ export default function Bois() {
               id="standard-start-adornment"
               className="col-sm-2"
               style={{ marginRight: "40px" }}
-              value={peso}
+              value={peso_confirmed ? new_peso : peso}
               onChange={(e) => setPeso(e.target.value)}
               InputProps={{
                 endAdornment: (
@@ -130,14 +145,15 @@ export default function Bois() {
             <button
               className="btn btn-danger"
               onClick={handleClose}
-              style={{marginRight: "10px", marginTop: "10px"}}
+              style={{ marginRight: "10px", marginTop: "10px" }}
             >
               <i class="fa-solid fa-times" /> Cancelar
             </button>
             <button
               type="submit"
               className="btn btn-primary"
-              style={{marginRight: "10px", marginTop: "10px"}}
+              style={{ marginRight: "10px", marginTop: "10px" }}
+              onClick={handleConfirm}
             >
               <i class="fa-solid fa-check" /> Confirmar
             </button>
