@@ -28,11 +28,10 @@ export default function Dashboard() {
             <div className="small-box bg-info">
               <div className="inner">
                 <h3>{numBois}</h3>
-
                 <p>Bois</p>
               </div>
               <div className="icon">
-                <i className="ion ion-bag"></i>
+                <i className="fa-solid fa-cow"></i>
               </div>
               <NavLink to="/bois" className="small-box-footer">
                 Mais Informações <i className="fas fa-arrow-circle-right"></i>

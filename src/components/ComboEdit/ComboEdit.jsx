@@ -1,11 +1,8 @@
-import { Visibility, VisibilityOff } from "@mui/icons-material";
-import { IconButton, InputAdornment, TextField } from "@mui/material";
+import { Button, IconButton, InputAdornment, TextField } from "@mui/material";
 import React, { useEffect, useState } from "react";
-import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import DataTable from "react-data-table-component";
 import { apiBuscar } from "../../services/api";
-import BasicTable from "../Table/Table";
 
 export default function ComboEdit({
   tabela,
@@ -60,6 +57,7 @@ export default function ComboEdit({
           endAdornment: (
             <InputAdornment position="end">
               <IconButton
+                title="Buscar"
                 onClick={handleShow}
                 onMouseDown={handleMouseDownSearch}
               >
