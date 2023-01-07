@@ -63,6 +63,13 @@ Pesagens.afterCreate((pesagem, options) => {
   );
 });
 
+Boi.afterCreate((boi, options) => {
+  Pesagens.create({
+    peso: boi.peso,
+    id_boi: boi.id_pk,
+  });
+});
+
 async function buscar(pk, filtro) {
   if (filtro) {
     if (isNaN(filtro)) {
