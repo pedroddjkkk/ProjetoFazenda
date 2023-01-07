@@ -48,7 +48,7 @@ export default function ComboEdit({
       <TextField
         label={label}
         className="col-sm-2"
-        value={nome}
+        value={nome ? nome : value}
         focused={id ? true : false}
         onChange={(e) => {
           setId(id);

@@ -14,6 +14,7 @@ export default function Bois() {
   const [peso_confirmed, setPesoConfirmed] = useState();
   const [id_racao, setId_racao] = useState();
   const [new_peso, setNewPeso] = useState();
+  const [nome_racao, setNomeRacao] = useState();
   const selectedTab = useSelector((state) => state.tabs.selectedTab);
 
   function getColumns() {
@@ -115,6 +116,7 @@ export default function Bois() {
               label="Ração"
               tabela="tab_racoes"
               setValue={setId_racao}
+              value={nome_racao}
               className="col-sm-2"
               columns={getComboColumns()}
             />
@@ -185,6 +187,7 @@ export default function Bois() {
     setRaca(data.raca);
     setId_racao(data.id_racao);
     setNewPeso(data.new_peso);
+    setNomeRacao(data.racao.nome)
   }
 
   return (
