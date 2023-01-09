@@ -13,6 +13,7 @@ import { ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 import Dashboard from "./components/DashBoard";
 import "./App.css"
+import Permissoes from "./components/Permissoes";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 let pages = [];
@@ -55,6 +56,13 @@ pages.push({
             path: "/racoes",
             element: <Racoes />,
             icon: "fa-solid fa-utensils",
+        },
+        {
+          navigable: true,
+          name: "Permissões",
+          path: "/permissoes",
+          element: <Permissoes />,
+          icon: "fa-solid fa-lock",
         }
     ],
 });
