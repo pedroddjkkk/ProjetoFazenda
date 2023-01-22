@@ -10,7 +10,5 @@ body{
 }
 
 .add-div-group{
-  width: 94% !important;
-  padding: 2% 2% 0 2% !important;
-  margin-right: 17.8% !important;
+  padding: 2% 2% 0 0.8% !important;
 }

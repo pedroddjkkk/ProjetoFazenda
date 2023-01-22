@@ -74,7 +74,7 @@ export default function Bois() {
   function getAddColumns() {
     return (
       <>
-        <div className="add-div-group container">
+        <div className="add-div-group">
           <div className="row">
             <TextField
               label="Peso"
