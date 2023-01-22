@@ -14,7 +14,7 @@ export default function Racoes() {
 
   function getAddColumns() {
     return (
-      <div className="add-div-group container">
+      <div className="add-div-group">
         <div className="row">
           <TextField
             label="Nome"
