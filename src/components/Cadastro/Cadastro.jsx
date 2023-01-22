@@ -145,14 +145,14 @@ export default function Cadastro({
             children={
               <form onSubmit={onConfirm}>
                 <div>
-                  {addColumns}
-                  <hr
-                    style={{
-                      width: "95%",
-                      margin: "2% auto",
-                      backgroundColor: "black",
-                    }}
-                  />
+                  <div className="add-section" style={{margin: "2% auto"}}>
+                    {addColumns}
+                    <hr
+                      style={{
+                        width: "95%",
+                        backgroundColor: "black",
+                      }}/>
+                  </div>
                   <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
                     <button
                       className="btn btn-danger"
