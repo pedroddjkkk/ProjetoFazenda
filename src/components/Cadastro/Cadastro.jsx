@@ -17,6 +17,7 @@ export default function Cadastro({
   getData,
   clearData,
   setDataProp,
+  editBottom,
 }) {
   const dispatch = useDispatch();
   const tabs = useSelector((state) => state.tabs.tabs);
@@ -218,6 +219,7 @@ export default function Cadastro({
                       <i class="fa-solid fa-check" /> Confirmar
                     </button>
                   </Box>
+                  {editBottom}
                 </div>
               </form>
             }
