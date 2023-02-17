@@ -6,7 +6,7 @@ import ComboEdit from "../ComboEdit/ComboEdit";
 import { useSelector } from "react-redux";
 import { Button, Modal } from "react-bootstrap";
 import { useEffect, useState } from "react";
-import { Line, LineChart } from "recharts";
+import { Line, LineChart, ResponsiveContainer } from "recharts";
 
 export default function Bois() {
   const [peso, setPeso] = useState();
@@ -194,6 +194,7 @@ export default function Bois() {
   }
 
   function editBottom() {
+    if(!pesagens) return null;
     const getData = () => {
       return pesagens.map((pesagem) => {
         return {
@@ -204,10 +205,12 @@ export default function Bois() {
 
     return (
       <div className="row">
-        <div className="col-sm-12">
-          <LineChart width={400} height={400} data={getData()}>
-            <Line type="monotone" dataKey="peso" stroke="#8884d8" />
-          </LineChart>
+        <div className="col-sm-12"> 
+          <ResponsiveContainer height={200} width='100%'>
+            <LineChart data={getData()}>
+              <Line type="monotone" dataKey="peso" stroke="#8884d8" />
+            </LineChart>
+          </ResponsiveContainer>
         </div>
       </div>
     );
