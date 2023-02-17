@@ -105,6 +105,11 @@ async function buscar(pk, filtro) {
           required: false,
           as: "racao",
         },
+        {
+          model: Pesagens,
+          required: false,
+          as: "pesagens",
+        }
       ],
     });
 

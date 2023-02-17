@@ -6,6 +6,7 @@ import ComboEdit from "../ComboEdit/ComboEdit";
 import { useSelector } from "react-redux";
 import { Button, Modal } from "react-bootstrap";
 import { useEffect, useState } from "react";
+import { Line, LineChart } from "recharts";
 
 export default function Bois() {
   const [peso, setPeso] = useState();
@@ -49,7 +50,7 @@ export default function Bois() {
   const handleConfirm = () => {
     setShow(false);
     setPesoConfirmed(true);
-  }
+  };
 
   const handleShow = () => setShow(true);
 
@@ -64,7 +65,7 @@ export default function Bois() {
       { name: "Nome", selector: (row) => row.nome },
     ];
   }
-  
+
   useEffect(() => {
     if (selectedTab === "Editar") {
       setPesoConfirmed(false);
@@ -187,7 +188,19 @@ export default function Bois() {
     setRaca(data.raca);
     setId_racao(data.id_racao);
     setNewPeso(data.new_peso);
-    setNomeRacao(data.racao.nome)
+    setNomeRacao(data.racao.nome);
+  }
+
+  function editBottom() {
+    return (
+      <div className="row">
+        <div className="col-sm-12">
+          <LineChart width={400} height={400} data={getData()}>
+            <Line type="monotone" dataKey="peso" stroke="#8884d8" />
+          </LineChart>
+        </div>
+      </div>
+    );
   }
 
   return (
@@ -198,6 +211,7 @@ export default function Bois() {
       getData={getData()}
       clearData={clearData}
       setDataProp={setData}
+      editBottom={editBottom()}
     />
   );
 }
