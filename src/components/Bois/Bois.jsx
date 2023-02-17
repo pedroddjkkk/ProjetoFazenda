@@ -190,9 +190,18 @@ export default function Bois() {
     setId_racao(data.id_racao);
     setNewPeso(data.new_peso);
     setNomeRacao(data.racao.nome);
+    setPesagens(data.pesagens);
   }
 
   function editBottom() {
+    const getData = () => {
+      return pesagens.map((pesagem) => {
+        return {
+          peso: pesagem.peso,
+        };
+      });
+    };
+
     return (
       <div className="row">
         <div className="col-sm-12">
