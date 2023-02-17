@@ -6,7 +6,7 @@ import ComboEdit from "../ComboEdit/ComboEdit";
 import { useSelector } from "react-redux";
 import { Button, Modal } from "react-bootstrap";
 import { useEffect, useState } from "react";
-import { Line, LineChart, ResponsiveContainer } from "recharts";
+import { CartesianGrid, Line, LineChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
 
 export default function Bois() {
   const [peso, setPeso] = useState();
@@ -202,13 +202,15 @@ export default function Bois() {
         };
       });
     };
-
     return (
       <div className="row">
         <div className="col-sm-12"> 
           <ResponsiveContainer height={200} width='100%'>
             <LineChart data={getData()}>
+              <Tooltip />
               <Line type="monotone" dataKey="peso" stroke="#8884d8" />
+              <CartesianGrid stroke="#ccc" strokeDasharray="5 5" />
+              <XAxis dataKey="peso" />
             </LineChart>
           </ResponsiveContainer>
         </div>

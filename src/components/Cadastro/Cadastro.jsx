@@ -178,19 +178,18 @@ export default function Cadastro({
             id="Editar"
             children={
               <form onSubmit={onConfirm}>
-                <div>
+                <div className="add-section" style={{margin: "0 auto", width: "95%",}}>
                   {addColumns}
                   <hr
                     style={{
-                      width: "95%",
-                      margin: "2% auto",
+                      marginTop: "2%",
                       backgroundColor: "black",
                     }}
                   />
                   <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
                     <button
                       className="btn btn-danger"
-                      style={{ margin: "0 30px 30px 0px" }}
+                      style={{ margin: "0 0 30px 30px" }}
                       onClick={() => {
                         dispatch(
                           newTabs([
@@ -206,7 +205,7 @@ export default function Cadastro({
                     </button>
                     <button
                       className="btn btn-danger"
-                      style={{ margin: "0 30px 30px 0px" }}
+                      style={{ margin: "0 0 30px 30px" }}
                       onClick={onDelete}
                     >
                       <i class="fa-solid fa-trash" /> Deletar
@@ -214,7 +213,7 @@ export default function Cadastro({
                     <button
                       type="submit"
                       className="btn btn-primary"
-                      style={{ margin: "0 30px 30px 0px" }}
+                      style={{ margin: "0 0 30px 30px" }}
                     >
                       <i class="fa-solid fa-check" /> Confirmar
                     </button>
