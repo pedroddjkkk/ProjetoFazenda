@@ -16,6 +16,7 @@ export default function Bois() {
   const [id_racao, setId_racao] = useState();
   const [new_peso, setNewPeso] = useState();
   const [nome_racao, setNomeRacao] = useState();
+  const [pesagens, setPesagens] = useState();
   const selectedTab = useSelector((state) => state.tabs.selectedTab);
 
   function getColumns() {
