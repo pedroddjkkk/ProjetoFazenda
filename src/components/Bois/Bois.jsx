@@ -210,7 +210,6 @@ export default function Bois() {
               <Tooltip />
               <Line type="monotone" dataKey="peso" stroke="#8884d8" />
               <CartesianGrid stroke="#ccc" strokeDasharray="5 5" />
-              <XAxis dataKey="peso" />
             </LineChart>
           </ResponsiveContainer>
         </div>
