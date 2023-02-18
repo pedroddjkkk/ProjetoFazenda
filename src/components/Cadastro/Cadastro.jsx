@@ -22,10 +22,10 @@ export default function Cadastro({
   const dispatch = useDispatch();
   const tabs = useSelector((state) => state.tabs.tabs);
   const selectedTab = useSelector((state) => state.tabs.selectedTab);
-  const [data, setData] = useState();
+  const [data, setData] = useState("");
   const fadeInRef = useRef(null);
-  const [filtro, setFiltro] = useState();
-  const [selectedId, setSelectedId] = useState();
+  const [filtro, setFiltro] = useState("");
+  const [selectedId, setSelectedId] = useState("");
 
   const reloadData = async () => {
     const ret = await apiBuscar(table);
