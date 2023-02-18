@@ -54,7 +54,7 @@ export default function Cadastro({
     }
   }, [selectedTab]);
 
- /*  async function handleKeyDown(event) {
+  /*  async function handleKeyDown(event) {
     if (event.key === "Enter") {
       event.preventDefault();
       const ret = await apiBuscar(table, "", filtro);
@@ -142,6 +142,13 @@ export default function Cadastro({
                   onRowClicked={handleClickTable}
                   pagination
                   keyField="id_pk"
+                  paginationComponentOptions={{
+                    rowsPerPageText: "Registros por paginas:",
+                    rangeSeparatorText: "de",
+                    noRowsPerPage: false,
+                    selectAllRowsItem: false,
+                    selectAllRowsItemText: "All",
+                  }}
                   highlightOnHover
                   pointerOnHover
                   paginationPerPage={5}
@@ -156,13 +163,17 @@ export default function Cadastro({
             children={
               <form onSubmit={onConfirm}>
                 <div>
-                  <div className="add-section" style={{margin: "0 auto", width: "95%",}}>
+                  <div
+                    className="add-section"
+                    style={{ margin: "0 auto", width: "95%" }}
+                  >
                     {addColumns}
                     <hr
                       style={{
                         backgroundColor: "black",
-                        marginTop: "2%"
-                      }}/>
+                        marginTop: "2%",
+                      }}
+                    />
                   </div>
                   <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
                     <button
@@ -188,7 +199,10 @@ export default function Cadastro({
             id="Editar"
             children={
               <form onSubmit={onConfirm}>
-                <div className="add-section" style={{margin: "0 auto", width: "95%",}}>
+                <div
+                  className="add-section"
+                  style={{ margin: "0 auto", width: "95%" }}
+                >
                   {addColumns}
                   <hr
                     style={{
@@ -196,10 +210,9 @@ export default function Cadastro({
                       backgroundColor: "black",
                     }}
                   />
-                  <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
+                  <div className="edit-buttons">
                     <button
-                      className="btn btn-danger"
-                      style={{ margin: "0 0 30px 30px" }}
+                      className="btn btn-danger btn-cadastro-edit"
                       onClick={() => {
                         dispatch(
                           newTabs([
@@ -214,20 +227,18 @@ export default function Cadastro({
                       <i className="fa-solid fa-times" /> Cancelar
                     </button>
                     <button
-                      className="btn btn-danger"
-                      style={{ margin: "0 0 30px 30px" }}
+                      className="btn btn-danger btn-cadastro-edit"
                       onClick={onDelete}
                     >
                       <i className="fa-solid fa-trash" /> Deletar
                     </button>
                     <button
                       type="submit"
-                      className="btn btn-primary"
-                      style={{ margin: "0 0 30px 30px" }}
+                      className="btn btn-primary btn-cadastro-edit"
                     >
                       <i className="fa-solid fa-check" /> Confirmar
                     </button>
-                  </Box>
+                  </div>
                   {editBottom}
                 </div>
               </form>

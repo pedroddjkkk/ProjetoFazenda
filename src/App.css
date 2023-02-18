@@ -18,6 +18,15 @@ body{
   margin-left: 14rem;
 }
 
+.edit-buttons{
+  display: flex;
+  justify-content: flex-end;
+}
+
+.btn-cadastro-edit{
+  margin: 0 0 30px 30px;
+}
+
 @media screen and (max-width: 767.98px) {
   #content-wrapper{
     min-height: calc(100vh - 56px);
@@ -25,7 +34,19 @@ body{
   }
 }
 
+@media screen and (max-width: 575.98px) {
+  .edit-buttons{
+    display: flex !important;
+    justify-content: center;
+  }
+  .btn-cadastro-edit{
+    margin: 0 5px 5px 5px;
+  }
+}
+
 .small-footer{
   margin-top: 20px !important;
   height: 0px !important;
 }
+
+

@@ -109,7 +109,7 @@ async function buscar(pk, filtro) {
           model: Pesagens,
           required: false,
           as: "pesagens",
-        }
+        },
       ],
     });
 
