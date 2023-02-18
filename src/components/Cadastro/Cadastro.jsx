@@ -111,7 +111,7 @@ export default function Cadastro({
           {tabs &&
             tabs.map((tab, index) => {
               return (
-                <li className="nav-item" role="presentation">
+                <li className="nav-item" role="presentation" key={index}>
                   <a
                     className={
                       selectedTab === tab.name ? "nav-link active" : "nav-link"
