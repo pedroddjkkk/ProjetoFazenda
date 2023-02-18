@@ -1,4 +1,4 @@
-import { Box, TextField } from "@mui/material";
+import { Box } from "@mui/material";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { Button } from "react-bootstrap";
 import DataTable from "react-data-table-component";
@@ -24,7 +24,7 @@ export default function Cadastro({
   const selectedTab = useSelector((state) => state.tabs.selectedTab);
   const [data, setData] = useState("");
   const fadeInRef = useRef(null);
-  const [filtro, setFiltro] = useState("");
+  const [filtro] = useState("");
   const [selectedId, setSelectedId] = useState("");
 
   const reloadData = async () => {
@@ -54,13 +54,13 @@ export default function Cadastro({
     }
   }, [selectedTab]);
 
-  async function handleKeyDown(event) {
+ /*  async function handleKeyDown(event) {
     if (event.key === "Enter") {
       event.preventDefault();
       const ret = await apiBuscar(table, "", filtro);
       setData(ret.data);
     }
-  }
+  } */
 
   async function onConfirm(e) {
     e.preventDefault();
