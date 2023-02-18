@@ -1,4 +1,4 @@
-export default function acompanhamento() {
+export default function Acompanhamento() {
   return (
     <>
     </>

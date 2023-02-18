@@ -14,6 +14,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import Dashboard from "./components/DashBoard";
 import "./App.css"
 import Permissoes from "./components/Permissoes";
+import Acompanhamento from "./components/Acompanhamento/Acompanhamento";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 let pages = [];
@@ -61,7 +62,7 @@ pages.push({
           navigable: true,
           name: "Acompanhar Bovinos",
           path: "/acompanhamento",
-          element: <Permissoes />,
+          element: <Acompanhamento />,
           icon: "fa-solid fa-chart-line",
         },
         {
