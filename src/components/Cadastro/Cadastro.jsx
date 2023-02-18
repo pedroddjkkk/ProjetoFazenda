@@ -121,7 +121,7 @@ export default function Cadastro({
                     href="#tab-1"
                     onClick={() => dispatch(selectTab(tab.name))}
                   >
-                    <i class={tab.icon && tab.icon}></i>
+                    <i className={tab.icon && tab.icon}></i>
                     {" " + tab.name}
                   </a>
                 </li>
@@ -167,14 +167,14 @@ export default function Cadastro({
                       style={{ margin: "0 30px 30px 0px" }}
                       onClick={() => dispatch(selectTab("Listar"))}
                     >
-                      <i class="fa-solid fa-times" /> Cancelar
+                      <i className="fa-solid fa-times" /> Cancelar
                     </button>
                     <button
                       type="submit"
                       className="btn btn-primary"
                       style={{ margin: "0 30px 30px 0px" }}
                     >
-                      <i class="fa-solid fa-check" /> Confirmar
+                      <i className="fa-solid fa-check" /> Confirmar
                     </button>
                   </Box>
                 </div>
@@ -208,21 +208,21 @@ export default function Cadastro({
                         dispatch(selectTab("Listar"));
                       }}
                     >
-                      <i class="fa-solid fa-times" /> Cancelar
+                      <i className="fa-solid fa-times" /> Cancelar
                     </button>
                     <button
                       className="btn btn-danger"
                       style={{ margin: "0 0 30px 30px" }}
                       onClick={onDelete}
                     >
-                      <i class="fa-solid fa-trash" /> Deletar
+                      <i className="fa-solid fa-trash" /> Deletar
                     </button>
                     <button
                       type="submit"
                       className="btn btn-primary"
                       style={{ margin: "0 0 30px 30px" }}
                     >
-                      <i class="fa-solid fa-check" /> Confirmar
+                      <i className="fa-solid fa-check" /> Confirmar
                     </button>
                   </Box>
                   {editBottom}
