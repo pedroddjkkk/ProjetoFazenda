@@ -13,6 +13,7 @@ import { ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 import Dashboard from "./components/DashBoard";
 import "./App.css"
+import * as serviceWorkerRegistration from './serviceWorkerRegistration';
 import Permissoes from "./components/Permissoes";
 import Acompanhamento from "./components/Acompanhamento/Acompanhamento";
 
@@ -91,3 +92,5 @@ root.render(
         <ToastContainer />
     </React.StrictMode>
 );
+
+serviceWorkerRegistration.unregister();
