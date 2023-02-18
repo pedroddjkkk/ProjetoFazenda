@@ -4,9 +4,9 @@ import "../../assets/bootstrap/css/bootstrap.min.css";
 import { IconButton, InputAdornment, TextField } from "@mui/material";
 import ComboEdit from "../ComboEdit/ComboEdit";
 import { useSelector } from "react-redux";
-import { Button, Modal } from "react-bootstrap";
+import { Modal } from "react-bootstrap";
 import { useEffect, useState } from "react";
-import { CartesianGrid, Line, LineChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
+import { CartesianGrid, Line, LineChart, ResponsiveContainer, Tooltip } from "recharts";
 
 export default function Bois() {
   const [peso, setPeso] = useState();
