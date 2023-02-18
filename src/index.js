@@ -63,6 +63,12 @@ pages.push({
           path: "/permissoes",
           element: <Permissoes />,
           icon: "fa-solid fa-lock",
+        },{
+          navigable: true,
+          name: "Acompanhar Bovinos",
+          path: "/acompanhamento",
+          element: <Permissoes />,
+          icon: "fa-solid fa-chart-line",
         }
     ],
 });
