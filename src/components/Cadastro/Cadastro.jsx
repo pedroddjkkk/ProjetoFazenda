@@ -47,6 +47,12 @@ export default function Cadastro({
     dispatch(selectTab("Listar"));
   }, [data]);
 
+  useEffect(() => {
+    if (selectedTab === "Adicionar") {
+      clearData();
+    }
+  }, [selectedTab]);
+
   async function handleKeyDown(event) {
     if (event.key === "Enter") {
       event.preventDefault();
