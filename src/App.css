@@ -12,3 +12,15 @@ body{
 .add-div-group{
   padding: 2% 2% 0 0.8% !important;
 }
+
+#content-wrapper{
+  min-height: calc(100vh - 56px);
+  margin-left: 14rem;
+}
+
+@media screen and (max-width: 767.98px) {
+  #content-wrapper{
+    min-height: calc(100vh - 56px);
+    margin-left: 6.5rem;
+  }
+}
