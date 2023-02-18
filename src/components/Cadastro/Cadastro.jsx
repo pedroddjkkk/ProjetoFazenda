@@ -50,6 +50,7 @@ export default function Cadastro({
   useEffect(() => {
     if (selectedTab === "Adicionar") {
       clearData();
+      setSelectedId(null);
     }
   }, [selectedTab]);
 
