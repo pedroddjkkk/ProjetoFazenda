@@ -92,7 +92,7 @@ function Navbar({ pages }) {
               <Outlet />
             </div>
           </div>
-          <footer class="bg-white sticky-footer">
+          <footer class="bg-white sticky-footer small-footer">
             <div class="container my-auto">
               <div class="text-center my-auto copyright">
                 <span>Copyright © 2023</span>

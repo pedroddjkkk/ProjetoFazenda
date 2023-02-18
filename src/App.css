@@ -24,3 +24,8 @@ body{
     margin-left: 6.5rem;
   }
 }
+
+.small-footer{
+  margin-top: 20px !important;
+  height: 0px !important;
+}
