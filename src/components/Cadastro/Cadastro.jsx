@@ -141,6 +141,7 @@ export default function Cadastro({
                   title="Lista de registros"
                   onRowClicked={handleClickTable}
                   pagination
+                  keyField="id_pk"
                   highlightOnHover
                   pointerOnHover
                   paginationPerPage={5}
