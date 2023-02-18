@@ -97,9 +97,11 @@ export default function Cadastro({
 
   const actionsMemo = useMemo(
     () => (
-      <Button className="btn" onClick={() => exportToExcel(columns, data)}>
-        Exportar
-      </Button>
+      <>
+        <Button className="btn" onClick={() => exportToExcel(columns, data)}>
+          Exportar
+        </Button>
+      </>
     ),
     [data]
   );
