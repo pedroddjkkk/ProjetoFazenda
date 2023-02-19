@@ -18,6 +18,10 @@ body{
   margin-left: 14rem;
 }
 
+#nav-transition{
+  transition: margin-left 0.5s ease;
+}
+
 #content-wrapper.hidden{
   margin-left: 0;
 }

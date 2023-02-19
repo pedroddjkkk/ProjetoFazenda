@@ -36,7 +36,7 @@ function Login() {
   };
 
   return (
-    <div className="container-fluid bg-gradient-primary fill-height">
+    <div className="container-fluid bg-gradient-primary fill-height" style={{height: "100vh"}}>
       <div className="container">
         <div className="row justify-content-center">
           <div className="col-md-9 col-lg-12 col-xl-10">
