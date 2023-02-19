@@ -18,6 +18,7 @@ export default function Cadastro({
   clearData,
   setDataProp,
   editBottom,
+  propsNewTabs
 }) {
   const dispatch = useDispatch();
   const tabs = useSelector((state) => state.tabs.tabs);
@@ -244,6 +245,7 @@ export default function Cadastro({
               </form>
             }
           />
+          {propsNewTabs}
         </div>
       </div>
     </div>
