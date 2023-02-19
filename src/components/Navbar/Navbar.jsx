@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink, Outlet } from "react-router-dom";
 import "../../App.css";
@@ -12,6 +12,7 @@ function Navbar({ pages }) {
   const selectedUser = useSelector((state) => state.user.user);
   const fadeInRef = useRef(null);
   const selectedTab = useSelector((state) => state.tabs.selectedTab);
+  const [navbarVisible, setNavbarVisible] = useState(false);
 
   useEffect(() => {
     fadeIn(fadeInRef.current)
@@ -27,7 +28,7 @@ function Navbar({ pages }) {
   return (
     <div id="page-top">
       <div id="wrapper">
-        <nav class="navbar navbar-dark align-items-start sidebar sidebar-dark accordion bg-gradient-primary p-0 fixed-top">
+        <nav class={`navbar navbar-dark align-items-start sidebar sidebar-dark accordion bg-gradient-primary p-0 fixed-top ${navbarVisible ? "" : "hidden"}`}>
           <div class="container-fluid d-flex flex-column p-0">
             <a
               class="navbar-brand d-flex justify-content-center align-items-center sidebar-brand m-0"
@@ -56,7 +57,7 @@ function Navbar({ pages }) {
             </ul>
           </div>
         </nav>
-        <div class="d-flex flex-column" id="content-wrapper">
+        <div class={`d-flex flex-column ${navbarVisible ? "" : "hidden"}`} id="content-wrapper">
           <div id="content">
             <nav class="navbar navbar-light navbar-expand bg-white shadow mb-4 topbar static-top">
               <div class="container-fluid">
@@ -64,6 +65,7 @@ function Navbar({ pages }) {
                   class="btn btn-link d-md-none rounded-circle me-3"
                   id="sidebarToggleTop"
                   type="button"
+                  onClick={() => setNavbarVisible(!navbarVisible)}
                 >
                   <i class="fas fa-bars"></i>
                 </button>

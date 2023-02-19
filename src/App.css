@@ -18,6 +18,10 @@ body{
   margin-left: 14rem;
 }
 
+#content-wrapper.hidden{
+  margin-left: 0;
+}
+
 .edit-buttons{
   display: flex;
   justify-content: flex-end;
@@ -25,6 +29,11 @@ body{
 
 .btn-cadastro-edit{
   margin: 0 0 30px 30px;
+}
+
+.hidden{
+  display: none !important;
+  left: -600px !important;
 }
 
 @media screen and (max-width: 767.98px) {
