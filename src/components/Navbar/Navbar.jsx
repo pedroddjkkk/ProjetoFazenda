@@ -12,7 +12,7 @@ function Navbar({ pages }) {
   const selectedUser = useSelector((state) => state.user.user);
   const fadeInRef = useRef(null);
   const selectedTab = useSelector((state) => state.tabs.selectedTab);
-  const [navbarVisible, setNavbarVisible] = useState(false);
+  const [navbarVisible, setNavbarVisible] = useState(true);
 
   useEffect(() => {
     fadeIn(fadeInRef.current)
