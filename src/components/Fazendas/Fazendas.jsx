@@ -1,5 +1,6 @@
 import { TextField } from "@mui/material";
 import { useState } from "react";
+import { useDispatch } from "react-redux";
 import Cadastro from "../Cadastro/Cadastro";
 
 export default function Fazendas() {
@@ -7,6 +8,7 @@ export default function Fazendas() {
   const [cnpj, setCnpj] = useState();
   const [endereco, setEndereco] = useState();
   const [telefone, setTelefone] = useState();
+  const dispatch = useDispatch();
 
   function getColumns() {
     return [
