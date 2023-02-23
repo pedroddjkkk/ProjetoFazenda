@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const api = axios.create({
-  baseURL: "http://172.21.102.57:3001",
+  baseURL: "http://192.168.3.80:3001",
 });
 
 export const apiBuscar = async (tabela, pk, filtro) => {

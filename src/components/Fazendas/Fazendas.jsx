@@ -14,7 +14,7 @@ export default function Fazendas() {
 
   function getColumns() {
     return [
-      { name: "Identificação", selector: (row) => row.id_pk },
+      { name: "Identificação", selector: (row) => row.id_pk, width: "10%" },
       { name: "Nome", selector: (row) => row.nome },
       { name: "Cnpj", selector: (row) => row.cnpj },
       { name: "Endereço", selector: (row) => row.endereco },
@@ -91,17 +91,17 @@ export default function Fazendas() {
   }
 
   function onTableRowClick() {
-    dispatch(newTabs([{ name: "Lotes", icon: "fa-solid fa-list" }]));
+    dispatch(
+      newTabs([
+        { name: "Lotes", icon: "fa-solid fa-list" },
+        { name: "Editar", icon: "fa-solid fa-edit" },
+      ])
+    );
     dispatch(selectTab("Lotes"));
   }
 
   function getPropsNewTabs() {
-    return (
-      <TabContent
-        id="Lotes"
-        component={<div>Teste</div>}
-      />
-    );
+    return <TabContent id="Lotes" component={<div>Teste</div>} />;
   }
   return (
     <Cadastro

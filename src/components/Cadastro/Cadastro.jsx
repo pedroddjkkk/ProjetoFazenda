@@ -156,7 +156,7 @@ export default function Cadastro({
                   paginationPerPage={5}
                   paginationRowsPerPageOptions={[5, 10, 15, 20]}
                   actions={actionsMemo}
-                  noDataComponent={<h5 style={{padding: "20px 0 40px 0"}}>Sem dados para a tabela</h5>}
+                  noDataComponent={<span style={{padding: "20px 0 40px 0"}}>Sem dados para a tabela</span>}
                 />
               </>
             }
