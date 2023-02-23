@@ -18,7 +18,8 @@ export default function Cadastro({
   clearData,
   setDataProp,
   editBottom,
-  propsNewTabs
+  propsNewTabs,
+  onTableRowClick,
 }) {
   const dispatch = useDispatch();
   const tabs = useSelector((state) => state.tabs.tabs);
@@ -140,7 +141,7 @@ export default function Cadastro({
                   columns={columns}
                   data={data}
                   title="Lista de registros"
-                  onRowClicked={handleClickTable}
+                  onRowClicked={onTableRowClick ? onTableRowClick : handleClickTable}
                   pagination
                   keyField="id_pk"
                   paginationComponentOptions={{
