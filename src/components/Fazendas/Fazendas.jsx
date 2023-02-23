@@ -1,6 +1,7 @@
 import { TextField } from "@mui/material";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
+import { newTabs, selectTab } from "../../redux/actions/tabsSlice";
 import Cadastro from "../Cadastro/Cadastro";
 
 export default function Fazendas() {
@@ -89,7 +90,10 @@ export default function Fazendas() {
   }
 
   function onTableRowClick(){
-    
+    dispatch(newTabs([
+      { name: "Teste", icon: "fa-solid fa-list" },
+    ]))
+    dispatch(selectTab("Teste"))
   }
 
   return <Cadastro 
