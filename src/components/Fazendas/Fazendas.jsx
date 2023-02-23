@@ -3,6 +3,7 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { newTabs, selectTab } from "../../redux/actions/tabsSlice";
 import Cadastro from "../Cadastro/Cadastro";
+import TabContent from "../Tab/TabContent";
 
 export default function Fazendas() {
   const [nome, setNome] = useState();
@@ -13,11 +14,11 @@ export default function Fazendas() {
 
   function getColumns() {
     return [
-      { name: "Identificação", selector: row => row.id_pk },
-      { name: "Nome", selector: row => row.nome },
-      { name: "Cnpj", selector: row => row.cnpj },
-      { name: "Endereço", selector: row => row.endereco },
-      { name: "Telefone", selector: row => row.telefone },
+      { name: "Identificação", selector: (row) => row.id_pk },
+      { name: "Nome", selector: (row) => row.nome },
+      { name: "Cnpj", selector: (row) => row.cnpj },
+      { name: "Endereço", selector: (row) => row.endereco },
+      { name: "Telefone", selector: (row) => row.telefone },
     ];
   }
 
@@ -66,43 +67,52 @@ export default function Fazendas() {
     );
   }
 
-  function getData(){
+  function getData() {
     return {
       nome: nome,
       cnpj: cnpj,
       endereco: endereco,
-      telefone: telefone
-    }
+      telefone: telefone,
+    };
   }
 
-  function clearData(){
+  function clearData() {
     setNome("");
     setCnpj("");
     setEndereco("");
     setTelefone("");
   }
 
-  function setData(data){
+  function setData(data) {
     setNome(data.nome);
     setCnpj(data.cnpj);
     setEndereco(data.endereco);
     setTelefone(data.telefone);
   }
 
-  function onTableRowClick(){
-    dispatch(newTabs([
-      { name: "Teste", icon: "fa-solid fa-list" },
-    ]))
-    dispatch(selectTab("Teste"))
+  function onTableRowClick() {
+    dispatch(newTabs([{ name: "Lotes", icon: "fa-solid fa-list" }]));
+    dispatch(selectTab("Lotes"));
   }
 
-  return <Cadastro 
-    columns={getColumns()}
-    addColumns={getAddColumns()}
-    table="tab_fazendas"
-    getData={getData()}
-    clearData={clearData}
-    setDataProp={setData}
-    onTableRowClick={onTableRowClick()}
-  />;
+  function getPropsNewTabs() {
+    return (
+      <TabContent
+        id="Lotes"
+        children={<div>Teste</div>}
+      />
+    );
+  }
+  return (
+    <Cadastro
+      columns={getColumns()}
+      addColumns={getAddColumns()}
+      table="tab_fazendas"
+      getData={getData()}
+      clearData={clearData}
+      setDataProp={setData}
+      onTableRowClick={onTableRowClick()}
+      propsNewTabs={getPropsNewTabs()}
+    />
+  );
 }
