@@ -99,7 +99,7 @@ export default function Fazendas() {
     return (
       <TabContent
         id="Lotes"
-        children={<div>Teste</div>}
+        component={<div>Teste</div>}
       />
     );
   }

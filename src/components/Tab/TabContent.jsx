@@ -1,7 +1,7 @@
 import { Paper } from "@mui/material";
 import { useSelector } from "react-redux";
 
-export default function TabContent({ id, children }) {
+export default function TabContent({ id, component }) {
   const selectedTab = useSelector((state) => state.tabs.selectedTab);
 
   if (id == selectedTab) {
@@ -10,7 +10,7 @@ export default function TabContent({ id, children }) {
         elevation={1}
         style={{ borderRadius: 0, borderLeft: "1px solid rgb(236 239 255)" }}
       >
-        {children}
+        {component}
       </Paper>
     );
   } else {

@@ -135,7 +135,7 @@ export default function Cadastro({
         <div className="tab-content">
           <TabContent
             id="Listar"
-            children={
+            component={
               <>
                 <DataTable
                   columns={columns}
@@ -162,7 +162,7 @@ export default function Cadastro({
           />
           <TabContent
             id="Adicionar"
-            children={
+            component={
               <form onSubmit={onConfirm}>
                 <div>
                   <div
@@ -199,7 +199,7 @@ export default function Cadastro({
           />
           <TabContent
             id="Editar"
-            children={
+            component={
               <form onSubmit={onConfirm}>
                 <div
                   className="add-section"
