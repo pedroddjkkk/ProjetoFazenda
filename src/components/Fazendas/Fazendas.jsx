@@ -86,6 +86,10 @@ export default function Fazendas() {
     setTelefone(data.telefone);
   }
 
+  function onTableRowClick(){
+    
+  }
+
   return <Cadastro 
     columns={getColumns()}
     addColumns={getAddColumns()}
@@ -93,5 +97,6 @@ export default function Fazendas() {
     getData={getData()}
     clearData={clearData}
     setDataProp={setData}
+    onTableRowClick={onTableRowClick()}
   />;
 }
