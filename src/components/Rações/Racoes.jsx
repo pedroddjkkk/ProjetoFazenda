@@ -7,7 +7,7 @@ export default function Racoes() {
 
   function getColumns() {
     return [
-      { name: "Identificação", selector: row => row.id_pk },
+      { name: "Identificação", selector: row => row.id_pk, width: "10%" },
       { name: "Nome", selector: row => row.nome },
     ];
   }

@@ -10,7 +10,7 @@ export default function Usuarios() {
 
   function getColumns() {
     return [
-      { name: "Identificação", selector: row => row.id_pk, sortable: true },
+      { name: "Identificação", selector: row => row.id_pk, sortable: true, width: "10%" },
       { name: "Email", selector: row => row.email, sortable: true },
       { name: "Login", selector: row => row.login },
       { name: "Nome", selector: row => row.nome },

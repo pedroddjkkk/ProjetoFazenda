@@ -25,7 +25,7 @@ export default function Bois() {
         name: "Identificação",
         selector: (row) => row.id_pk,
         sortable: true,
-        width: "250px",
+        width: "10%",
       },
       {
         name: "Peso (Kg)",
@@ -61,7 +61,7 @@ export default function Bois() {
         name: "Identificação",
         selector: (row) => row.id_pk,
         sortable: true,
-        width: "250px",
+        width: "10%",
       },
       { name: "Nome", selector: (row) => row.nome },
     ];
