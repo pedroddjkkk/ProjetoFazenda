@@ -90,13 +90,14 @@ export default function Fazendas() {
     setTelefone(data.telefone);
   }
 
-  function onTableRowClick() {
+  function onTableRowClick(e) {
     dispatch(
       newTabs([
         { name: "Lotes", icon: "fa-solid fa-list" },
         { name: "Editar", icon: "fa-solid fa-edit" },
       ])
     );
+    setData(e);
     dispatch(selectTab("Lotes"));
   }
 
