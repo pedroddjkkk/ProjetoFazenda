@@ -141,7 +141,9 @@ export default function Cadastro({
                   columns={columns}
                   data={data}
                   title="Lista de registros"
-                  onRowClicked={onTableRowClick ? onTableRowClick : handleClickTable}
+                  onRowClicked={
+                    onTableRowClick ? onTableRowClick : handleClickTable
+                  }
                   pagination
                   keyField="id_pk"
                   paginationComponentOptions={{
@@ -156,7 +158,11 @@ export default function Cadastro({
                   paginationPerPage={5}
                   paginationRowsPerPageOptions={[5, 10, 15, 20]}
                   actions={actionsMemo}
-                  noDataComponent={<span style={{padding: "20px 0 40px 0"}}>Sem dados para a tabela</span>}
+                  noDataComponent={
+                    <span style={{ padding: "20px 0 40px 0" }}>
+                      Sem dados para a tabela
+                    </span>
+                  }
                 />
               </>
             }

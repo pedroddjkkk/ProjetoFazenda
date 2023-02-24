@@ -111,7 +111,7 @@ export default function Fazendas() {
       getData={getData()}
       clearData={clearData}
       setDataProp={setData}
-      onTableRowClick={onTableRowClick()}
+      onTableRowClick={onTableRowClick}
       propsNewTabs={getPropsNewTabs()}
     />
   );
