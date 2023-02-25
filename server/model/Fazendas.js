@@ -2,6 +2,8 @@ const sequelize = require("../utils/dbUtils").sequelize;
 
 const { DataTypes, Model } = require("sequelize");
 
+var Lote = require("./Lote").Lote;
+
 class Fazenda extends Model {
   otherPublicField;
 }
@@ -38,6 +40,11 @@ Fazenda.init(
     createdAt: "dr_hr_criacao",
   }
 );
+
+Fazenda.hasMany(Lote, {
+  foreignKey: "id_fazenda",
+  sourceKey: "id_pk",
+});
 
 async function buscar(pk, filtro) {
   if (pk){

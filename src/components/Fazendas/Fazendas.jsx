@@ -113,7 +113,7 @@ export default function Fazendas() {
     setTelefone(data.telefone);
   }
 
-  async function getLotes(){
+  async function getLotes(id_fazenda){
     const res = await apiBuscar("tab_lotes", id_fazenda, "");
     setLoteData(res.data);
     setProgressPending(false);
@@ -130,7 +130,7 @@ export default function Fazendas() {
     );
     setIdFazenda(e.id_pk);
     setData(e);
-    getLotes()
+    getLotes(e.id_pk)
     dispatch(selectTab("Lotes"));
   }
 
