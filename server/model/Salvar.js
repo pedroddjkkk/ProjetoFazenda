@@ -2,6 +2,7 @@ const modelBoi = require("./Boi");
 const modelUser = require("./User");
 const modelFazendas = require("./Fazendas");
 const modelRacoes = require("./Racoes");
+const modelLotes = require("./Lote");
 
 async function salvar(req, res) {
     const { tabela, where, registro } = req.body;
@@ -17,6 +18,9 @@ async function salvar(req, res) {
     }
     else if (tabela === "tab_racoes"){
       return await modelRacoes.salvar(where, registro);
+    }
+    else if (tabela === "tab_lotes"){
+      return await modelLotes.salvar(where, registro);
     }
 }
 

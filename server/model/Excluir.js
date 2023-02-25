@@ -2,6 +2,7 @@ const modelUser = require("./User");
 const modelBoi = require("./Boi");
 const modelFazendas = require("./Fazendas");
 const modelRacoes = require("./Racoes");
+const modelLotes = require("./Lote");
 
 async function excluir(req, res) {
     const { tabela, pk, filtro } = req.body;
@@ -17,6 +18,9 @@ async function excluir(req, res) {
     }
     else if (tabela === "tab_racoes"){
       return await modelRacoes.excluir(pk, filtro);
+    }
+    else if (tabela === "tab_lotes"){
+      return await modelLotes.excluir(pk, filtro);
     }
 }
 
