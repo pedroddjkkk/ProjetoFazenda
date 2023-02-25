@@ -1,7 +1,10 @@
-import { TextField } from "@mui/material";
-import { useState } from "react";
+import { CircularProgress, TextField } from "@mui/material";
+import { useMemo, useState } from "react";
+import { Button } from "react-bootstrap";
+import DataTable from "react-data-table-component";
 import { useDispatch } from "react-redux";
 import { newTabs, selectTab } from "../../redux/actions/tabsSlice";
+import exportToExcel from "../../utils/exportToExcel";
 import Cadastro from "../Cadastro/Cadastro";
 import TabContent from "../Tab/TabContent";
 
@@ -11,6 +14,7 @@ export default function Fazendas() {
   const [endereco, setEndereco] = useState();
   const [telefone, setTelefone] = useState();
   const [loteData, setLoteData] = useState([]);
+  const [progressPending, setProgressPending] = useState(true);
   const dispatch = useDispatch();
 
   const loteColumns = [
@@ -73,6 +77,17 @@ export default function Fazendas() {
     );
   }
 
+  const actionsMemo = useMemo(
+    () => (
+      <>
+        <Button className="btn" onClick={() => exportToExcel(loteColumns, loteData)}>
+          Exportar
+        </Button>
+      </>
+    ),
+    [loteData]
+  );
+
   function getData() {
     return {
       nome: nome,
@@ -116,7 +131,7 @@ export default function Fazendas() {
             columns={loteColumns}
             data={loteData}
             title="Lista de Lotes"
-            onRowClicked={onTableRowClick ? onTableRowClick : handleClickTable}
+            /* onRowClicked={handleClickTable} */
             pagination
             keyField="id_pk"
             paginationComponentOptions={{
