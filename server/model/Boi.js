@@ -4,6 +4,7 @@ const { DataTypes, Model, Op } = require("sequelize");
 
 var Racoes = require("./Racoes").Racoes;
 var Pesagens = require("./Pesagens").Pesagens;
+var Lote = require("./Lote").Lote;
 
 class Boi extends Model {
   otherPublicField;
@@ -40,6 +41,14 @@ Boi.belongsTo(Racoes, {
     name: "id_racao",
   },
   as: "racao",
+});
+
+Boi.belongsTo(Lote, {
+  foreignKey: {
+    allowNull: true,
+    name: "id_lote",
+  },
+  as: "lote",
 });
 
 Boi.hasMany(Pesagens, {

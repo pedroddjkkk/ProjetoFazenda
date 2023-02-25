@@ -77,4 +77,5 @@ module.exports = {
   buscar,
   salvar,
   excluir,
+  Lote,
 };
