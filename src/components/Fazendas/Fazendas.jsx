@@ -10,7 +10,13 @@ export default function Fazendas() {
   const [cnpj, setCnpj] = useState();
   const [endereco, setEndereco] = useState();
   const [telefone, setTelefone] = useState();
+  const [loteData, setLoteData] = useState([]);
   const dispatch = useDispatch();
+
+  const loteColumns = [
+    { name: "Identificação", selector: (row) => row.id_pk, width: "10%" },
+    { name: "Nome", selector: (row) => row.nome },
+  ];
 
   function getColumns() {
     return [
@@ -102,7 +108,44 @@ export default function Fazendas() {
   }
 
   function getPropsNewTabs() {
-    return <TabContent id="Lotes" component={<div>Teste</div>} />;
+    return (
+      <TabContent
+        id="Lotes"
+        component={
+          <DataTable
+            columns={loteColumns}
+            data={loteData}
+            title="Lista de Lotes"
+            onRowClicked={onTableRowClick ? onTableRowClick : handleClickTable}
+            pagination
+            keyField="id_pk"
+            paginationComponentOptions={{
+              rowsPerPageText: "Registros por paginas:",
+              rangeSeparatorText: "de",
+              noRowsPerPage: false,
+              selectAllRowsItem: false,
+              selectAllRowsItemText: "All",
+            }}
+            highlightOnHover
+            pointerOnHover
+            progressPending={progressPending}
+            progressComponent={
+              <div style={{ padding: "40px 0 40px 0" }}>
+                <CircularProgress />
+              </div>
+            }
+            paginationPerPage={5}
+            paginationRowsPerPageOptions={[5, 10, 15, 20]}
+            actions={actionsMemo}
+            noDataComponent={
+              <span style={{ padding: "20px 0 40px 0" }}>
+                Sem dados para a tabela
+              </span>
+            }
+          />
+        }
+      />
+    );
   }
   return (
     <Cadastro
