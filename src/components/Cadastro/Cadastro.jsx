@@ -1,4 +1,4 @@
-import { Box } from "@mui/material";
+import { Box, CircularProgress } from "@mui/material";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { Button } from "react-bootstrap";
 import DataTable from "react-data-table-component";
@@ -157,6 +157,9 @@ export default function Cadastro({
                   highlightOnHover
                   pointerOnHover
                   progressPending={progressPending}
+                  progressComponent={<div style={{padding: "40px 0 40px 0"}}>
+                    <CircularProgress />
+                  </div>}
                   paginationPerPage={5}
                   paginationRowsPerPageOptions={[5, 10, 15, 20]}
                   actions={actionsMemo}
