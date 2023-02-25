@@ -239,17 +239,19 @@ export function getTabContentListar(
   columns,
   handleClickTable,
   progressPending,
-  actionsMemo
+  actionsMemo,
+  tabName,
+  tabTitle,
 ) {
   return (
     <TabContent
-      id="Listar"
+      id={tabName ? tabName : "Listar"}
       component={
         <>
           <DataTable
             columns={columns}
             data={data}
-            title="Lista de registros"
+            title={tabTitle ? tabTitle : "Lista de registros"}
             onRowClicked={handleClickTable}
             pagination
             keyField="id_pk"

@@ -6,7 +6,7 @@ import { useDispatch } from "react-redux";
 import { newTabs, selectTab } from "../../redux/actions/tabsSlice";
 import { apiBuscar } from "../../services/api";
 import exportToExcel from "../../utils/exportToExcel";
-import Cadastro from "../Cadastro/Cadastro";
+import Cadastro, { getTabContentListar } from "../Cadastro/Cadastro";
 import TabContent from "../Tab/TabContent";
 
 export default function Fazendas() {
@@ -82,7 +82,10 @@ export default function Fazendas() {
   const actionsMemo = useMemo(
     () => (
       <>
-        <Button className="btn" onClick={() => exportToExcel(loteColumns, loteData)}>
+        <Button
+          className="btn"
+          onClick={() => exportToExcel(loteColumns, loteData)}
+        >
           Exportar
         </Button>
       </>
@@ -113,7 +116,7 @@ export default function Fazendas() {
     setTelefone(data.telefone);
   }
 
-  async function getLotes(id_fazenda){
+  async function getLotes(id_fazenda) {
     const res = await apiBuscar("tab_lotes", id_fazenda, "");
     setLoteData(res.data);
     setProgressPending(false);
@@ -124,56 +127,16 @@ export default function Fazendas() {
     dispatch(
       newTabs([
         { name: "Lotes", icon: "fa-solid fa-list" },
-        { name: "Incluir Lote", icon: "fa-solid fa-plus"},
+        { name: "Incluir Lote", icon: "fa-solid fa-plus" },
         { name: "Editar", icon: "fa-solid fa-edit" },
       ])
     );
     setIdFazenda(e.id_pk);
     setData(e);
-    getLotes(e.id_pk)
+    getLotes(e.id_pk);
     dispatch(selectTab("Lotes"));
   }
 
-  function getPropsNewTabs() {
-    return (
-      <TabContent
-        id="Lotes"
-        component={
-          <DataTable
-            columns={loteColumns}
-            data={loteData}
-            title="Lista de Lotes"
-            /* onRowClicked={handleClickTable} */
-            pagination
-            keyField="id_pk"
-            paginationComponentOptions={{
-              rowsPerPageText: "Registros por paginas:",
-              rangeSeparatorText: "de",
-              noRowsPerPage: false,
-              selectAllRowsItem: false,
-              selectAllRowsItemText: "All",
-            }}
-            highlightOnHover
-            pointerOnHover
-            progressPending={progressPending}
-            progressComponent={
-              <div style={{ padding: "40px 0 40px 0" }}>
-                <CircularProgress />
-              </div>
-            }
-            paginationPerPage={5}
-            paginationRowsPerPageOptions={[5, 10, 15, 20]}
-            actions={actionsMemo}
-            noDataComponent={
-              <span style={{ padding: "20px 0 40px 0" }}>
-                Sem dados para a tabela
-              </span>
-            }
-          />
-        }
-      />
-    );
-  }
   return (
     <Cadastro
       columns={getColumns()}
@@ -183,7 +146,15 @@ export default function Fazendas() {
       clearData={clearData}
       setDataProp={setData}
       onTableRowClick={onTableRowClick}
-      propsNewTabs={getPropsNewTabs()}
+      propsNewTabs={getTabContentListar(
+        loteData,
+        loteColumns,
+        "",
+        progressPending,
+        actionsMemo,
+        "Lotes",
+        "Lista de Lotes"
+      )}
     />
   );
 }
