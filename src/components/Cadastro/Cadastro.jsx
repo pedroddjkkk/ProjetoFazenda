@@ -133,45 +133,14 @@ export default function Cadastro({
               );
             })}
         </ul>
+        {getTabContentListar(
+          data,
+          columns,
+          onTableRowClick ? onTableRowClick : handleClickTable,
+          progressPending,
+          actionsMemo
+        )}
         <div className="tab-content">
-          <TabContent
-            id="Listar"
-            component={
-              <>
-                <DataTable
-                  columns={columns}
-                  data={data}
-                  title="Lista de registros"
-                  onRowClicked={
-                    onTableRowClick ? onTableRowClick : handleClickTable
-                  }
-                  pagination
-                  keyField="id_pk"
-                  paginationComponentOptions={{
-                    rowsPerPageText: "Registros por paginas:",
-                    rangeSeparatorText: "de",
-                    noRowsPerPage: false,
-                    selectAllRowsItem: false,
-                    selectAllRowsItemText: "All",
-                  }}
-                  highlightOnHover
-                  pointerOnHover
-                  progressPending={progressPending}
-                  progressComponent={<div style={{padding: "40px 0 40px 0"}}>
-                    <CircularProgress />
-                  </div>}
-                  paginationPerPage={5}
-                  paginationRowsPerPageOptions={[5, 10, 15, 20]}
-                  actions={actionsMemo}
-                  noDataComponent={
-                    <span style={{ padding: "20px 0 40px 0" }}>
-                      Sem dados para a tabela
-                    </span>
-                  }
-                />
-              </>
-            }
-          />
           <TabContent
             id="Adicionar"
             component={
@@ -262,5 +231,54 @@ export default function Cadastro({
         </div>
       </div>
     </div>
+  );
+}
+
+export function getTabContentListar(
+  data,
+  columns,
+  handleClickTable,
+  progressPending,
+  actionsMemo
+) {
+  return (
+    <TabContent
+      id="Listar"
+      component={
+        <>
+          <DataTable
+            columns={columns}
+            data={data}
+            title="Lista de registros"
+            onRowClicked={handleClickTable}
+            pagination
+            keyField="id_pk"
+            paginationComponentOptions={{
+              rowsPerPageText: "Registros por paginas:",
+              rangeSeparatorText: "de",
+              noRowsPerPage: false,
+              selectAllRowsItem: false,
+              selectAllRowsItemText: "All",
+            }}
+            highlightOnHover
+            pointerOnHover
+            progressPending={progressPending}
+            progressComponent={
+              <div style={{ padding: "40px 0 40px 0" }}>
+                <CircularProgress />
+              </div>
+            }
+            paginationPerPage={5}
+            paginationRowsPerPageOptions={[5, 10, 15, 20]}
+            actions={actionsMemo}
+            noDataComponent={
+              <span style={{ padding: "20px 0 40px 0" }}>
+                Sem dados para a tabela
+              </span>
+            }
+          />
+        </>
+      }
+    />
   );
 }
