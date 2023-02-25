@@ -4,6 +4,7 @@ import { Button } from "react-bootstrap";
 import DataTable from "react-data-table-component";
 import { useDispatch } from "react-redux";
 import { newTabs, selectTab } from "../../redux/actions/tabsSlice";
+import { apiBuscar } from "../../services/api";
 import exportToExcel from "../../utils/exportToExcel";
 import Cadastro from "../Cadastro/Cadastro";
 import TabContent from "../Tab/TabContent";
@@ -14,6 +15,7 @@ export default function Fazendas() {
   const [endereco, setEndereco] = useState();
   const [telefone, setTelefone] = useState();
   const [loteData, setLoteData] = useState([]);
+  const [id_fazenda, setIdFazenda] = useState();
   const [progressPending, setProgressPending] = useState(true);
   const dispatch = useDispatch();
 
@@ -111,14 +113,24 @@ export default function Fazendas() {
     setTelefone(data.telefone);
   }
 
+  async function getLotes(){
+    const res = await apiBuscar("tab_lotes", id_fazenda, "");
+    setLoteData(res.data);
+    setProgressPending(false);
+    return res;
+  }
+
   function onTableRowClick(e) {
     dispatch(
       newTabs([
         { name: "Lotes", icon: "fa-solid fa-list" },
+        { name: "Incluir Lote", icon: "fa-solid fa-plus"},
         { name: "Editar", icon: "fa-solid fa-edit" },
       ])
     );
+    setIdFazenda(e.id_pk);
     setData(e);
+    getLotes()
     dispatch(selectTab("Lotes"));
   }
 
