@@ -26,11 +26,12 @@ export default function Cadastro({
   const selectedTab = useSelector((state) => state.tabs.selectedTab);
   const [data, setData] = useState("");
   const fadeInRef = useRef(null);
-  const [filtro] = useState("");
+  const [progressPending, setProgressPending] = useState(true);
   const [selectedId, setSelectedId] = useState("");
 
   const reloadData = async () => {
     const ret = await apiBuscar(table);
+    setProgressPending(false);
     setData(ret.data);
   };
 
@@ -155,6 +156,7 @@ export default function Cadastro({
                   }}
                   highlightOnHover
                   pointerOnHover
+                  progressPending={progressPending}
                   paginationPerPage={5}
                   paginationRowsPerPageOptions={[5, 10, 15, 20]}
                   actions={actionsMemo}
