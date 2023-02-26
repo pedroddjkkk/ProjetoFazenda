@@ -137,6 +137,22 @@ export default function Fazendas() {
     dispatch(selectTab("Lotes"));
   }
 
+  function getPropsNewTabs() {
+    return (
+      <>
+        {getTabContentListar(
+          loteData,
+          loteColumns,
+          "",
+          progressPending,
+          actionsMemo,
+          "Lotes",
+          "Lista de Lotes"
+        )}
+      </>
+    );
+  }
+
   return (
     <Cadastro
       columns={getColumns()}
@@ -146,15 +162,7 @@ export default function Fazendas() {
       clearData={clearData}
       setDataProp={setData}
       onTableRowClick={onTableRowClick}
-      propsNewTabs={getTabContentListar(
-        loteData,
-        loteColumns,
-        "",
-        progressPending,
-        actionsMemo,
-        "Lotes",
-        "Lista de Lotes"
-      )}
+      propsNewTabs={getPropsNewTabs()}
     />
   );
 }
