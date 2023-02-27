@@ -249,10 +249,10 @@ export function getTabContentListar(
   );
 }
 
-export function getTabContentAdicionar(onConfirm, addColumns, dispatch) {
+export function getTabContentAdicionar(onConfirm, addColumns, dispatch, tabName ) {
   return (
     <TabContent
-      id="Adicionar"
+      id={tabName ? tabName : "Adicionar"}
       component={
         <form onSubmit={onConfirm}>
           <div>

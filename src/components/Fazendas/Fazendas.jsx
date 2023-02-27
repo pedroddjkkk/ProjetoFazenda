@@ -6,7 +6,7 @@ import { useDispatch } from "react-redux";
 import { newTabs, selectTab } from "../../redux/actions/tabsSlice";
 import { apiBuscar } from "../../services/api";
 import exportToExcel from "../../utils/exportToExcel";
-import Cadastro, { getTabContentListar } from "../Cadastro/Cadastro";
+import Cadastro, { getTabContentAdicionar, getTabContentListar } from "../Cadastro/Cadastro";
 import TabContent from "../Tab/TabContent";
 
 export default function Fazendas() {
@@ -148,6 +148,12 @@ export default function Fazendas() {
           actionsMemo,
           "Lotes",
           "Lista de Lotes"
+        )}
+        {getTabContentAdicionar(
+          "",
+          "",
+          dispatch,
+          "Incluir Lote"
         )}
       </>
     );
