@@ -47,6 +47,7 @@ async function salvar(where, registro) {
     const ret = await Lote.update(
       {
         nome: registro.nome,
+        id_fazenda: registro.id_fazenda,
       },
       {
         where: {
@@ -59,6 +60,7 @@ async function salvar(where, registro) {
   } else {
     const ret = await Lote.create({
       nome: registro.nome,
+      id_fazenda: registro.id_fazenda,
     });
 
     return ret;

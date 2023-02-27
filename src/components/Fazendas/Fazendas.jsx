@@ -3,8 +3,9 @@ import { useMemo, useState } from "react";
 import { Button } from "react-bootstrap";
 import DataTable from "react-data-table-component";
 import { useDispatch } from "react-redux";
+import { toast } from "react-toastify";
 import { newTabs, selectTab } from "../../redux/actions/tabsSlice";
-import { apiBuscar } from "../../services/api";
+import { apiBuscar, apiSalvar } from "../../services/api";
 import exportToExcel from "../../utils/exportToExcel";
 import Cadastro, { getTabContentAdicionar, getTabContentListar } from "../Cadastro/Cadastro";
 import TabContent from "../Tab/TabContent";
@@ -16,6 +17,7 @@ export default function Fazendas() {
   const [telefone, setTelefone] = useState();
   const [loteData, setLoteData] = useState([]);
   const [id_fazenda, setIdFazenda] = useState();
+  const [nomeLote, setNomeLote] = useState();
   const [progressPending, setProgressPending] = useState(true);
   const dispatch = useDispatch();
 
@@ -72,6 +74,24 @@ export default function Fazendas() {
             value={telefone}
             onChange={(e) => setTelefone(e.target.value)}
             style={{ marginRight: "40px" }}
+            variant="standard"
+          />
+        </div>
+      </div>
+    );
+  }
+
+  function getLoteAddColumns() {
+    return (
+      <div className="add-div-group">
+        <div className="row">
+          <TextField
+            label="Nome do Lote"
+            id="standard-start-adornment"
+            className="col-sm-3"
+            style={{ marginRight: "40px" }}
+            value={nomeLote}
+            onChange={(e) => setNomeLote(e.target.value)}
             variant="standard"
           />
         </div>
@@ -136,6 +156,22 @@ export default function Fazendas() {
     getLotes(e.id_pk);
     dispatch(selectTab("Lotes"));
   }
+  async function onLoteConfirm(e){
+    e.preventDefault();
+    const ret = await apiSalvar("tab_lotes", "", {
+      nome: nomeLote,
+      id_fazenda: id_fazenda,
+    })
+    if (ret.status === 200) {
+      toast.success("Salvo com sucesso!");
+    } else {
+      toast.error("Erro ao salvar!");
+    }
+    /* await reloadData();
+    dispatch(selectTab("Listar"));
+    clearData(); */
+    return ret;
+  }
 
   function getPropsNewTabs() {
     return (
@@ -150,8 +186,8 @@ export default function Fazendas() {
           "Lista de Lotes"
         )}
         {getTabContentAdicionar(
-          "",
-          "",
+          onLoteConfirm,
+          getLoteAddColumns(),
           dispatch,
           "Incluir Lote"
         )}
