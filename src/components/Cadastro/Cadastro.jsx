@@ -141,43 +141,7 @@ export default function Cadastro({
           actionsMemo
         )}
         <div className="tab-content">
-          <TabContent
-            id="Adicionar"
-            component={
-              <form onSubmit={onConfirm}>
-                <div>
-                  <div
-                    className="add-section"
-                    style={{ margin: "0 auto", width: "95%" }}
-                  >
-                    {addColumns}
-                    <hr
-                      style={{
-                        backgroundColor: "black",
-                        marginTop: "2%",
-                      }}
-                    />
-                  </div>
-                  <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
-                    <button
-                      className="btn btn-danger"
-                      style={{ margin: "0 30px 30px 0px" }}
-                      onClick={() => dispatch(selectTab("Listar"))}
-                    >
-                      <i className="fa-solid fa-times" /> Cancelar
-                    </button>
-                    <button
-                      type="submit"
-                      className="btn btn-primary"
-                      style={{ margin: "0 30px 30px 0px" }}
-                    >
-                      <i className="fa-solid fa-check" /> Confirmar
-                    </button>
-                  </Box>
-                </div>
-              </form>
-            }
-          />
+          {getTabContentAdicionar(onConfirm, addColumns, dispatch)}
           <TabContent
             id="Editar"
             component={
@@ -286,41 +250,43 @@ export function getTabContentListar(
 }
 
 export function getTabContentAdicionar(onConfirm, addColumns, dispatch) {
-  <TabContent
-    id="Adicionar"
-    component={
-      <form onSubmit={onConfirm}>
-        <div>
-          <div
-            className="add-section"
-            style={{ margin: "0 auto", width: "95%" }}
-          >
-            {addColumns}
-            <hr
-              style={{
-                backgroundColor: "black",
-                marginTop: "2%",
-              }}
-            />
+  return (
+    <TabContent
+      id="Adicionar"
+      component={
+        <form onSubmit={onConfirm}>
+          <div>
+            <div
+              className="add-section"
+              style={{ margin: "0 auto", width: "95%" }}
+            >
+              {addColumns}
+              <hr
+                style={{
+                  backgroundColor: "black",
+                  marginTop: "2%",
+                }}
+              />
+            </div>
+            <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
+              <button
+                className="btn btn-danger"
+                style={{ margin: "0 30px 30px 0px" }}
+                onClick={() => dispatch(selectTab("Listar"))}
+              >
+                <i className="fa-solid fa-times" /> Cancelar
+              </button>
+              <button
+                type="submit"
+                className="btn btn-primary"
+                style={{ margin: "0 30px 30px 0px" }}
+              >
+                <i className="fa-solid fa-check" /> Confirmar
+              </button>
+            </Box>
           </div>
-          <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
-            <button
-              className="btn btn-danger"
-              style={{ margin: "0 30px 30px 0px" }}
-              onClick={() => dispatch(selectTab("Listar"))}
-            >
-              <i className="fa-solid fa-times" /> Cancelar
-            </button>
-            <button
-              type="submit"
-              className="btn btn-primary"
-              style={{ margin: "0 30px 30px 0px" }}
-            >
-              <i className="fa-solid fa-check" /> Confirmar
-            </button>
-          </Box>
-        </div>
-      </form>
-    }
-  />;
+        </form>
+      }
+    />
+  );
 }
