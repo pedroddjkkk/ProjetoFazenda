@@ -134,6 +134,10 @@ export default function Fazendas() {
     setTelefone(data.telefone);
   }
 
+  function clearLoteData(){
+    setNomeLote("");
+  }
+
   async function getLotes(id_fazenda) {
     const res = await apiBuscar("tab_lotes", id_fazenda);
     setLoteData(res.data);
@@ -166,10 +170,9 @@ export default function Fazendas() {
     } else {
       toast.error("Erro ao salvar!");
     }
-    /* await reloadData();
-    dispatch(selectTab("Listar"));
-    clearData(); */
-    return ret;
+    await getLotes(id_fazenda);
+    dispatch(selectTab("Lotes"));
+    clearLoteData();
   }
 
   function getPropsNewTabs() {
