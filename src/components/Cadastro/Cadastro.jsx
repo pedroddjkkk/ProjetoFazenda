@@ -265,7 +265,7 @@ export function getTabContentListar(
             highlightOnHover
             pointerOnHover
             progressPending={progressPending}
-            progressComponent={
+            progresssComponent={
               <div style={{ padding: "40px 0 40px 0" }}>
                 <CircularProgress />
               </div>
@@ -283,4 +283,8 @@ export function getTabContentListar(
       }
     />
   );
+}
+
+export function getTabContentAdicionar(){
+
 }
