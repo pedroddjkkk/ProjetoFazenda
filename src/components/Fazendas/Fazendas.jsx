@@ -1,14 +1,12 @@
 import { CircularProgress, TextField } from "@mui/material";
 import { useMemo, useState } from "react";
 import { Button } from "react-bootstrap";
-import DataTable from "react-data-table-component";
 import { useDispatch } from "react-redux";
 import { toast } from "react-toastify";
 import { newTabs, selectTab } from "../../redux/actions/tabsSlice";
 import { apiBuscar, apiSalvar } from "../../services/api";
 import exportToExcel from "../../utils/exportToExcel";
 import Cadastro, { getTabContentAdicionar, getTabContentListar } from "../Cadastro/Cadastro";
-import TabContent from "../Tab/TabContent";
 
 export default function Fazendas() {
   const [nome, setNome] = useState();
@@ -137,7 +135,7 @@ export default function Fazendas() {
   }
 
   async function getLotes(id_fazenda) {
-    const res = await apiBuscar("tab_lotes", id_fazenda, "");
+    const res = await apiBuscar("tab_lotes", id_fazenda);
     setLoteData(res.data);
     setProgressPending(false);
     return res;
@@ -158,6 +156,7 @@ export default function Fazendas() {
   }
   async function onLoteConfirm(e){
     e.preventDefault();
+    console.log("id_fazenda", id_fazenda);
     const ret = await apiSalvar("tab_lotes", "", {
       nome: nomeLote,
       id_fazenda: id_fazenda,

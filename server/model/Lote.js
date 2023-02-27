@@ -16,7 +16,7 @@ Lote.init(
     nome: {
       type: DataTypes.STRING,
       allowNull: false,
-    }
+    },
   },
   {
     sequelize,
@@ -28,18 +28,13 @@ Lote.init(
 );
 
 async function buscar(pk, filtro) {
-  if (pk){
-    const ret = await Lote.findAll({
-      where: {
-        id_pk: pk,
-      },
-    });
+  const ret = await Lote.findAll({
+    where: {
+      id_fazenda: pk,
+    },
+  });
 
-    return ret;
-  } else {
-    const ret = await Lote.findAll();
-    return ret;
-  }
+  return ret;
 }
 
 async function salvar(where, registro) {
@@ -67,7 +62,7 @@ async function salvar(where, registro) {
   }
 }
 
-async function excluir(pk, filtro){
+async function excluir(pk, filtro) {
   await Lote.destroy({
     where: {
       id_pk: pk,

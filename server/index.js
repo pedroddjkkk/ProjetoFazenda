@@ -5,6 +5,7 @@ const bodyParser = require("body-parser");
 const express = require("express");
 const path = require("path");
 const cors = require("cors");
+require("dotenv").config();
 var dbUtils = require("./utils/dbUtils");
 
 const PORT = process.env.PORT || 3001;
