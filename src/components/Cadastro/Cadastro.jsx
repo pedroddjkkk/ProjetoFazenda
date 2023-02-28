@@ -1,5 +1,5 @@
 import { Box, CircularProgress } from "@mui/material";
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { Button } from "react-bootstrap";
 import DataTable from "react-data-table-component";
 import { useDispatch, useSelector } from "react-redux";
@@ -43,8 +43,8 @@ export default function Cadastro({
   useEffect(() => {
     dispatch(
       newTabs([
-        { name: "Listar", icon: "fa-solid fa-list" },
-        { name: "Adicionar", icon: "fa-solid fa-plus" },
+        { id: "Listar", name: "Listar", icon: "fa-solid fa-list" },
+        { id: "Adicionar", name: "Adicionar", icon: "fa-solid fa-plus" },
       ])
     );
     dispatch(selectTab("Listar"));
@@ -78,20 +78,22 @@ export default function Cadastro({
     clearData();
   }
 
-  async function handleClickTable(e) {
-    dispatch(newTabs([{ name: "Editar", icon: "fa-solid fa-edit" }]));
+  const handleClickTable = useCallback(async (e) => {
+    dispatch(newTabs([{ id: "Editar", name: "Editar", icon: "fa-solid fa-edit" }]));
     dispatch(selectTab("Editar"));
     setSelectedId(e.id_pk);
     setDataProp(e);
-  }
+  }, [dispatch, setSelectedId, setDataProp]);
+
+  const onTableRowClickMemo = useCallback(onTableRowClick, [onTableRowClick]);
 
   async function onDelete(e) {
     await apiExcluir(table, selectedId);
     await reloadData();
     dispatch(
       newTabs([
-        { name: "Listar", icon: "fa-solid fa-list" },
-        { name: "Adicionar", icon: "fa-solid fa-plus" },
+        { id: "Listar", name: "Listar", icon: "fa-solid fa-list" },
+        { id: "Adicionar", name: "Adicionar", icon: "fa-solid fa-plus" },
       ])
     );
     dispatch(selectTab("Listar"));
@@ -119,12 +121,12 @@ export default function Cadastro({
                 <li className="nav-item" role="presentation" key={index}>
                   <a
                     className={
-                      selectedTab === tab.name ? "nav-link active" : "nav-link"
+                      selectedTab === tab.id ? "nav-link active" : "nav-link"
                     }
                     role="tab"
                     data-bs-toggle="tab"
                     href="#tab-1"
-                    onClick={() => dispatch(selectTab(tab.name))}
+                    onClick={() => dispatch(selectTab(tab.id))}
                   >
                     <i className={tab.icon && tab.icon}></i>
                     {" " + tab.name}
@@ -136,7 +138,7 @@ export default function Cadastro({
         {getTabContentListar(
           data,
           columns,
-          onTableRowClick ? onTableRowClick : handleClickTable,
+          onTableRowClickMemo ? onTableRowClickMemo : handleClickTable,
           progressPending,
           actionsMemo
         )}
@@ -163,8 +165,8 @@ export default function Cadastro({
                       onClick={() => {
                         dispatch(
                           newTabs([
-                            { name: "Listar", icon: "fa-solid fa-list" },
-                            { name: "Adicionar", icon: "fa-solid fa-plus" },
+                            { id: "Listar", name: "Listar", icon: "fa-solid fa-list" },
+                            { id: "Adicionar", name: "Adicionar", icon: "fa-solid fa-plus" },
                           ])
                         );
                         clearData();

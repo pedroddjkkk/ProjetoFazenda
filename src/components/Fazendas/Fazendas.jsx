@@ -151,9 +151,9 @@ export default function Fazendas() {
   function onTableRowClick(e) {
     dispatch(
       newTabs([
-        { name: "Lotes", icon: "fa-solid fa-list" },
-        { name: "Incluir Lote", icon: "fa-solid fa-plus" },
-        { name: "Editar", icon: "fa-solid fa-edit" },
+        { id: "Lotes", name: "Lotes", icon: "fa-solid fa-list" },
+        { id: "Incluir Lote", name: "Incluir Lote", icon: "fa-solid fa-plus" },
+        { id: "Editar", name: "Editar", icon: "fa-solid fa-edit" },
       ])
     );
     setIdFazenda(e.id_pk);
@@ -182,7 +182,7 @@ export default function Fazendas() {
   const onLoteClick = (e) => {
    dispatch(
       newTabs([
-        { name: "Bois", icon: "fa-solid fa-list" },
+        { id: "Bois", name: "Bois", icon: "fa-solid fa-list" },
       ])
     );
     dispatch(selectTab("Bois"));
