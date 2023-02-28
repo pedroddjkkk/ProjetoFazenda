@@ -249,7 +249,7 @@ export function getTabContentListar(
   );
 }
 
-export function getTabContentAdicionar(onConfirm, addColumns, dispatch, tabName ) {
+export function getTabContentAdicionar(onConfirm, addColumns, dispatch, onCancel, tabName ) {
   return (
     <TabContent
       id={tabName ? tabName : "Adicionar"}
@@ -272,7 +272,7 @@ export function getTabContentAdicionar(onConfirm, addColumns, dispatch, tabName 
               <button
                 className="btn btn-danger"
                 style={{ margin: "0 30px 30px 0px" }}
-                onClick={() => dispatch(selectTab("Listar"))}
+                onClick={onCancel ? onCancel : () => dispatch(selectTab("Listar"))}
               >
                 <i className="fa-solid fa-times" /> Cancelar
               </button>

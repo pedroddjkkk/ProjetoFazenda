@@ -6,7 +6,10 @@ import { toast } from "react-toastify";
 import { newTabs, selectTab } from "../../redux/actions/tabsSlice";
 import { apiBuscar, apiSalvar } from "../../services/api";
 import exportToExcel from "../../utils/exportToExcel";
-import Cadastro, { getTabContentAdicionar, getTabContentListar } from "../Cadastro/Cadastro";
+import Cadastro, {
+  getTabContentAdicionar,
+  getTabContentListar,
+} from "../Cadastro/Cadastro";
 
 export default function Fazendas() {
   const [nome, setNome] = useState();
@@ -134,7 +137,7 @@ export default function Fazendas() {
     setTelefone(data.telefone);
   }
 
-  function clearLoteData(){
+  function clearLoteData() {
     setNomeLote("");
   }
 
@@ -158,13 +161,13 @@ export default function Fazendas() {
     getLotes(e.id_pk);
     dispatch(selectTab("Lotes"));
   }
-  async function onLoteConfirm(e){
+  async function onLoteConfirm(e) {
     e.preventDefault();
     console.log("id_fazenda", id_fazenda);
     const ret = await apiSalvar("tab_lotes", "", {
       nome: nomeLote,
       id_fazenda: id_fazenda,
-    })
+    });
     if (ret.status === 200) {
       toast.success("Salvo com sucesso!");
     } else {
@@ -191,6 +194,10 @@ export default function Fazendas() {
           onLoteConfirm,
           getLoteAddColumns(),
           dispatch,
+          () => {
+            clearLoteData();
+            dispatch(selectTab("Lotes"));
+          },
           "Incluir Lote"
         )}
       </>
