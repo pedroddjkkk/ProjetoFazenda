@@ -161,6 +161,7 @@ export default function Fazendas() {
     getLotes(e.id_pk);
     dispatch(selectTab("Lotes"));
   }
+
   async function onLoteConfirm(e) {
     e.preventDefault();
     console.log("id_fazenda", id_fazenda);
@@ -178,13 +179,22 @@ export default function Fazendas() {
     clearLoteData();
   }
 
+  const onLoteClick = (e) => {
+   dispatch(
+      newTabs([
+        { name: "Bois", icon: "fa-solid fa-list" },
+      ])
+    );
+    dispatch(selectTab("Bois"));
+  }
+
   function getPropsNewTabs() {
     return (
       <>
         {getTabContentListar(
           loteData,
           loteColumns,
-          "",
+          onLoteClick,
           progressPending,
           actionsMemo,
           "Lotes",
