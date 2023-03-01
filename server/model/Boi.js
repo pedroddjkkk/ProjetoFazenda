@@ -176,8 +176,20 @@ async function excluir(pk, filtro) {
     },
   });
 }
+
+async function buscarBoisLote(pk, filtro) {
+  const ret = await Boi.findAll({
+    where: {
+      id_lote: pk,
+    },
+  });
+
+  return ret;
+}
+
 module.exports = {
   buscar,
   salvar,
   excluir,
+  buscarBoisLote,
 };

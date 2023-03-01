@@ -180,14 +180,16 @@ export default function Fazendas() {
     clearLoteData();
   }
 
-  const onLoteClick = (e) => {
-   dispatch(
-      newTabs([
-        { id: "Bois", name: "Bois", icon: "fa-solid fa-list" },
-      ])
-    );
-    dispatch(selectTab("Bois"));
+  async function getBois(id_lote) {
+    const res = await apiBuscar("bois_lote", id_lote);
+    return res.data;
   }
+
+  const onLoteClick = (e) => {
+    setBoisData(getBois(e.id_pk))
+    dispatch(newTabs([{ id: "Bois", name: "Bois", icon: "fa-solid fa-list" }]));
+    dispatch(selectTab("Bois"));
+  };
 
   function getPropsNewTabs() {
     return (
@@ -212,7 +214,7 @@ export default function Fazendas() {
           "Incluir Lote"
         )}
         {getTabContentListar(
-          [],
+          boisData,
           [],
           () => {},
           false,

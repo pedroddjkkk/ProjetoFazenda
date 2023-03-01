@@ -22,6 +22,9 @@ async function buscar(req, res) {
     else if (tabela === "tab_lotes"){
       return await modelLotes.buscar(pk, filtro);
     }
+    else if (tabela === "bois_lote"){
+      return await modelBoi.buscarBoisLote(pk, filtro)
+    }
 }
 
 module.exports = buscar;
