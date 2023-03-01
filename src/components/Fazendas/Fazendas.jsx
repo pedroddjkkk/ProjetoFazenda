@@ -19,6 +19,7 @@ export default function Fazendas() {
   const [loteData, setLoteData] = useState([]);
   const [id_fazenda, setIdFazenda] = useState();
   const [nomeLote, setNomeLote] = useState();
+  const [boisData, setBoisData] = useState([]);
   const [progressPending, setProgressPending] = useState(true);
   const dispatch = useDispatch();
 
@@ -209,6 +210,15 @@ export default function Fazendas() {
             dispatch(selectTab("Lotes"));
           },
           "Incluir Lote"
+        )}
+        {getTabContentListar(
+          [],
+          [],
+          () => {},
+          false,
+          null,
+          "Bois",
+          "Lista de Bois"
         )}
       </>
     );
