@@ -20,10 +20,9 @@ export default function Fazendas() {
   const [id_fazenda, setIdFazenda] = useState();
   const [nomeLote, setNomeLote] = useState();
   const [boisData, setBoisData] = useState([]);
+  const [nomeLoteSelecionado, setNomeLoteSelecionado] = useState();
   const [progressPending, setProgressPending] = useState(true);
   const dispatch = useDispatch();
-
-  let nomeLoteSelecionado;
 
   const loteColumns = [
     { name: "Identificação", selector: (row) => row.id_pk, width: "10%" },
@@ -209,7 +208,7 @@ export default function Fazendas() {
 
   const onLoteClick = (e) => {
     getBois(e.id_pk);
-    nomeLoteSelecionado = e.nome;
+    setNomeLoteSelecionado(e.nome);
     dispatch(newTabs([{ id: "Bois", name: "Bois", icon: "fa-solid fa-list" }]));
     dispatch(selectTab("Bois"));
   };
@@ -243,7 +242,7 @@ export default function Fazendas() {
           false,
           null,
           "Bois",
-          "Lista de Bois no lote " + nomeLoteSelecionado
+          "Lista de Bois no " + nomeLoteSelecionado
         )}
       </>
     );
