@@ -182,6 +182,18 @@ async function buscarBoisLote(pk, filtro) {
     where: {
       id_lote: pk,
     },
+    include: [
+      {
+        model: Racoes,
+        required: false,
+        as: "racao",
+      },
+      {
+        model: Pesagens,
+        required: false,
+        as: "pesagens",
+      },
+    ],
   });
 
   return ret;

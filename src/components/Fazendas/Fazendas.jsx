@@ -23,9 +23,29 @@ export default function Fazendas() {
   const [progressPending, setProgressPending] = useState(true);
   const dispatch = useDispatch();
 
+  let nomeLoteSelecionado;
+
   const loteColumns = [
     { name: "Identificação", selector: (row) => row.id_pk, width: "10%" },
     { name: "Nome", selector: (row) => row.nome },
+  ];
+
+  const boisColumns = [
+    {
+      name: "Identificação",
+      selector: (row) => row.id_pk,
+      sortable: true,
+      width: "10%",
+    },
+    {
+      name: "Peso (Kg)",
+      sortable: true,
+      right: true,
+      selector: (row) => row.peso,
+      width: "100px",
+    },
+    { name: "Raça", selector: (row) => row.raca },
+    { name: "Ração", selector: (row) => row.racao.nome },
   ];
 
   function getColumns() {
@@ -182,11 +202,14 @@ export default function Fazendas() {
 
   async function getBois(id_lote) {
     const res = await apiBuscar("bois_lote", id_lote);
+    setBoisData(res.data);
+    setProgressPending(false);
     return res.data;
   }
 
   const onLoteClick = (e) => {
-    setBoisData(getBois(e.id_pk))
+    getBois(e.id_pk);
+    nomeLoteSelecionado = e.nome;
     dispatch(newTabs([{ id: "Bois", name: "Bois", icon: "fa-solid fa-list" }]));
     dispatch(selectTab("Bois"));
   };
@@ -215,12 +238,12 @@ export default function Fazendas() {
         )}
         {getTabContentListar(
           boisData,
-          [],
+          boisColumns,
           () => {},
           false,
           null,
           "Bois",
-          "Lista de Bois"
+          "Lista de Bois no lote " + nomeLoteSelecionado
         )}
       </>
     );
