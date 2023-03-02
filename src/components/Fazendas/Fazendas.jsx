@@ -249,6 +249,15 @@ export default function Fazendas() {
           "Bois",
           "Lista de Bois no " + nomeLoteSelecionado
         )}
+        {getTabContentAdicionar(
+          onLoteConfirm,
+          getLoteAddColumns(),
+          dispatch,
+          () => {
+            dispatch(selectTab("Bois"));
+          },
+          "Incluir Lote"
+        )}
       </>
     );
   }
