@@ -209,7 +209,12 @@ export default function Fazendas() {
   const onLoteClick = (e) => {
     getBois(e.id_pk);
     setNomeLoteSelecionado(e.nome);
-    dispatch(newTabs([{ id: "Bois", name: "Bois", icon: "fa-solid fa-list" }]));
+    dispatch(
+      newTabs([
+        { id: "Bois", name: "Bois", icon: "fa-solid fa-list" },
+        { id: "incluirBoi", name: "Incluir Boi", icon: "fa-solid fa-plus" },
+      ])
+    );
     dispatch(selectTab("Bois"));
   };
 
