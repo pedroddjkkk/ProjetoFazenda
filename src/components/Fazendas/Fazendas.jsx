@@ -32,24 +32,6 @@ export default function Fazendas() {
     { name: "Nome", selector: (row) => row.nome },
   ];
 
-  const boisColumns = [
-    {
-      name: "Identificação",
-      selector: (row) => row.id_pk,
-      sortable: true,
-      width: "10%",
-    },
-    {
-      name: "Peso (Kg)",
-      sortable: true,
-      right: true,
-      selector: (row) => row.peso,
-      width: "100px",
-    },
-    { name: "Raça", selector: (row) => row.raca },
-    { name: "Ração", selector: (row) => row.racao.nome },
-  ];
-
   function getColumns() {
     return [
       { name: "Identificação", selector: (row) => row.id_pk, width: "10%" },
@@ -202,24 +184,9 @@ export default function Fazendas() {
     clearLoteData();
   }
 
-  async function getBois(id_lote) {
-    const res = await apiBuscar("bois_lote", id_lote);
-    setBoisData(res.data);
-    setProgressPending(false);
-    return res.data;
-  }
-
   const onLoteClick = (e) => {
-    getBois(e.id_pk);
     setIdLote(e.id_pk);
     setNomeLoteSelecionado(e.nome);
-    dispatch(
-      newTabs([
-        { id: "Bois", name: "Bois", icon: "fa-solid fa-list" },
-        { id: "incluirBoi", name: "Incluir Boi", icon: "fa-solid fa-plus" },
-      ])
-    );
-    dispatch(selectTab("Bois"));
   };
 
   function getPropsNewTabs() {
@@ -254,15 +221,6 @@ export default function Fazendas() {
           "Lista de Bois no " + nomeLoteSelecionado
         )} */}
         {/* <TabContent id={"Bois"} component={<Bois />} /> */}
-        {getTabContentAdicionar(
-          onLoteConfirm,
-          getLoteAddColumns(),
-          dispatch,
-          () => {
-            dispatch(selectTab("Bois"));
-          },
-          "Incluir Lote"
-        )}
       </>
     );
   }
