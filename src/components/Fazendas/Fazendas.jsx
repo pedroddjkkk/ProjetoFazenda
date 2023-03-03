@@ -6,10 +6,12 @@ import { toast } from "react-toastify";
 import { newTabs, selectTab } from "../../redux/actions/tabsSlice";
 import { apiBuscar, apiSalvar } from "../../services/api";
 import exportToExcel from "../../utils/exportToExcel";
+import Bois from "../Bois/Bois";
 import Cadastro, {
   getTabContentAdicionar,
   getTabContentListar,
 } from "../Cadastro/Cadastro";
+import TabContent from "../Tab/TabContent";
 
 export default function Fazendas() {
   const [nome, setNome] = useState();
@@ -20,6 +22,7 @@ export default function Fazendas() {
   const [id_fazenda, setIdFazenda] = useState();
   const [nomeLote, setNomeLote] = useState();
   const [boisData, setBoisData] = useState([]);
+  const [idLote, setIdLote ] = useState();
   const [nomeLoteSelecionado, setNomeLoteSelecionado] = useState();
   const [progressPending, setProgressPending] = useState(true);
   const dispatch = useDispatch();
@@ -208,6 +211,7 @@ export default function Fazendas() {
 
   const onLoteClick = (e) => {
     getBois(e.id_pk);
+    setIdLote(e.id_pk);
     setNomeLoteSelecionado(e.nome);
     dispatch(
       newTabs([
@@ -240,7 +244,7 @@ export default function Fazendas() {
           },
           "Incluir Lote"
         )}
-        {getTabContentListar(
+        {/*  {getTabContentListar(
           boisData,
           boisColumns,
           () => {},
@@ -248,7 +252,8 @@ export default function Fazendas() {
           null,
           "Bois",
           "Lista de Bois no " + nomeLoteSelecionado
-        )}
+        )} */}
+        {/* <TabContent id={"Bois"} component={<Bois />} /> */}
         {getTabContentAdicionar(
           onLoteConfirm,
           getLoteAddColumns(),
@@ -261,17 +266,22 @@ export default function Fazendas() {
       </>
     );
   }
-
-  return (
-    <Cadastro
-      columns={getColumns()}
-      addColumns={getAddColumns()}
-      table="tab_fazendas"
-      getData={getData()}
-      clearData={clearData}
-      setDataProp={setData}
-      onTableRowClick={onTableRowClick}
-      propsNewTabs={getPropsNewTabs()}
-    />
-  );
+  if(idLote){
+    return (
+      <Bois />
+    )
+  } else {
+    return (
+      <Cadastro
+        columns={getColumns()}
+        addColumns={getAddColumns()}
+        table="tab_fazendas"
+        getData={getData()}
+        clearData={clearData}
+        setDataProp={setData}
+        onTableRowClick={onTableRowClick}
+        propsNewTabs={getPropsNewTabs()}
+      />
+    );
+  }
 }
