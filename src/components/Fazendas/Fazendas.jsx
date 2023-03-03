@@ -10,6 +10,8 @@ import Cadastro, {
   getTabContentAdicionar,
   getTabContentListar,
 } from "../Cadastro/Cadastro";
+import TabContent from "../Tab/TabContent";
+import Bois from "../Bois/Bois";
 
 export default function Fazendas() {
   const [nome, setNome] = useState();
@@ -240,15 +242,6 @@ export default function Fazendas() {
           },
           "Incluir Lote"
         )}
-        {getTabContentListar(
-          boisData,
-          boisColumns,
-          () => {},
-          false,
-          null,
-          "Bois",
-          "Lista de Bois no " + nomeLoteSelecionado
-        )}
         {getTabContentAdicionar(
           onLoteConfirm,
           getLoteAddColumns(),
@@ -258,6 +251,7 @@ export default function Fazendas() {
           },
           "Incluir Lote"
         )}
+        <TabContent id="Bois" component={<Bois></Bois>} />
       </>
     );
   }
