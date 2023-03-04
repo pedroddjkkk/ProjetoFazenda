@@ -40,13 +40,6 @@ pages.push({
         },
         {
             navigable: true,
-            name: "Bois",
-            path: "/bois",
-            element: <Bois />,
-            icon: "fa-solid fa-cow",
-        },
-        {
-            navigable: true,
             name: "Fazendas",
             path: "/fazendas",
             element: <Fazendas />,
