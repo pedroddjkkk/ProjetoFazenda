@@ -7,8 +7,9 @@ import { useSelector } from "react-redux";
 import { Modal } from "react-bootstrap";
 import { useEffect, useState } from "react";
 import { CartesianGrid, Line, LineChart, ResponsiveContainer, Tooltip } from "recharts";
+import { apiBuscar } from "../../services/api";
 
-export default function Bois() {
+export default function Bois( props ) {
   const [peso, setPeso] = useState();
   const [raca, setRaca] = useState();
   const [show, setShow] = useState(false);
@@ -217,6 +218,11 @@ export default function Bois() {
     );
   }
 
+  async function fetchData(){
+    const ret = await apiBuscar("tab_bois", null, props.fk);
+    return ret;
+  }
+
   return (
     <Cadastro
       columns={getColumns()}
@@ -226,6 +232,7 @@ export default function Bois() {
       clearData={clearData}
       setDataProp={setData}
       editBottom={editBottom()}
+      fetchData={fetchData}
     />
   );
 }

@@ -81,23 +81,24 @@ Boi.afterCreate((boi, options) => {
 
 async function buscar(pk, filtro) {
   if (filtro) {
-    if (isNaN(filtro)) {
-      const ret = await Boi.findAll({
-        where: {
-          raca: {
-            [Op.like]: `%${filtro}%`,
-          },
+    const ret = await Boi.findAll({
+      where: {
+        id_lote: filtro,
+      },
+      include: [
+        {
+          model: Racoes,
+          required: false,
+          as: "racao",
         },
-      });
-      return ret;
-    } else {
-      const ret = await Boi.findAll({
-        where: {
-          id_pk: filtro,
+        {
+          model: Pesagens,
+          required: false,
+          as: "pesagens",
         },
-      });
-      return ret;
-    }
+      ],
+    });
+    return ret;
   } else if (pk) {
     const ret = await Boi.findAll({
       where: {
