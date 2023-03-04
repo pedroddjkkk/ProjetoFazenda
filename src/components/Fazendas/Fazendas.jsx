@@ -12,6 +12,7 @@ import Cadastro, {
   getTabContentListar,
 } from "../Cadastro/Cadastro";
 import TabContent from "../Tab/TabContent";
+import Lotes from "./Lotes";
 
 export default function Fazendas() {
   const [nome, setNome] = useState();
@@ -224,9 +225,11 @@ export default function Fazendas() {
       </>
     );
   }
-  if(idLote){
+  if(id_fazenda){
     return (
-      <Bois />
+      <Lotes
+      fk={id_fazenda}
+      />
     )
   } else {
     return (

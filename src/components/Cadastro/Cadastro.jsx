@@ -20,6 +20,7 @@ export default function Cadastro({
   editBottom,
   propsNewTabs,
   onTableRowClick,
+  fetchData,
 }) {
   const dispatch = useDispatch();
   const tabs = useSelector((state) => state.tabs.tabs);
@@ -30,6 +31,12 @@ export default function Cadastro({
   const [selectedId, setSelectedId] = useState("");
 
   const reloadData = async () => {
+    if(fetchData){
+      const ret = await fetchData();
+      setProgressPending(false);
+      setData(ret.data);
+      return;
+    }
     const ret = await apiBuscar(table);
     setProgressPending(false);
     setData(ret.data);
