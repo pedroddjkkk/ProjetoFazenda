@@ -164,6 +164,7 @@ async function salvar(where, registro) {
       raca: registro.raca,
       peso: registro.peso,
       id_racao: registro.id_racao,
+      id_lote: registro.id_lote,
     });
 
     return ret;

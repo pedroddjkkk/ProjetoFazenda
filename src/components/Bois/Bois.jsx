@@ -175,6 +175,7 @@ export default function Bois( props ) {
       raca: raca,
       id_racao: id_racao,
       new_peso: new_peso,
+      id_lote: props.fk,
     };
   }
 
