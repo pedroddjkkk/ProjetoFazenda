@@ -34,6 +34,7 @@ export default function Lotes( props ){
   function getData() {
     return {
       nome: nome,
+      id_fazenda: props.fk,
     };
   }
 
