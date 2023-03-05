@@ -66,8 +66,9 @@ export default function Lotes( props ){
         columns={columns}
         table="tab_lotes"
         addColumns={getAddColumns()}
+        tabTitle="Lista de Lotes"
         getData={getData()}
-        clearData={clearData}
+        clearData={clearData} 
         setDataProp={setData}
         fetchData={fetchData}
         onTableRowClick={onTableRowClick}

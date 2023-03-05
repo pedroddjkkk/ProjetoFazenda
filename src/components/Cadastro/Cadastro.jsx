@@ -21,6 +21,7 @@ export default function Cadastro({
   propsNewTabs,
   onTableRowClick,
   fetchData,
+  tabTitle,
 }) {
   const dispatch = useDispatch();
   const tabs = useSelector((state) => state.tabs.tabs);
@@ -147,7 +148,9 @@ export default function Cadastro({
           columns,
           onTableRowClickMemo ? onTableRowClickMemo : handleClickTable,
           progressPending,
-          actionsMemo
+          actionsMemo,
+          "Listar",
+          tabTitle ? tabTitle : "Lista de Registros"
         )}
         <div className="tab-content">
           {getTabContentAdicionar(onConfirm, addColumns, dispatch)}

@@ -11,7 +11,7 @@ async function excluir(req, res) {
       return await modelUser.excluir(pk, filtro); 
     } 
     else if (tabela === "tab_bois") {
-      return await modelBoi.excluir(pk, filtro); 
+      return await modelBoi.excluir(pk, filtro);
     }
     else if (tabela === "tab_fazendas"){
       return await modelFazendas.excluir(pk, filtro);
