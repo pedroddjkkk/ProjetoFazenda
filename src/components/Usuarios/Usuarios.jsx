@@ -92,5 +92,6 @@ export default function Usuarios() {
     getData={getData()}
     clearData={clearData}
     setDataProp={setData}
+    tabTitle="Lista de Usuários"
   />;
 }

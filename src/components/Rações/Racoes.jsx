@@ -52,6 +52,7 @@ export default function Racoes() {
       getData={getData()}
       clearData={clearData}
       setDataProp={setData}
+      tabTitle="Lista de Rações"
     />
   );
 }

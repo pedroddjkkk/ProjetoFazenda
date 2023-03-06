@@ -242,6 +242,7 @@ export default function Fazendas() {
         setDataProp={setData}
         onTableRowClick={onTableRowClick}
         propsNewTabs={getPropsNewTabs()}
+        tabTitle="Lista de Fazendas"
       />
     );
   }

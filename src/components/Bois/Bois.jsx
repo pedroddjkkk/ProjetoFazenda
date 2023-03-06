@@ -234,6 +234,7 @@ export default function Bois( props ) {
       setDataProp={setData}
       editBottom={editBottom()}
       fetchData={fetchData}
+      tabTitle="Lista de Bois"
     />
   );
 }
