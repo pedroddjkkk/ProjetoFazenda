@@ -35,7 +35,7 @@ export default function Dashboard() {
               <div className="icon">
                 <i className="fa-solid fa-cow"></i>
               </div>
-              <NavLink to="/bois" className="small-box-footer">
+              <NavLink to="/fazendas" className="small-box-footer">
                 Mais Informações <i className="fas fa-arrow-circle-right"></i>
               </NavLink>
             </div>
