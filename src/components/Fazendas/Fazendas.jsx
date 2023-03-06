@@ -1,17 +1,6 @@
-import { CircularProgress, TextField } from "@mui/material";
-import { useMemo, useState } from "react";
-import { Button } from "react-bootstrap";
-import { useDispatch } from "react-redux";
-import { toast } from "react-toastify";
-import { newTabs, selectTab } from "../../redux/actions/tabsSlice";
-import { apiBuscar, apiSalvar } from "../../services/api";
-import exportToExcel from "../../utils/exportToExcel";
-import Bois from "../Bois/Bois";
-import Cadastro, {
-  getTabContentAdicionar,
-  getTabContentListar,
-} from "../Cadastro/Cadastro";
-import TabContent from "../Tab/TabContent";
+import { TextField } from "@mui/material";
+import { useState } from "react";
+import Cadastro from "../Cadastro/Cadastro";
 import Lotes from "./Lotes";
 
 export default function Fazendas() {
@@ -19,19 +8,7 @@ export default function Fazendas() {
   const [cnpj, setCnpj] = useState();
   const [endereco, setEndereco] = useState();
   const [telefone, setTelefone] = useState();
-  const [loteData, setLoteData] = useState([]);
   const [id_fazenda, setIdFazenda] = useState();
-  const [nomeLote, setNomeLote] = useState();
-  const [boisData, setBoisData] = useState([]);
-  const [idLote, setIdLote ] = useState();
-  const [nomeLoteSelecionado, setNomeLoteSelecionado] = useState();
-  const [progressPending, setProgressPending] = useState(true);
-  const dispatch = useDispatch();
-
-  const loteColumns = [
-    { name: "Identificação", selector: (row) => row.id_pk, width: "10%" },
-    { name: "Nome", selector: (row) => row.nome },
-  ];
 
   function getColumns() {
     return [
@@ -88,38 +65,6 @@ export default function Fazendas() {
     );
   }
 
-  function getLoteAddColumns() {
-    return (
-      <div className="add-div-group">
-        <div className="row">
-          <TextField
-            label="Nome do Lote"
-            id="standard-start-adornment"
-            className="col-sm-3"
-            style={{ marginRight: "40px" }}
-            value={nomeLote}
-            onChange={(e) => setNomeLote(e.target.value)}
-            variant="standard"
-          />
-        </div>
-      </div>
-    );
-  }
-
-  const actionsMemo = useMemo(
-    () => (
-      <>
-        <Button
-          className="btn"
-          onClick={() => exportToExcel(loteColumns, loteData)}
-        >
-          Exportar
-        </Button>
-      </>
-    ),
-    [loteData]
-  );
-
   function getData() {
     return {
       nome: nome,
@@ -143,94 +88,12 @@ export default function Fazendas() {
     setTelefone(data.telefone);
   }
 
-  function clearLoteData() {
-    setNomeLote("");
-  }
-
-  async function getLotes(id_fazenda) {
-    const res = await apiBuscar("tab_lotes", id_fazenda);
-    setLoteData(res.data);
-    setProgressPending(false);
-    return res;
-  }
-
   function onTableRowClick(e) {
-    dispatch(
-      newTabs([
-        { id: "Lotes", name: "Lotes", icon: "fa-solid fa-list" },
-        { id: "Incluir Lote", name: "Incluir Lote", icon: "fa-solid fa-plus" },
-        { id: "Editar", name: "Editar", icon: "fa-solid fa-edit" },
-      ])
-    );
     setIdFazenda(e.id_pk);
-    setData(e);
-    getLotes(e.id_pk);
-    dispatch(selectTab("Lotes"));
   }
 
-  async function onLoteConfirm(e) {
-    e.preventDefault();
-    console.log("id_fazenda", id_fazenda);
-    const ret = await apiSalvar("tab_lotes", "", {
-      nome: nomeLote,
-      id_fazenda: id_fazenda,
-    });
-    if (ret.status === 200) {
-      toast.success("Salvo com sucesso!");
-    } else {
-      toast.error("Erro ao salvar!");
-    }
-    await getLotes(id_fazenda);
-    dispatch(selectTab("Lotes"));
-    clearLoteData();
-  }
-
-  const onLoteClick = (e) => {
-    setIdLote(e.id_pk);
-    setNomeLoteSelecionado(e.nome);
-  };
-
-  function getPropsNewTabs() {
-    return (
-      <>
-        {getTabContentListar(
-          loteData,
-          loteColumns,
-          onLoteClick,
-          progressPending,
-          actionsMemo,
-          "Lotes",
-          "Lista de Lotes"
-        )}
-        {getTabContentAdicionar(
-          onLoteConfirm,
-          getLoteAddColumns(),
-          dispatch,
-          () => {
-            clearLoteData();
-            dispatch(selectTab("Lotes"));
-          },
-          "Incluir Lote"
-        )}
-        {/*  {getTabContentListar(
-          boisData,
-          boisColumns,
-          () => {},
-          false,
-          null,
-          "Bois",
-          "Lista de Bois no " + nomeLoteSelecionado
-        )} */}
-        {/* <TabContent id={"Bois"} component={<Bois />} /> */}
-      </>
-    );
-  }
-  if(id_fazenda){
-    return (
-      <Lotes
-      fk={id_fazenda}
-      />
-    )
+  if (id_fazenda) {
+    return <Lotes fk={id_fazenda} />;
   } else {
     return (
       <Cadastro
@@ -240,9 +103,8 @@ export default function Fazendas() {
         getData={getData()}
         clearData={clearData}
         setDataProp={setData}
-        onTableRowClick={onTableRowClick}
-        propsNewTabs={getPropsNewTabs()}
         tabTitle="Lista de Fazendas"
+        onTableRowClick={onTableRowClick}
       />
     );
   }
