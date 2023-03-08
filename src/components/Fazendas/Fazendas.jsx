@@ -2,6 +2,8 @@ import { TextField } from "@mui/material";
 import { useState } from "react";
 import Cadastro from "../Cadastro/Cadastro";
 import Lotes from "./Lotes";
+import { useDispatch } from "react-redux";
+import { newTabs } from "../../redux/actions/tabsSlice";
 
 export default function Fazendas() {
   const [nome, setNome] = useState();
@@ -9,6 +11,7 @@ export default function Fazendas() {
   const [endereco, setEndereco] = useState();
   const [telefone, setTelefone] = useState();
   const [id_fazenda, setIdFazenda] = useState();
+  const dispatch = useDispatch();
 
   function getColumns() {
     return [
@@ -90,6 +93,13 @@ export default function Fazendas() {
 
   function onTableRowClick(e) {
     setIdFazenda(e.id_pk);
+    dispatch(
+      newTabs([
+        { id: "Listar", name: "Listar", icon: "fa-solid fa-list" },
+        { id: "Adicionar", name: "Adicionar", icon: "fa-solid fa-plus" },
+        { id: "Editar", name: "Editar", icon: "fa-solid fa-edit" },
+      ])
+    );
   }
 
   if (id_fazenda) {
