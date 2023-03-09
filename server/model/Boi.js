@@ -167,6 +167,8 @@ async function salvar(where, registro) {
       id_lote: registro.id_lote,
     });
 
+    ret.GMD = await calcularGMDBovino();
+
     return ret;
   }
 }
@@ -199,6 +201,10 @@ async function buscarBoisLote(pk, filtro) {
   });
 
   return ret;
+}
+
+async function calcularGMDBovino(){
+
 }
 
 module.exports = {
