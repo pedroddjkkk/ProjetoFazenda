@@ -98,6 +98,11 @@ async function buscar(pk, filtro) {
         },
       ],
     });
+
+    for (const boi of ret) {
+      ret.GMD = await calcularGMDBovino(boi.id_pk);
+    }
+
     return ret;
   } else if (pk) {
     const ret = await Boi.findAll({
@@ -122,6 +127,10 @@ async function buscar(pk, filtro) {
         },
       ],
     });
+
+    for (const boi of ret) {
+      ret.GMD = await calcularGMDBovino(boi.id_pk);
+    }
 
     return ret;
   }
@@ -167,8 +176,6 @@ async function salvar(where, registro) {
       id_lote: registro.id_lote,
     });
 
-    ret.GMD = await calcularGMDBovino();
-
     return ret;
   }
 }
@@ -203,8 +210,30 @@ async function buscarBoisLote(pk, filtro) {
   return ret;
 }
 
-async function calcularGMDBovino(){
+async function calcularGMDBovino(id){
+  const pesagemNova = await Pesagens.findOne({
+    where: {
+      id_boi: id,
+    },
+    order: [
+      ['dr_hr_criacao', 'DESC']
+    ]
+  })
 
+  const pesagemAntiga = await Pesagens.findOne({
+    where: {
+      id_boi: id,
+    },
+    order: [
+      ['dr_hr_criacao', 'ASC']
+    ]
+  })
+
+  const dataUltimaPesagem = new Date(pesagemNova.dr_hr_criacao);
+  const dataPrimeiraPesagem = new Date(pesagemAntiga.dr_hr_criacao);
+  const diffEmDias = Math.floor((dataUltimaPesagem - dataPrimeiraPesagem) / (1000 * 60 * 60 * 24));
+  const diffEmKg = pesagemNova.peso - pesagemAntiga.peso;
+  const gmd = diffEmKg / diffEmDias;
 }
 
 module.exports = {
