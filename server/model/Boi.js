@@ -234,6 +234,8 @@ async function calcularGMDBovino(id){
   const diffEmDias = Math.floor((dataUltimaPesagem - dataPrimeiraPesagem) / (1000 * 60 * 60 * 24));
   const diffEmKg = pesagemNova.peso - pesagemAntiga.peso;
   const gmd = diffEmKg / diffEmDias;
+
+  return gmd;
 }
 
 module.exports = {
