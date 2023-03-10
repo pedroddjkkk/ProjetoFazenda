@@ -1,7 +1,6 @@
 const modelBuscar = require("./model/Buscar");
 const modelSalvar = require("./model/Salvar");
 const modelExcluir = require("./model/Excluir");
-const bodyParser = require("body-parser");
 const express = require("express");
 const path = require("path");
 const cors = require("cors");
@@ -14,7 +13,7 @@ const app = express();
 
 app.use(cors());
 
-app.use(bodyParser.json())
+app.use(express.json());
 
 app.listen(PORT, () => {
   console.log(`Server listening on ${PORT}`);
