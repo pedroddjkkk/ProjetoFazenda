@@ -100,7 +100,7 @@ async function buscar(pk, filtro) {
     });
 
     for (const boi of ret) {
-      ret.GMD = await calcularGMDBovino(boi.id_pk);
+      boi.dataValues.gmd = await calcularGMDBovino(boi.id_pk);
     }
 
     return ret;
@@ -129,7 +129,7 @@ async function buscar(pk, filtro) {
     });
 
     for (const boi of ret) {
-      ret.GMD = await calcularGMDBovino(boi.id_pk);
+      ret.dataValues.gmd = await calcularGMDBovino(boi.id_pk);
     }
 
     return ret;
@@ -235,7 +235,11 @@ async function calcularGMDBovino(id){
   const diffEmKg = pesagemNova.peso - pesagemAntiga.peso;
   const gmd = diffEmKg / diffEmDias;
 
-  return gmd;
+  if(isNaN(gmd)){
+    return 0;
+  }
+  
+  return gmd.toFixed(2);
 }
 
 module.exports = {

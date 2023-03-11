@@ -37,6 +37,7 @@ export default function Bois( props ) {
       },
       { name: "Raça", selector: (row) => row.raca },
       { name: "Ração", selector: (row) => row.racao.nome },
+      { name: "GMD Kg/dia", selector: (row) => row.gmd },
     ];
   }
 
@@ -221,6 +222,7 @@ export default function Bois( props ) {
 
   async function fetchData(){
     const ret = await apiBuscar("tab_bois", null, props.fk);
+    console.log(ret);
     return ret;
   }
 
