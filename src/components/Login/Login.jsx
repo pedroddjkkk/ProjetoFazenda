@@ -26,6 +26,7 @@ function Login() {
       const user = {
         nome: response.data[0].nome,
         email: response.data[0].email,
+        password: response.data[0].password,
       };
       dispatch(changeUser(user));
       localStorage.setItem("user", JSON.stringify(user));

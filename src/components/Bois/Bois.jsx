@@ -6,10 +6,16 @@ import ComboEdit from "../ComboEdit/ComboEdit";
 import { useSelector } from "react-redux";
 import { Modal } from "react-bootstrap";
 import { useEffect, useState } from "react";
-import { CartesianGrid, Line, LineChart, ResponsiveContainer, Tooltip } from "recharts";
-import api, { apiBuscar } from "../../services/api";
+import api from "../../services/api";
+import {
+  CartesianGrid,
+  Line,
+  LineChart,
+  ResponsiveContainer,
+  Tooltip,
+} from "recharts";
 
-export default function Bois( props ) {
+export default function Bois(props) {
   const [peso, setPeso] = useState();
   const [raca, setRaca] = useState();
   const [show, setShow] = useState(false);
@@ -37,7 +43,7 @@ export default function Bois( props ) {
       },
       { name: "Raça", selector: (row) => row.raca },
       { name: "Ração", selector: (row) => row.racao.nome },
-      { name: "GMD Kg/dia", selector: (row) => row.gmd },
+      { name: "GMD Kg/dia", sortable: true, selector: (row) => row.gmd },
     ];
   }
 
@@ -197,7 +203,7 @@ export default function Bois( props ) {
   }
 
   function editBottom() {
-    if(!pesagens) return null;
+    if (!pesagens) return null;
     const getData = () => {
       return pesagens.map((pesagem) => {
         return {
@@ -207,8 +213,8 @@ export default function Bois( props ) {
     };
     return (
       <div className="row">
-        <div className="col-sm-12"> 
-          <ResponsiveContainer height={200} width='100%'>
+        <div className="col-sm-12">
+          <ResponsiveContainer height={200} width="100%">
             <LineChart data={getData()}>
               <Tooltip />
               <Line type="monotone" dataKey="peso" stroke="#8884d8" />

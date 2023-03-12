@@ -49,7 +49,7 @@ function Navbar({ pages }) {
               </a>
               <hr class="sidebar-divider my-0" />
               <ul id="accordionSidebar" class="navbar-nav text-light">
-                {pages[0].children.map((item, index) => {
+                {pages[0].children[0].children.map((item, index) => {
                   if (item.navigable)
                     return (
                       <li className="nav-item">
