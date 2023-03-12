@@ -86,12 +86,10 @@ const router = createBrowserRouter(pages);
 
 root.render(
   <React.StrictMode>
-    <Validator>
-      <Provider store={store}>
-        <RouterProvider router={router} />
-      </Provider>
-      <ToastContainer />
-    </Validator>
+    <Provider store={store}>
+      <RouterProvider router={router} />
+    </Provider>
+    <ToastContainer />
   </React.StrictMode>
 );
 
