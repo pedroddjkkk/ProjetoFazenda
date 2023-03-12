@@ -5,7 +5,7 @@ import DataTable from "react-data-table-component";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import { newTabs, selectTab } from "../../redux/actions/tabsSlice";
-import { apiBuscar, apiExcluir, apiSalvar } from "../../services/api";
+import api, { apiBuscar, apiExcluir, apiSalvar } from "../../services/api";
 import exportToExcel from "../../utils/exportToExcel";
 import fadeIn from "../../utils/fadeIn";
 import TabContent from "../Tab/TabContent";
@@ -38,7 +38,7 @@ export default function Cadastro({
       setData(ret.data);
       return;
     }
-    const ret = await apiBuscar(table);
+    const ret = await api.get(table);
     setProgressPending(false);
     setData(ret.data);
   };
@@ -65,17 +65,9 @@ export default function Cadastro({
     }
   }, [selectedTab]);
 
-  /*  async function handleKeyDown(event) {
-    if (event.key === "Enter") {
-      event.preventDefault();
-      const ret = await apiBuscar(table, "", filtro);
-      setData(ret.data);
-    }
-  } */
-
   async function onConfirm(e) {
     e.preventDefault();
-    const ret = await apiSalvar(table, selectedId ? selectedId : "", getData);
+    const ret = await api.put(table, selectedId ? selectedId : "", getData);
     if (ret.status === 200) {
       toast.success("Salvo com sucesso!");
     } else {
@@ -96,7 +88,7 @@ export default function Cadastro({
   const onTableRowClickMemo = useCallback(onTableRowClick, [onTableRowClick]);
 
   async function onDelete(e) {
-    await apiExcluir(table, selectedId);
+    await api.delete(table, selectedId);
     await reloadData();
     dispatch(
       newTabs([

@@ -7,7 +7,7 @@ import { useSelector } from "react-redux";
 import { Modal } from "react-bootstrap";
 import { useEffect, useState } from "react";
 import { CartesianGrid, Line, LineChart, ResponsiveContainer, Tooltip } from "recharts";
-import { apiBuscar } from "../../services/api";
+import api, { apiBuscar } from "../../services/api";
 
 export default function Bois( props ) {
   const [peso, setPeso] = useState();
@@ -221,7 +221,7 @@ export default function Bois( props ) {
   }
 
   async function fetchData(){
-    const ret = await apiBuscar("tab_bois", null, props.fk);
+    const ret = await api.get("tab_bois", null, props.fk);
     console.log(ret);
     return ret;
   }

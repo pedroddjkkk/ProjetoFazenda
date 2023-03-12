@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router";
 import { changeUser } from "../../redux/actions/userSlice.js";
-import { apiBuscar } from "../../services/api.js";
+import api, { apiBuscar } from "../../services/api.js";
 import "./Login.css";
 import "../../assets/bootstrap/css/bootstrap.min.css"
 
@@ -20,7 +20,7 @@ function Login() {
       password: password,
     };
 
-    const response = await apiBuscar("tab_user", "", data);
+    const response = await api.get("tab_user", "", data);
 
     if (response.data.length > 0) {
       const user = {
