@@ -6,8 +6,7 @@ import ComboEdit from "../ComboEdit/ComboEdit";
 import { useSelector } from "react-redux";
 import { Modal } from "react-bootstrap";
 import { useEffect, useState } from "react";
-import { CartesianGrid, Line, LineChart, ResponsiveContainer, Tooltip } from "recharts";
-import api, { apiBuscar } from "../../services/api";
+import api from "../../services/api";
 import {
   CartesianGrid,
   Line,
@@ -15,7 +14,6 @@ import {
   ResponsiveContainer,
   Tooltip,
 } from "recharts";
-import { apiBuscar } from "../../services/api";
 
 export default function Bois(props) {
   const [peso, setPeso] = useState();

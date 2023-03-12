@@ -22,50 +22,56 @@ const root = ReactDOM.createRoot(document.getElementById("root"));
 let pages = [];
 
 pages.push({
-  navigable: true,
-  element: <Navbar pages={pages} />,
+  navigable: false,
+  element: <Validator />,
   children: [
     {
       navigable: true,
-      name: "Dashboard",
-      path: "/dashboard",
-      element: <Dashboard />,
-      icon: "fa-solid fa-gauge",
-    },
-    {
-      navigable: true,
-      name: "Usuários",
-      path: "/users",
-      element: <Usuarios />,
-      icon: "fa-solid fa-user",
-    },
-    {
-      navigable: true,
-      name: "Fazendas",
-      path: "/fazendas",
-      element: <Fazendas />,
-      icon: "fa-solid fa-house-user",
-    },
-    {
-      navigable: true,
-      name: "Rações",
-      path: "/racoes",
-      element: <Racoes />,
-      icon: "fa-solid fa-utensils",
-    },
-    {
-      navigable: true,
-      name: "Acompanhar Bovinos",
-      path: "/acompanhamento",
-      element: <Acompanhamento />,
-      icon: "fa-solid fa-chart-line",
-    },
-    {
-      navigable: true,
-      name: "Permissões",
-      path: "/permissoes",
-      element: <Permissoes />,
-      icon: "fa-solid fa-lock",
+      element: <Navbar pages={pages} />,
+      children: [
+        {
+          navigable: true,
+          name: "Dashboard",
+          path: "/dashboard",
+          element: <Dashboard />,
+          icon: "fa-solid fa-gauge",
+        },
+        {
+          navigable: true,
+          name: "Usuários",
+          path: "/users",
+          element: <Usuarios />,
+          icon: "fa-solid fa-user",
+        },
+        {
+          navigable: true,
+          name: "Fazendas",
+          path: "/fazendas",
+          element: <Fazendas />,
+          icon: "fa-solid fa-house-user",
+        },
+        {
+          navigable: true,
+          name: "Rações",
+          path: "/racoes",
+          element: <Racoes />,
+          icon: "fa-solid fa-utensils",
+        },
+        {
+          navigable: true,
+          name: "Acompanhar Bovinos",
+          path: "/acompanhamento",
+          element: <Acompanhamento />,
+          icon: "fa-solid fa-chart-line",
+        },
+        {
+          navigable: true,
+          name: "Permissões",
+          path: "/permissoes",
+          element: <Permissoes />,
+          icon: "fa-solid fa-lock",
+        },
+      ],
     },
   ],
 });
