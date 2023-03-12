@@ -88,7 +88,7 @@ export default function Cadastro({
   const onTableRowClickMemo = useCallback(onTableRowClick, [onTableRowClick]);
 
   async function onDelete(e) {
-    await api.delete(table, selectedId);
+    await api.del(table, selectedId);
     await reloadData();
     dispatch(
       newTabs([

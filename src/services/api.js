@@ -4,21 +4,21 @@ const apiConnection = axios.create({
   baseURL: "http://localhost:3002",
 });
 
-let api;
-
-api.get = async (tabela, pk, filtro) => {
-  const ret = await api.apiConnection("/buscar", { tabela, pk, filtro })
+const get = async (tabela, pk, filtro) => {
+  const ret = await apiConnection.post("/buscar", { tabela, pk, filtro })
   return ret;
 };
 
-api.put = async (tabela, where, registro) => {
-  const ret = await api.apiConnection("/salvar", { tabela, where, registro })
+const put = async (tabela, where, registro) => {
+  const ret = await apiConnection.post("/salvar", { tabela, where, registro })
   return ret;
 };
 
-api.delete = async (tabela, pk, filtro) => {
-  const ret = await api.apiConnection("/excluir", { tabela, pk, filtro })
+const del = async (tabela, pk, filtro) => {
+  const ret = await apiConnection.post("/excluir", { tabela, pk, filtro })
   return ret;
 };
+
+const api = { get, put, del, apiConnection };
 
 export default api;
