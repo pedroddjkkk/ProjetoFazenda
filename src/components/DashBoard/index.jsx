@@ -1,7 +1,7 @@
 import 'admin-lte/dist/css/adminlte.min.css';
 import { useEffect, useState } from 'react';
 import { NavLink } from 'react-router-dom';
-import { apiBuscar } from '../../services/api';
+import api, { apiBuscar } from '../../services/api';
 import { Pie, PieChart, ResponsiveContainer } from 'recharts';
 import { Tooltip } from 'react-bootstrap';
 
@@ -10,7 +10,7 @@ export default function Dashboard() {
   const [numBois, setNumBois] = useState(0);
 
   const fetchData = async () => {
-    const ret = await apiBuscar("tab_bois");
+    const ret = await api.get("tab_bois");
     setBois(ret.data);
   }
   

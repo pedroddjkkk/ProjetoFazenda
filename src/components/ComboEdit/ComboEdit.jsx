@@ -2,7 +2,7 @@ import { Button, IconButton, InputAdornment, TextField } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import Modal from "react-bootstrap/Modal";
 import DataTable from "react-data-table-component";
-import { apiBuscar } from "../../services/api";
+import api, { apiBuscar } from "../../services/api";
 
 export default function ComboEdit({
   tabela,
@@ -33,7 +33,7 @@ export default function ComboEdit({
   }, [id]);
 
   async function reloadData() {
-    const ret = await apiBuscar(tabela);
+    const ret = await api.get(tabela);
     setData(ret.data);
   }
 

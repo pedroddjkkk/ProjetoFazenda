@@ -1,20 +1,24 @@
 import axios from "axios";
 
-const api = axios.create({
+const apiConnection = axios.create({
   baseURL: "http://localhost:3002",
 });
 
-export const apiBuscar = async (tabela, pk, filtro) => {
-  const ret = await api.post("/buscar", { tabela, pk, filtro })
+const get = async (tabela, pk, filtro) => {
+  const ret = await apiConnection.post("/buscar", { tabela, pk, filtro })
   return ret;
 };
 
-export const apiSalvar = async (tabela, where, registro) => {
-  const ret = await api.post("/salvar", { tabela, where, registro })
+const put = async (tabela, where, registro) => {
+  const ret = await apiConnection.post("/salvar", { tabela, where, registro })
   return ret;
 };
 
-export const apiExcluir = async (tabela, pk, filtro) => {
-  const ret = await api.post("/excluir", { tabela, pk, filtro })
+const del = async (tabela, pk, filtro) => {
+  const ret = await apiConnection.post("/excluir", { tabela, pk, filtro })
   return ret;
 };
+
+const api = { get, put, del, apiConnection };
+
+export default api;

@@ -6,6 +6,8 @@ import ComboEdit from "../ComboEdit/ComboEdit";
 import { useSelector } from "react-redux";
 import { Modal } from "react-bootstrap";
 import { useEffect, useState } from "react";
+import { CartesianGrid, Line, LineChart, ResponsiveContainer, Tooltip } from "recharts";
+import api, { apiBuscar } from "../../services/api";
 import {
   CartesianGrid,
   Line,
@@ -226,8 +228,8 @@ export default function Bois(props) {
     );
   }
 
-  async function fetchData() {
-    const ret = await apiBuscar("tab_bois", null, props.fk);
+  async function fetchData(){
+    const ret = await api.get("tab_bois", null, props.fk);
     console.log(ret);
     return ret;
   }
