@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const apiConnection = axios.create({
-  baseURL: "http://localhost:3002",
+  baseURL: "http://p7220v.vps-kinghost.net:3001",
 });
 
 const get = async (tabela, pk, filtro) => {
