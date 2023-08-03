@@ -1,0 +1,19 @@
+.table-content:nth-child(even){
+  background-color: #e9ebf1;
+  color: rgb(141, 141, 141);
+}
+
+.table-content:nth-child(odd){
+  background-color: #faf9f9;
+}
+
+.table-content:nth-child(odd):hover{
+  background-color: #f3f1f1;
+  cursor: pointer;
+}
+
+.table-content:nth-child(even):hover{
+  background-color: #dfe2e7;
+  cursor: pointer;
+}
+
