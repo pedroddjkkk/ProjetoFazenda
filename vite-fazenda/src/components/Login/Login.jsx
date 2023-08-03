@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router";
 import { changeUser } from "../../redux/actions/userSlice.js";
-import api, { apiBuscar } from "../../services/api.js";
+import api from "../../services/api.js";
 import "./Login.css";
 import "../../assets/bootstrap/css/bootstrap.min.css"
 

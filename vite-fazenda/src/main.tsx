@@ -18,7 +18,7 @@ import Permissoes from "./components/Permissoes";
 import Acompanhamento from "./components/Acompanhamento/Acompanhamento";
 import Validator from "./services/Validator";
 
-const root = ReactDOM.createRoot(document.getElementById("root"));
+const root = ReactDOM.createRoot(document.getElementById("root")!);
 let pages = [];
 
 pages.push({
