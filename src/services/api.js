@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const apiConnection = axios.create({
-  baseURL: "172.21.102.59:3002",
+  baseURL: "http://localhost:3001",
 });
 
 const get = async (tabela, pk, filtro) => {
