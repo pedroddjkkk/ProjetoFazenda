@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import Modal from "react-bootstrap/Modal";
 import DataTable from "react-data-table-component";
 import api from "../../services/api";
+import { FaMagnifyingGlass } from "react-icons/fa";
 
 export default function ComboEdit({
   tabela,
@@ -61,7 +62,7 @@ export default function ComboEdit({
                 onClick={handleShow}
                 onMouseDown={handleMouseDownSearch}
               >
-                <i class="fa-solid fa-magnifying-glass"></i>
+                <FaMagnifyingGlass />
               </IconButton>
             </InputAdornment>
           ),

@@ -14,6 +14,7 @@ import {
   ResponsiveContainer,
   Tooltip,
 } from "recharts";
+import { FaCheck, FaTimes } from "react-icons/fa";
 
 export default function Bois(props) {
   const [peso, setPeso] = useState();
@@ -160,7 +161,10 @@ export default function Bois(props) {
               onClick={handleClose}
               style={{ marginRight: "10px", marginTop: "10px" }}
             >
-              <i class="fa-solid fa-times" /> Cancelar
+              <div className="flex items-center">
+                <FaTimes />
+                <span className="ml-1">Cancelar</span>
+              </div>
             </button>
             <button
               type="submit"
@@ -168,7 +172,10 @@ export default function Bois(props) {
               style={{ marginRight: "10px", marginTop: "10px" }}
               onClick={handleConfirm}
             >
-              <i class="fa-solid fa-check" /> Confirmar
+              <div className="flex items-center">
+                <FaCheck />
+                <span className="ml-1">Confirmar</span>
+              </div>
             </button>
           </Modal.Footer>
         </Modal>
@@ -226,7 +233,7 @@ export default function Bois(props) {
     );
   }
 
-  async function fetchData(){
+  async function fetchData() {
     const ret = await api.get("tab_bois", null, props.fk);
     console.log(ret);
     return ret;

@@ -9,6 +9,14 @@ import api from "../../services/api";
 import exportToExcel from "../../utils/exportToExcel";
 import fadeIn from "../../utils/fadeIn";
 import TabContent from "../Tab/TabContent";
+import {
+  FaCheck,
+  FaEdit,
+  FaList,
+  FaPlus,
+  FaTimes,
+  FaTrash,
+} from "react-icons/fa";
 
 export default function Cadastro({
   columns,
@@ -32,7 +40,7 @@ export default function Cadastro({
   const [selectedId, setSelectedId] = useState("");
 
   const reloadData = async () => {
-    if(fetchData){
+    if (fetchData) {
       const ret = await fetchData();
       setProgressPending(false);
       setData(ret.data);
@@ -51,8 +59,8 @@ export default function Cadastro({
   useEffect(() => {
     dispatch(
       newTabs([
-        { id: "Listar", name: "Listar", icon: "fa-solid fa-list" },
-        { id: "Adicionar", name: "Adicionar", icon: "fa-solid fa-plus" },
+        { id: "Listar", name: "Listar", icon: <FaList /> },
+        { id: "Adicionar", name: "Adicionar", icon: <FaPlus /> },
       ])
     );
     dispatch(selectTab("Listar"));
@@ -78,12 +86,15 @@ export default function Cadastro({
     clearData();
   }
 
-  const handleClickTable = useCallback(async (e) => {
-    dispatch(newTabs([{ id: "Editar", name: "Editar", icon: "fa-solid fa-edit" }]));
-    dispatch(selectTab("Editar"));
-    setSelectedId(e.id_pk);
-    setDataProp(e);
-  }, [dispatch, setSelectedId, setDataProp]);
+  const handleClickTable = useCallback(
+    async (e) => {
+      dispatch(newTabs([{ id: "Editar", name: "Editar", icon: <FaEdit /> }]));
+      dispatch(selectTab("Editar"));
+      setSelectedId(e.id_pk);
+      setDataProp(e);
+    },
+    [dispatch, setSelectedId, setDataProp]
+  );
 
   const onTableRowClickMemo = useCallback(onTableRowClick, [onTableRowClick]);
 
@@ -92,8 +103,8 @@ export default function Cadastro({
     await reloadData();
     dispatch(
       newTabs([
-        { id: "Listar", name: "Listar", icon: "fa-solid fa-list" },
-        { id: "Adicionar", name: "Adicionar", icon: "fa-solid fa-plus" },
+        { id: "Listar", name: "Listar", icon: <FaList /> },
+        { id: "Adicionar", name: "Adicionar", icon: <FaPlus /> },
       ])
     );
     dispatch(selectTab("Listar"));
@@ -128,8 +139,10 @@ export default function Cadastro({
                     href="#tab-1"
                     onClick={() => dispatch(selectTab(tab.id))}
                   >
-                    <i className={tab.icon && tab.icon}></i>
-                    {" " + tab.name}
+                    <div className="flex items-center">
+                      {tab.icon && tab.icon}
+                      <span className="ml-1">{" " + tab.name}</span>
+                    </div>
                   </a>
                 </li>
               );
@@ -167,27 +180,40 @@ export default function Cadastro({
                       onClick={() => {
                         dispatch(
                           newTabs([
-                            { id: "Listar", name: "Listar", icon: "fa-solid fa-list" },
-                            { id: "Adicionar", name: "Adicionar", icon: "fa-solid fa-plus" },
+                            { id: "Listar", name: "Listar", icon: <FaList /> },
+                            {
+                              id: "Adicionar",
+                              name: "Adicionar",
+                              icon: <FaPlus />,
+                            },
                           ])
                         );
                         clearData();
                         dispatch(selectTab("Listar"));
                       }}
                     >
-                      <i className="fa-solid fa-times" /> Cancelar
+                      <div className="flex items-center">
+                        <FaTimes />
+                        <span className="ml-1">Cancelar</span>
+                      </div>
                     </button>
                     <button
                       className="btn btn-danger btn-cadastro-edit"
                       onClick={onDelete}
                     >
-                      <i className="fa-solid fa-trash" /> Deletar
+                      <div className="flex items-center">
+                        <FaTrash />
+                        <span className="ml-1">Deletar</span>
+                      </div>
                     </button>
                     <button
                       type="submit"
                       className="btn btn-primary btn-cadastro-edit"
                     >
-                      <i className="fa-solid fa-check" /> Confirmar
+                      <div className="flex items-center">
+                        <FaCheck />
+                        <span className="ml-1">Confirmar</span>
+                      </div>
                     </button>
                   </div>
                   {editBottom}
@@ -253,7 +279,13 @@ export function getTabContentListar(
   );
 }
 
-export function getTabContentAdicionar(onConfirm, addColumns, dispatch, onCancel, tabName ) {
+export function getTabContentAdicionar(
+  onConfirm,
+  addColumns,
+  dispatch,
+  onCancel,
+  tabName
+) {
   return (
     <TabContent
       id={tabName ? tabName : "Adicionar"}
@@ -276,16 +308,24 @@ export function getTabContentAdicionar(onConfirm, addColumns, dispatch, onCancel
               <button
                 className="btn btn-danger"
                 style={{ margin: "0 30px 30px 0px" }}
-                onClick={onCancel ? onCancel : () => dispatch(selectTab("Listar"))}
+                onClick={
+                  onCancel ? onCancel : () => dispatch(selectTab("Listar"))
+                }
               >
-                <i className="fa-solid fa-times" /> Cancelar
+                <div className="flex items-center">
+                  <FaTimes />
+                  <span className="ml-1">Cancelar</span>
+                </div>
               </button>
               <button
                 type="submit"
                 className="btn btn-primary"
                 style={{ margin: "0 30px 30px 0px" }}
               >
-                <i className="fa-solid fa-check" /> Confirmar
+                <div className="flex items-center">
+                  <FaCheck />
+                  <span className="ml-1">Confirmar</span>
+                </div>
               </button>
             </Box>
           </div>

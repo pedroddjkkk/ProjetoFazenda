@@ -6,6 +6,7 @@ import "../../assets/bootstrap/css/bootstrap.min.css";
 import "../../assets/css/styles.min.css";
 import { changeUser } from "../../redux/actions/userSlice";
 import fadeIn from "../../utils/fadeIn";
+import { FaTractor, FaSignOutAlt } from "react-icons/fa";
 
 function Navbar({ pages }) {
   const dispatch = useDispatch();
@@ -41,7 +42,7 @@ function Navbar({ pages }) {
                 href="#"
               >
                 <div class="sidebar-brand-icon rotate-n-15">
-                  <i class="fas fa-tractor"></i>
+                  <FaTractor size={32} />
                 </div>
                 <div class="sidebar-brand-text mx-3">
                   <span>Agro</span>
@@ -100,8 +101,10 @@ function Navbar({ pages }) {
                       dispatch(changeUser(null));
                     }}
                   >
-                    <i className="fas fa-sign-out-alt"></i>
-                    <span>Sair</span>
+                    <div className="flex items-center">
+                      <FaSignOutAlt size={16} />
+                      <span className="ml-2">Sair</span>
+                    </div>
                   </NavLink>
                 </div>
               </div>
