@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import Modal from "react-bootstrap/Modal";
 import DataTable from "react-data-table-component";
 import api from "../../services/api";
-import { FaMagnifyingGlass } from "react-icons/fa";
+import { FaMagnifyingGlass } from "react-icons/fa6";
 
 export default function ComboEdit({
   tabela,

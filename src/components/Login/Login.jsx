@@ -4,7 +4,8 @@ import { useNavigate } from "react-router";
 import { changeUser } from "../../redux/actions/userSlice.js";
 import api from "../../services/api.js";
 import "./Login.css";
-import "../../assets/bootstrap/css/bootstrap.min.css"
+import "../../assets/bootstrap/css/bootstrap.min.css";
+import { FaGoogle, FaFacebook } from "react-icons/fa6";
 
 function Login() {
   const [email, setEmail] = useState("");
@@ -37,7 +38,10 @@ function Login() {
   };
 
   return (
-    <div className="container-fluid bg-gradient-primary fill-height" style={{height: "100vh"}}>
+    <div
+      className="container-fluid bg-gradient-primary fill-height"
+      style={{ height: "100vh" }}
+    >
       <div className="container">
         <div className="row justify-content-center">
           <div className="col-md-9 col-lg-12 col-xl-10">
@@ -89,15 +93,19 @@ function Login() {
                           className="btn btn-primary d-block btn-google btn-user w-100 mb-2"
                           role="button"
                         >
-                          <i className="fab fa-google"></i>&nbsp; Login com
-                          Google
+                          <div className="flex items-center justify-center">
+                            <FaGoogle size={18} />
+                            <span className="ml-2">Login com Google</span>
+                          </div>
                         </a>
                         <a
                           className="btn btn-primary d-block btn-facebook btn-user w-100"
                           role="button"
                         >
-                          <i className="fab fa-facebook-f"></i>&nbsp; Login com
-                          Facebook
+                          <div className="flex items-center justify-center">
+                            <FaFacebook size={18} />
+                            <span className="ml-2">Login com Facebook</span>
+                          </div>
                         </a>
                         <hr />
                       </form>

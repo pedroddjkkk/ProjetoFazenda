@@ -15,6 +15,7 @@ import {
   Tooltip,
 } from "recharts";
 import { FaCheck, FaTimes } from "react-icons/fa";
+import { AiOutlinePlus } from "react-icons/ai"
 
 export default function Bois(props) {
   const [peso, setPeso] = useState();
@@ -105,7 +106,7 @@ export default function Bois(props) {
                           onMouseDown={handleMouseDown}
                           title="Adicionar nova pesagem"
                         >
-                          <i class="fa-solid fa-plus"></i>
+                          <AiOutlinePlus />
                         </IconButton>
                       </InputAdornment>
                     )}
