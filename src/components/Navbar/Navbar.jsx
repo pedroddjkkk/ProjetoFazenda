@@ -52,17 +52,16 @@ function Navbar({ pages }) {
                 {pages[0].children[0].children.map((item, index) => {
                   if (item.navigable)
                     return (
-                      <li
-                        className="nav-item"
-                        style={{ display: "flex", justifyContent: "center", alignItems: "center" }}
-                      >
+                      <li className="nav-item">
                         <NavLink
                           className="nav-link"
                           key={index}
                           to={item.path}
                         >
-                          {item.icon}
-                          <span>{item.name}</span>
+                          <div className="flex justify-start items-center flex-row">
+                            {item.icon}
+                            <span className="ml-2">{item.name}</span>
+                          </div>
                         </NavLink>
                       </li>
                     );
