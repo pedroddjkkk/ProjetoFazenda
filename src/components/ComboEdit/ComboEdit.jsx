@@ -2,7 +2,7 @@ import { Button, IconButton, InputAdornment, TextField } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import Modal from "react-bootstrap/Modal";
 import DataTable from "react-data-table-component";
-import api, { apiBuscar } from "../../services/api";
+import api from "../../services/api";
 
 export default function ComboEdit({
   tabela,

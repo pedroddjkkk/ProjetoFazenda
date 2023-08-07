@@ -1,7 +1,7 @@
 import 'admin-lte/dist/css/adminlte.min.css';
 import { useEffect, useState } from 'react';
 import { NavLink } from 'react-router-dom';
-import api, { apiBuscar } from '../../services/api';
+import api from '../../services/api';
 import { Pie, PieChart, ResponsiveContainer } from 'recharts';
 import { Tooltip } from 'react-bootstrap';
 

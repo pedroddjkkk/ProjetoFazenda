@@ -5,7 +5,7 @@ import DataTable from "react-data-table-component";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import { newTabs, selectTab } from "../../redux/actions/tabsSlice";
-import api, { apiBuscar, apiExcluir, apiSalvar } from "../../services/api";
+import api from "../../services/api";
 import exportToExcel from "../../utils/exportToExcel";
 import fadeIn from "../../utils/fadeIn";
 import TabContent from "../Tab/TabContent";

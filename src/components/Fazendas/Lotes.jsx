@@ -1,7 +1,7 @@
 import { TextField } from "@mui/material";
 import Cadastro from "../Cadastro/Cadastro";
 import { useState } from "react";
-import api, { apiBuscar } from "../../services/api";
+import api from "../../services/api";
 import Bois from "../Bois/Bois";
 
 export default function Lotes( props ){
