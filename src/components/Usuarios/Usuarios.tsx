@@ -1,19 +1,26 @@
 import { TextField } from "@mui/material";
 import { useState } from "react";
 import Cadastro from "../Cadastro/Cadastro";
+import { emailSchema } from "../../utils/schemas";
 
 export default function Usuarios() {
   const [nome, setNome] = useState();
   const [email, setEmail] = useState();
   const [login, setLogin] = useState();
   const [senha, setSenha] = useState();
+  const [emailError, setEmailError] = useState<boolean>();
 
   function getColumns() {
     return [
-      { name: "Identificação", selector: row => row.id_pk, sortable: true, width: "10%" },
-      { name: "Email", selector: row => row.email, sortable: true },
-      { name: "Login", selector: row => row.login },
-      { name: "Nome", selector: row => row.nome },
+      {
+        name: "Identificação",
+        selector: (row) => row.id_pk,
+        sortable: true,
+        width: "10%",
+      },
+      { name: "Email", selector: (row) => row.email, sortable: true },
+      { name: "Login", selector: (row) => row.login },
+      { name: "Nome", selector: (row) => row.nome },
     ];
   }
 
@@ -35,7 +42,17 @@ export default function Usuarios() {
             id="standard-start-adornment"
             className="col-sm-2"
             value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            error={emailError}
+            onChange={(e) => {
+              try {
+                const value = emailSchema.parse(e.target.value);
+                setEmailError(false);
+              } catch (error) {
+                setEmailError(true);
+              }
+
+              setEmail(e.target.value);
+            }}
             style={{ marginRight: "40px" }}
             variant="standard"
           />
@@ -62,36 +79,38 @@ export default function Usuarios() {
     );
   }
 
-  function getData(){
+  function getData() {
     return {
       nome: nome,
       email: email,
       login: login,
-      senha: senha
-    }
+      senha: senha,
+    };
   }
 
-  function clearData(){
+  function clearData() {
     setNome("");
     setEmail("");
     setLogin("");
     setSenha("");
   }
 
-  function setData(data){
+  function setData(data) {
     setNome(data.nome);
     setEmail(data.email);
     setLogin(data.login);
     setSenha(data.password);
   }
 
-  return <Cadastro 
-    columns={getColumns()}
-    addColumns={getAddColumns()}
-    table="tab_user"
-    getData={getData()}
-    clearData={clearData}
-    setDataProp={setData}
-    tabTitle="Lista de Usuários"
-  />;
+  return (
+    <Cadastro
+      columns={getColumns()}
+      addColumns={getAddColumns()}
+      table="tab_user"
+      getData={getData()}
+      clearData={clearData}
+      setDataProp={setData}
+      tabTitle="Lista de Usuários"
+    />
+  );
 }
