@@ -17,6 +17,14 @@ import * as serviceWorkerRegistration from "./serviceWorkerRegistration";
 import Permissoes from "./components/Permissoes";
 import Acompanhamento from "./components/Acompanhamento/Acompanhamento";
 import Validator from "./services/Validator";
+import {
+  FaGaugeHigh,
+  FaHouseUser,
+  FaUtensils,
+  FaChartLine,
+  FaLock,
+} from "react-icons/fa6";
+import { FaUserAlt } from "react-icons/fa";
 
 const root = ReactDOM.createRoot(document.getElementById("root")!);
 let pages = [];
@@ -34,42 +42,42 @@ pages.push({
           name: "Dashboard",
           path: "/dashboard",
           element: <Dashboard />,
-          icon: "fa-solid fa-gauge",
+          icon: <FaGaugeHigh />,
         },
         {
           navigable: true,
           name: "Usuários",
           path: "/users",
           element: <Usuarios />,
-          icon: "fa-solid fa-user",
+          icon: <FaUserAlt />,
         },
         {
           navigable: true,
           name: "Fazendas",
           path: "/fazendas",
           element: <Fazendas />,
-          icon: "fa-solid fa-house-user",
+          icon: <FaHouseUser />,
         },
         {
           navigable: true,
           name: "Rações",
           path: "/racoes",
           element: <Racoes />,
-          icon: "fa-solid fa-utensils",
+          icon: <FaUtensils />,
         },
         {
           navigable: true,
           name: "Acompanhar Bovinos",
           path: "/acompanhamento",
           element: <Acompanhamento />,
-          icon: "fa-solid fa-chart-line",
+          icon: <FaChartLine />,
         },
         {
           navigable: true,
           name: "Permissões",
           path: "/permissoes",
           element: <Permissoes />,
-          icon: "fa-solid fa-lock",
+          icon: <FaLock />,
         },
       ],
     },
