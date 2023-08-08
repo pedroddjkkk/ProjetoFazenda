@@ -49,4 +49,4 @@ try {
 
 dbUtils.tryConnection();
 
-dbUtils.sequelize.sync({alter: true})
+/* dbUtils.sequelize.sync({alter: true}) */
