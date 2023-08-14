@@ -1,0 +1,22 @@
+{
+  "background_color": "#ffffff",
+  "description": "Sistema de gerenciamento de bovinos Beefy.",
+  "dir": "ltr",
+  "display": "standalone",
+  "name": "Sistema Beefy",
+  "orientation": "any",
+  "scope": "/",
+  "short_name": "Beefy",
+  "start_url": "/",
+  "theme_color": "#50d4ff",
+  "categories": [],
+  "screenshots": [],
+  "icons": [
+    {
+      "src": "/logo.svg",
+      "type": "image/svg+xml"
+    }
+  ],
+  "shortcuts": [],
+  "lang": "pt"
+}
