@@ -1,0 +1,69 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body{
+  padding: 0;
+  margin: 0;
+  height: 100vh;
+}
+
+.cadastro-main-div{
+  width: 96%;
+  margin: 0 auto;
+}
+
+.add-div-group{
+  padding: 2% 2% 0 0.8% !important;
+}
+
+#content-wrapper{
+  min-height: calc(100vh - 56px);
+  margin-left: 14rem;
+}
+
+#nav-transition{
+  transition: margin-left 0.5s ease;
+}
+
+#content-wrapper.hidden{
+  margin-left: 0;
+}
+
+.edit-buttons{
+  display: flex;
+  justify-content: flex-end;
+}
+
+.btn-cadastro-edit{
+  margin: 0 0 30px 30px;
+}
+
+.hidden{
+  display: none !important;
+  left: -600px !important;
+}
+
+@media screen and (max-width: 767.98px) {
+  #content-wrapper{
+    min-height: calc(100vh - 56px);
+    margin-left: 6.5rem;
+  }
+}
+
+@media screen and (max-width: 575.98px) {
+  .edit-buttons{
+    display: flex !important;
+    justify-content: center;
+  }
+  .btn-cadastro-edit{
+    margin: 0 5px 5px 5px;
+  }
+}
+
+.small-footer{
+  margin-top: 20px !important;
+  height: 0px !important;
+}
+
+
