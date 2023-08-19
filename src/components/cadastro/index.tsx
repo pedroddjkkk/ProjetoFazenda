@@ -16,8 +16,9 @@ import { fadeIn } from "@/utils/fade";
 import exportToExcel from "@/utils/xlsx";
 import { TabContent } from "..";
 import axios from "axios";
+import { CadastroProps } from "@/types/cadastro";
 
-export default function Cadastro({
+export default function Cadastro<T extends Record<string, any>>({
   columns,
   api,
   addColumns,
@@ -29,7 +30,7 @@ export default function Cadastro({
   onTableRowClick,
   fetchData,
   tabTitle,
-}) {
+}: CadastroProps<T>) {
   const tabs = useTabs((state) => state.tabs);
   const selectedTab = useTabs((state) => state.selectedTab);
   const setTabs = useTabs((state) => state.setTabs);

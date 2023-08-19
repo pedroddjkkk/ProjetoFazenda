@@ -2,6 +2,7 @@
 import { Cadastro } from "@/components";
 import { TextField } from "@mui/material";
 import { useState } from "react";
+import { TableColumn } from "react-data-table-component";
 
 export default function Usuarios() {
   const [nome, setNome] = useState("");
@@ -9,19 +10,17 @@ export default function Usuarios() {
   const [login, setLogin] = useState("");
   const [senha, setSenha] = useState("");
 
-  function getColumns() {
-    return [
-      {
-        name: "Identificação",
-        selector: (row) => row.id,
-        sortable: true,
-        width: "10%",
-      },
-      { name: "Email", selector: (row) => row.email, sortable: true },
-      { name: "Login", selector: (row) => row.login },
-      { name: "Nome", selector: (row) => row.name },
-    ];
-  }
+  const columns = [
+    {
+      name: "Identificação",
+      selector: (row) => row.id,
+      sortable: true,
+      width: "10%",
+    },
+    { name: "Email", selector: (row) => row.email, sortable: true },
+    { name: "Login", selector: (row) => row.login },
+    { name: "Nome", selector: (row) => row.name },
+  ];
 
   function getAddColumns() {
     return (
@@ -86,7 +85,6 @@ export default function Usuarios() {
 
   function setData(data) {
     console.log(data);
-    
 
     setNome(data.name);
     setEmail(data.email);
@@ -96,7 +94,7 @@ export default function Usuarios() {
 
   return (
     <Cadastro
-      columns={getColumns()}
+      columns={columns}
       addColumns={getAddColumns()}
       api="api/user"
       getData={getData()}
