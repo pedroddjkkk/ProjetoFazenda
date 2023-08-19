@@ -15,10 +15,11 @@ import {
 import { fadeIn } from "@/utils/fade";
 import exportToExcel from "@/utils/xlsx";
 import { TabContent } from "..";
+import axios from "axios";
 
 export default function Cadastro({
   columns,
-  apiUrl,
+  api,
   addColumns,
   getData,
   clearData,
@@ -40,14 +41,16 @@ export default function Cadastro({
 
   const reloadData = async () => {
     if (fetchData) {
-      const ret = await fetchData();
+      const res = await fetchData();
       setProgressPending(false);
-      setData(ret.data);
+      setData(res.data);
       return;
     }
-    /* const ret = await api.get(table); */
+    const res = await axios.get(api);
+    console.log("responda", res);
+    
     setProgressPending(false);
-    setData([]);
+    setData(res.data);
   };
 
   useEffect(() => {
@@ -72,12 +75,12 @@ export default function Cadastro({
 
   async function onConfirm(e) {
     e.preventDefault();
-/*     const ret = await api.put(table, selectedId ? selectedId : "", getData);
-    if (ret.status === 200) {
+    const res = await axios.put(api + "/" + selectedId, getData);
+    if (res.status === 200) {
       toast.success("Salvo com sucesso!");
     } else {
       toast.error("Erro ao salvar!");
-    } */
+    }
     await reloadData();
     selectTab("Listar");
     clearData();
@@ -87,16 +90,16 @@ export default function Cadastro({
     async (e) => {
       setTabs([{ id: "Editar", name: "Editar", icon: <FaEdit /> }]);
       selectTab("Editar");
-      setSelectedId(e.id_pk);
+      setSelectedId(e.id);
       setDataProp(e);
     },
-    [dispatch, setSelectedId, setDataProp]
+    [setTabs, setSelectedId, setDataProp, selectTab]
   );
 
   const onTableRowClickMemo = useCallback(onTableRowClick, [onTableRowClick]);
 
   async function onDelete(e) {
-/*     await api.del(table, selectedId); */
+    await axios.delete(api + "/" + selectedId);
     await reloadData();
     setTabs([
       { id: "Listar", name: "Listar", icon: <FaList /> },
