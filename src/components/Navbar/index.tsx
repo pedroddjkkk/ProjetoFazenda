@@ -14,12 +14,10 @@ import { useUser } from "@/utils/stores";
 
 function Navbar({ children }: { children: React.ReactNode }) {
   const [navbarVisible, setNavbarVisible] = useState(true);
-  /*   const dispatch = useDispatch();*/
   const selectedUser = useUser((state) => state.user);
   const changeSelectedUser = useUser((state) => state.changeUser);
   const pathname = usePathname();
   const fadeInRef = useRef(null);
-  /*   const selectedTab = useSelector((state) => state.tabs.selectedTab); */
 
   useEffect(() => {
     fadeIn(fadeInRef);
