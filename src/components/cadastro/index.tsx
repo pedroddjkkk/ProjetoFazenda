@@ -2,13 +2,8 @@ import { Box, CircularProgress } from "@mui/material";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { Button } from "react-bootstrap";
 import DataTable from "react-data-table-component";
-import { useDispatch, useSelector } from "react-redux";
+import { useTabs } from "@/lib/stores";
 import { toast } from "react-toastify";
-import { newTabs, selectTab } from "../../redux/actions/tabsSlice";
-import api from "../../services/api";
-import exportToExcel from "../../utils/exportToExcel";
-import fadeIn from "../../utils/fadeIn";
-import TabContent from "../Tab/TabContent";
 import {
   FaCheck,
   FaEdit,
@@ -17,10 +12,13 @@ import {
   FaTimes,
   FaTrash,
 } from "react-icons/fa";
+import { fadeIn } from "@/utils/fade";
+import exportToExcel from "@/utils/xlsx";
+import { TabContent } from "..";
 
 export default function Cadastro({
   columns,
-  table,
+  apiUrl,
   addColumns,
   getData,
   clearData,
@@ -31,10 +29,11 @@ export default function Cadastro({
   fetchData,
   tabTitle,
 }) {
-  const dispatch = useDispatch();
-  const tabs = useSelector((state) => state.tabs.tabs);
-  const selectedTab = useSelector((state) => state.tabs.selectedTab);
-  const [data, setData] = useState("");
+  const tabs = useTabs((state) => state.tabs);
+  const selectedTab = useTabs((state) => state.selectedTab);
+  const setTabs = useTabs((state) => state.setTabs);
+  const selectTab = useTabs((state) => state.selectTab);
+  const [data, setData] = useState([]);
   const fadeInRef = useRef(null);
   const [progressPending, setProgressPending] = useState(true);
   const [selectedId, setSelectedId] = useState("");
@@ -46,24 +45,22 @@ export default function Cadastro({
       setData(ret.data);
       return;
     }
-    const ret = await api.get(table);
+    /* const ret = await api.get(table); */
     setProgressPending(false);
-    setData(ret.data);
+    setData([]);
   };
 
   useEffect(() => {
-    fadeIn(fadeInRef.current);
+    fadeIn(fadeInRef);
     reloadData();
   }, []);
 
   useEffect(() => {
-    dispatch(
-      newTabs([
-        { id: "Listar", name: "Listar", icon: <FaList /> },
-        { id: "Adicionar", name: "Adicionar", icon: <FaPlus /> },
-      ])
-    );
-    dispatch(selectTab("Listar"));
+    setTabs([
+      { id: "Listar", name: "Listar", icon: <FaList /> },
+      { id: "Adicionar", name: "Adicionar", icon: <FaPlus /> },
+    ]);
+    selectTab("Listar");
   }, [data]);
 
   useEffect(() => {
@@ -75,21 +72,21 @@ export default function Cadastro({
 
   async function onConfirm(e) {
     e.preventDefault();
-    const ret = await api.put(table, selectedId ? selectedId : "", getData);
+/*     const ret = await api.put(table, selectedId ? selectedId : "", getData);
     if (ret.status === 200) {
       toast.success("Salvo com sucesso!");
     } else {
       toast.error("Erro ao salvar!");
-    }
+    } */
     await reloadData();
-    dispatch(selectTab("Listar"));
+    selectTab("Listar");
     clearData();
   }
 
   const handleClickTable = useCallback(
     async (e) => {
-      dispatch(newTabs([{ id: "Editar", name: "Editar", icon: <FaEdit /> }]));
-      dispatch(selectTab("Editar"));
+      setTabs([{ id: "Editar", name: "Editar", icon: <FaEdit /> }]);
+      selectTab("Editar");
       setSelectedId(e.id_pk);
       setDataProp(e);
     },
@@ -99,15 +96,14 @@ export default function Cadastro({
   const onTableRowClickMemo = useCallback(onTableRowClick, [onTableRowClick]);
 
   async function onDelete(e) {
-    await api.del(table, selectedId);
+/*     await api.del(table, selectedId); */
     await reloadData();
-    dispatch(
-      newTabs([
-        { id: "Listar", name: "Listar", icon: <FaList /> },
-        { id: "Adicionar", name: "Adicionar", icon: <FaPlus /> },
-      ])
-    );
-    dispatch(selectTab("Listar"));
+    setTabs([
+      { id: "Listar", name: "Listar", icon: <FaList /> },
+      { id: "Adicionar", name: "Adicionar", icon: <FaPlus /> },
+    ]);
+
+    selectTab("Listar");
     clearData();
   }
 
@@ -137,7 +133,7 @@ export default function Cadastro({
                     role="tab"
                     data-bs-toggle="tab"
                     href="#tab-1"
-                    onClick={() => dispatch(selectTab(tab.id))}
+                    onClick={() => selectTab(tab.id)}
                   >
                     <div className="flex items-center">
                       {tab.icon && tab.icon}
@@ -158,7 +154,7 @@ export default function Cadastro({
           tabTitle ? tabTitle : "Lista de Registros"
         )}
         <div className="tab-content">
-          {getTabContentAdicionar(onConfirm, addColumns, dispatch)}
+          {getTabContentAdicionar(onConfirm, addColumns, selectTab)}
           <TabContent
             id="Editar"
             component={
@@ -178,18 +174,17 @@ export default function Cadastro({
                     <button
                       className="btn btn-danger btn-cadastro-edit"
                       onClick={() => {
-                        dispatch(
-                          newTabs([
-                            { id: "Listar", name: "Listar", icon: <FaList /> },
-                            {
-                              id: "Adicionar",
-                              name: "Adicionar",
-                              icon: <FaPlus />,
-                            },
-                          ])
-                        );
+                        setTabs([
+                          { id: "Listar", name: "Listar", icon: <FaList /> },
+                          {
+                            id: "Adicionar",
+                            name: "Adicionar",
+                            icon: <FaPlus />,
+                          },
+                        ]);
+
                         clearData();
-                        dispatch(selectTab("Listar"));
+                        selectTab("Listar");
                       }}
                     >
                       <div className="flex items-center">
@@ -259,7 +254,7 @@ export function getTabContentListar(
             highlightOnHover
             pointerOnHover
             progressPending={progressPending}
-            progresssComponent={
+            progressComponent={
               <div style={{ padding: "40px 0 40px 0" }}>
                 <CircularProgress />
               </div>
@@ -282,7 +277,7 @@ export function getTabContentListar(
 export function getTabContentAdicionar(
   onConfirm,
   addColumns,
-  dispatch,
+  selectTab,
   onCancel,
   tabName
 ) {
@@ -308,9 +303,7 @@ export function getTabContentAdicionar(
               <button
                 className="btn btn-danger"
                 style={{ margin: "0 30px 30px 0px" }}
-                onClick={
-                  onCancel ? onCancel : () => dispatch(selectTab("Listar"))
-                }
+                onClick={onCancel ? onCancel : () => selectTab("Listar")}
               >
                 <div className="flex items-center">
                   <FaTimes />

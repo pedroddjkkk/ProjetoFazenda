@@ -8,9 +8,9 @@ import { fadeIn } from "@/utils/fade";
 import { FaTractor, FaSignOutAlt, FaBars } from "react-icons/fa";
 import Script from "next/script";
 import Link from "next/link";
-import { pages } from "@/utils/pages";
+import { pages } from "@/lib/pages";
 import { usePathname } from "next/navigation";
-import { useUser } from "@/utils/stores";
+import { useUser } from "@/lib/stores";
 
 function Navbar({ children }: { children: React.ReactNode }) {
   const [navbarVisible, setNavbarVisible] = useState(true);

@@ -1,7 +1,4 @@
-import {
-  FaList,
-  FaPlus,
-} from "react-icons/fa";
+import { FaList, FaPlus } from "react-icons/fa";
 import { LoggedUser } from "@/types/user";
 import { Tab } from "@/types/tabs";
 import { create } from "zustand";
@@ -14,7 +11,7 @@ interface UserStore {
 interface TabsStore {
   tabs: Tab[];
   selectedTab: string;
-  changeTabs: (tabs: Tab[]) => void;
+  setTabs: (tabs: Tab[]) => void;
   selectTab: (tab: string) => void;
 }
 
@@ -35,7 +32,7 @@ export const useTabs = create<TabsStore>((set) => ({
     { id: "Adicionar", name: "Adicionar", icon: FaPlus },
   ],
   selectedTab: "Listar",
-  changeTabs: (tabs) => set((state) => ({ tabs: (state.tabs = tabs) })),
+  setTabs: (tabs) => set((state) => ({ tabs: (state.tabs = tabs) })),
   selectTab: (tab) =>
     set((state) => ({ selectedTab: (state.selectedTab = tab) })),
 }));
