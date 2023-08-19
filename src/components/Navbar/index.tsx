@@ -10,11 +10,13 @@ import Script from "next/script";
 import Link from "next/link";
 import { pages } from "@/utils/pages";
 import { usePathname } from "next/navigation";
+import { useUser } from "@/utils/stores";
 
 function Navbar({ children }: { children: React.ReactNode }) {
   const [navbarVisible, setNavbarVisible] = useState(true);
   /*   const dispatch = useDispatch();*/
-  const selectedUser = use
+  const selectedUser = useUser((state) => state.user);
+  const changeSelectedUser = useUser((state) => state.changeUser);
   const pathname = usePathname();
   const fadeInRef = useRef(null);
   /*   const selectedTab = useSelector((state) => state.tabs.selectedTab); */
@@ -87,10 +89,13 @@ function Navbar({ children }: { children: React.ReactNode }) {
                 </form>
                 <div className="column" style={{ textAlign: "center" }}>
                   <span style={{ fontSize: "16px" }}>
-                    {/* {selectedUser && selectedUser.nome} */}
-                    Pedro Valério
+                    {selectedUser && selectedUser.name}
                   </span>
-                  <Link className="nav-link" href="/">
+                  <Link
+                    className="nav-link"
+                    href="/"
+                    onClick={() => changeSelectedUser(null)}
+                  >
                     <div className="flex items-center">
                       <FaSignOutAlt size={16} />
                       <span className="ml-2">Sair</span>
