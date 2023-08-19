@@ -10,6 +10,7 @@ import axios from "axios";
 function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState(false);
   const changeUser = useUser((state) => state.changeUser);
   const router = useRouter();
 
@@ -20,11 +21,15 @@ function Login() {
       email: email,
       password: password,
     };
-
-    const response = await axios.post("/api/login", data);
-
-    console.log("response", response);
-    
+    try {
+      const response = await axios.post("/api/login", data);
+      if (response.status === 200) {
+        localStorage.setItem("user", JSON.stringify(response.data));
+        router.push("/users");
+      }
+    } catch (error) {
+      setError(true);
+    }
   };
 
   return (
@@ -66,9 +71,7 @@ function Login() {
                             id="exampleInputPassword"
                             placeholder="Senha"
                             name="password"
-                            onChange={(e) =>
-                              setPassword(e.target.value)
-                            }
+                            onChange={(e) => setPassword(e.target.value)}
                             value={password}
                           />
                         </div>
@@ -78,6 +81,11 @@ function Login() {
                         <button className="btn btn-primary d-block btn-user w-100">
                           Login
                         </button>
+                        {error && (
+                          <div className="alert alert-danger mt-2" role="alert">
+                            Email ou senha incorretos!
+                          </div>
+                        )}
                         <hr />
                         <a
                           className="btn btn-primary d-block btn-google btn-user w-100 mb-2"

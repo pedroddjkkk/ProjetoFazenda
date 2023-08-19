@@ -9,19 +9,30 @@ import { FaTractor, FaSignOutAlt, FaBars } from "react-icons/fa";
 import Script from "next/script";
 import Link from "next/link";
 import { pages } from "@/lib/pages";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { useUser } from "@/lib/stores";
+import axios from "axios";
 
 function Navbar({ children }: { children: React.ReactNode }) {
   const [navbarVisible, setNavbarVisible] = useState(true);
   const selectedUser = useUser((state) => state.user);
+  const changeUser = useUser((state) => state.changeUser);
   const changeSelectedUser = useUser((state) => state.changeUser);
+  const router = useRouter();
   const pathname = usePathname();
   const fadeInRef = useRef(null);
 
   useEffect(() => {
     fadeIn(fadeInRef);
   }, [fadeInRef]);
+
+  useEffect(() => {
+    const user = localStorage.getItem("user");
+
+    if (!user) return router.push("/login");
+
+    changeUser(JSON.parse(user));
+  }, [changeUser, router]);
 
   return (
     <div id="page-top">
@@ -91,8 +102,11 @@ function Navbar({ children }: { children: React.ReactNode }) {
                   </span>
                   <Link
                     className="nav-link"
-                    href="/"
-                    onClick={() => changeSelectedUser(null)}
+                    href="/login"
+                    onClick={async () => {
+                      await axios.delete("/api/logout");
+                      localStorage.removeItem("user");
+                    }}
                   >
                     <div className="flex items-center">
                       <FaSignOutAlt size={16} />

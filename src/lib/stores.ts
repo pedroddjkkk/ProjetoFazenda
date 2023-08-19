@@ -16,13 +16,7 @@ interface TabsStore {
 }
 
 export const useUser = create<UserStore>((set) => ({
-  user: {
-    email: "",
-    login: "",
-    id: 0,
-    token: "",
-    name: "Pedro Valério",
-  },
+  user: null,
   changeUser: (user) => set((state) => ({ user: (state.user = user) })),
 }));
 
