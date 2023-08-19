@@ -4,10 +4,10 @@ import { TextField } from "@mui/material";
 import { useState } from "react";
 
 export default function Usuarios() {
-  const [nome, setNome] = useState();
-  const [email, setEmail] = useState();
-  const [login, setLogin] = useState();
-  const [senha, setSenha] = useState();
+  const [nome, setNome] = useState("");
+  const [email, setEmail] = useState("");
+  const [login, setLogin] = useState("");
+  const [senha, setSenha] = useState("");
 
   function getColumns() {
     return [
@@ -85,6 +85,9 @@ export default function Usuarios() {
   }
 
   function setData(data) {
+    console.log(data);
+    
+
     setNome(data.name);
     setEmail(data.email);
     setLogin(data.login);

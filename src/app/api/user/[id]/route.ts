@@ -17,3 +17,16 @@ export async function PUT(
 
   return Succes("User updated successfully");
 }
+
+export async function DELETE(
+  req: NextRequest,
+  context: { params: { id: string } }
+) {
+  const deletedUser = await prisma.user.delete({
+    where: {
+      id: Number(context.params.id),
+    },
+  });
+
+  return Succes("User deleted successfully");
+}

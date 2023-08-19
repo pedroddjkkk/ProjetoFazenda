@@ -11,7 +11,8 @@ export async function POST(req: NextRequest, res: NextResponse) {
       data: {
         name: body.name,
         email: body.email,
-        password: await bcrypt.hash(body.password, 10),
+        password: body.password,
+        login: body.login,
       },
     });
   } catch (error: any) {
@@ -29,6 +30,8 @@ export async function GET() {
       id: true,
       name: true,
       email: true,
+      login: true,
+      password: true
     },
   });
 

@@ -48,7 +48,7 @@ export default function Cadastro({
     }
     const res = await axios.get(api);
     console.log("responda", res);
-    
+
     setProgressPending(false);
     setData(res.data);
   };
@@ -75,7 +75,12 @@ export default function Cadastro({
 
   async function onConfirm(e) {
     e.preventDefault();
-    const res = await axios.put(api + "/" + selectedId, getData);
+    let res;
+    if (selectedId) {
+      res = await axios.put(api + "/" + selectedId, getData);
+    } else {
+      res = await axios.post(api, getData);
+    }
     if (res.status === 200) {
       toast.success("Salvo com sucesso!");
     } else {
