@@ -13,8 +13,8 @@ import { usePathname } from "next/navigation";
 
 function Navbar({ children }: { children: React.ReactNode }) {
   const [navbarVisible, setNavbarVisible] = useState(true);
-  /*   const dispatch = useDispatch();
-  const selectedUser = useSelector((state) => state.user.user); */
+  /*   const dispatch = useDispatch();*/
+  const selectedUser = use
   const pathname = usePathname();
   const fadeInRef = useRef(null);
   /*   const selectedTab = useSelector((state) => state.tabs.selectedTab); */
