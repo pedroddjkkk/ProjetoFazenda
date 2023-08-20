@@ -1,14 +1,18 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
-import { verifyJwt } from "./lib/jwt";
+import * as jose from "jose";
 
 // This function can be marked `async` if using `await` inside
 export async function middleware(request: NextRequest) {
   const token = request.cookies.get("accesToken");
   const url = request.nextUrl.clone();
+  const secret_key = new TextEncoder().encode(process.env.JWT_SECRET);
   url.pathname = "/login";
+
+  if (!token) return NextResponse.redirect(url);
+
   try {
-    const validated = await verifyJwt(token?.value);
+    const validated = await jose.jwtVerify(token?.value, secret_key!);
 
     if (!validated?.payload) {
       return NextResponse.redirect(url);
