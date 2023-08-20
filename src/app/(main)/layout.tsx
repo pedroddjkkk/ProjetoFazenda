@@ -17,12 +17,6 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const cookieStore = cookies();
-  const token = cookieStore.get('accesToken');
-  const validated = verifyJwt(token?.value);
-
-  if(!validated) redirect('/login');
-
   return (
     <html lang="pt-br">
       <body className={inter.className}>
