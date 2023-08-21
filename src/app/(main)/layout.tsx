@@ -10,6 +10,7 @@ import { verifyJwt } from "@/lib/jwt";
 export const metadata: Metadata = {
   title: "Beefy",
   description: "Sistema de gerenciamento de bovinos",
+  manifest: "/manifest.json",
 };
 
 export default function RootLayout({

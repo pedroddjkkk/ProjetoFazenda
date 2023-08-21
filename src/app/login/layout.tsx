@@ -3,6 +3,7 @@ import { cookies } from "next/headers";
 export const metadata = {
   title: "Beefy",
   description: "Sistema de gerenciamento de bovinos",
+  manifest: "/manifest.json",
 };
 
 export default function RootLayout({
