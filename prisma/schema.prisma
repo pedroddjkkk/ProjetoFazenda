@@ -17,3 +17,11 @@ model User {
   password String
   email    String  @unique
 }
+
+model Fazenda {
+  id       Int    @id @default(autoincrement())
+  name     String
+  endereco String
+  telefone String
+  cnpj     String
+}

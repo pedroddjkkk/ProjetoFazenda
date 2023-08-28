@@ -1,9 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
-import * as bcrypt from "bcrypt";
-import { BadRequest, Succes, Unauthorized } from "@/lib/responses";
+import { BadRequest, Succes } from "@/lib/responses";
 import { prisma } from "@/lib/db/prisma";
 
-export async function POST(req: NextRequest, res: NextResponse) {
+export async function POST(req: NextRequest) {
   const body = await req.json();
 
   try {
