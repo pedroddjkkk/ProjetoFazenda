@@ -16,7 +16,7 @@ import { fadeIn } from "@/utils/fade";
 import exportToExcel from "@/utils/xlsx";
 import { TabContent } from "..";
 import axios from "axios";
-import { CadastroProps } from "@/types/cadastro";
+import { CadastroProps, getTabContentAdicionarProps } from "@/types/cadastro";
 
 export default function Cadastro<T extends Record<string, any>>({
   columns,
@@ -38,7 +38,7 @@ export default function Cadastro<T extends Record<string, any>>({
   const [data, setData] = useState([]);
   const fadeInRef = useRef(null);
   const [progressPending, setProgressPending] = useState(true);
-  const [selectedId, setSelectedId] = useState("");
+  const [selectedId, setSelectedId] = useState<number | null>(null);
 
   const reloadData = async () => {
     if (fetchData) {
@@ -74,7 +74,7 @@ export default function Cadastro<T extends Record<string, any>>({
     }
   }, [selectedTab]);
 
-  async function onConfirm(e) {
+  async function onConfirm(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     let res;
     if (selectedId) {
@@ -102,9 +102,11 @@ export default function Cadastro<T extends Record<string, any>>({
     [setTabs, setSelectedId, setDataProp, selectTab]
   );
 
-  const onTableRowClickMemo = useCallback(onTableRowClick, [onTableRowClick]);
+  const onTableRowClickMemo = onTableRowClick
+    ? useCallback(onTableRowClick, [onTableRowClick])
+    : null;
 
-  async function onDelete(e) {
+  async function onDelete() {
     await axios.delete(api + "/" + selectedId);
     await reloadData();
     setTabs([
@@ -153,17 +155,19 @@ export default function Cadastro<T extends Record<string, any>>({
               );
             })}
         </ul>
-        {getTabContentListar(
+        {getTabContentListar({
           data,
           columns,
-          onTableRowClickMemo ? onTableRowClickMemo : handleClickTable,
+          handleClickTable: onTableRowClickMemo
+            ? onTableRowClickMemo
+            : handleClickTable,
           progressPending,
           actionsMemo,
-          "Listar",
-          tabTitle ? tabTitle : "Lista de Registros"
-        )}
+          tabName: "Listar",
+          tabTitle: tabTitle ? tabTitle : "Lista de Registros",
+        })}
         <div className="tab-content">
-          {getTabContentAdicionar(onConfirm, addColumns, selectTab)}
+          {getTabContentAdicionar({ onConfirm, addColumns, selectTab })}
           <TabContent
             id="Editar"
             component={
@@ -232,15 +236,15 @@ export default function Cadastro<T extends Record<string, any>>({
   );
 }
 
-export function getTabContentListar(
+export function getTabContentListar({
   data,
   columns,
   handleClickTable,
   progressPending,
   actionsMemo,
   tabName,
-  tabTitle
-) {
+  tabTitle,
+}: any) {
   return (
     <TabContent
       id={tabName ? tabName : "Listar"}
@@ -283,13 +287,13 @@ export function getTabContentListar(
   );
 }
 
-export function getTabContentAdicionar(
+export function getTabContentAdicionar({
   onConfirm,
   addColumns,
   selectTab,
   onCancel,
-  tabName
-) {
+  tabName,
+}: getTabContentAdicionarProps) {
   return (
     <TabContent
       id={tabName ? tabName : "Adicionar"}

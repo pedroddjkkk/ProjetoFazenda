@@ -1,4 +1,4 @@
-import { Prisma } from "@prisma/client";
+import { AxiosPromise } from "axios";
 import { TableColumn } from "react-data-table-component";
 
 export type CadastroProps<T extends Record<string, any>> = {
@@ -9,4 +9,17 @@ export type CadastroProps<T extends Record<string, any>> = {
   clearData: () => void;
   setDataProp: (data: T) => void;
   tabTitle: string;
+  editBottom?: React.ReactNode;
+  propsNewTabs?: React.ReactNode;
+  onTableRowClick?: ((row: T, e: MouseEvent) => void)
+  fetchData?: () => any;
 };
+
+export type getTabContentAdicionarProps = {
+  onConfirm: (event: React.FormEvent<HTMLFormElement>) => void,
+  addColumns: React.ReactNode,
+  selectTab: (name: string) => void,
+  onCancel?: () => void,
+  tabName?: string
+}
+
