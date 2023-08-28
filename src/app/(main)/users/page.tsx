@@ -1,6 +1,7 @@
 "use client";
 import { Cadastro } from "@/components";
 import { TextField } from "@mui/material";
+import { Prisma } from "@prisma/client";
 import { useState } from "react";
 import { TableColumn } from "react-data-table-component";
 
@@ -10,7 +11,7 @@ export default function Usuarios() {
   const [login, setLogin] = useState("");
   const [senha, setSenha] = useState("");
 
-  const columns = [
+  const columns: TableColumn<Prisma.UserGetPayload<{}>>[] = [
     {
       name: "Identificação",
       selector: (row) => row.id,
@@ -18,7 +19,7 @@ export default function Usuarios() {
       width: "10%",
     },
     { name: "Email", selector: (row) => row.email, sortable: true },
-    { name: "Login", selector: (row) => row.login },
+    { name: "Login", selector: (row) => row.login ?? "" },
     { name: "Nome", selector: (row) => row.name },
   ];
 
@@ -82,24 +83,20 @@ export default function Usuarios() {
     setLogin("");
     setSenha("");
   }
-
-  function setData(data) {
-    console.log(data);
-
-    setNome(data.name);
-    setEmail(data.email);
-    setLogin(data.login);
-    setSenha(data.password);
-  }
-
+  
   return (
-    <Cadastro
+    <Cadastro<Prisma.UserGetPayload<{}>>
       columns={columns}
       addColumns={getAddColumns()}
       api="api/user"
       getData={getData()}
       clearData={clearData}
-      setDataProp={setData}
+      setDataProp={(data) => {
+        setNome(data.name);
+        setEmail(data.email);
+        setLogin(data.login ?? "");
+        setSenha(data.password);
+      }}
       tabTitle="Lista de Usuários"
     />
   );
