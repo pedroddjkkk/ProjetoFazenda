@@ -1,11 +1,11 @@
+"use client";
+
 import { TextField } from "@mui/material";
 import { useState } from "react";
-import Cadastro from "../Cadastro/Cadastro";
-import Lotes from "./Lotes";
-import { useDispatch } from "react-redux";
-import { newTabs } from "../../redux/actions/tabsSlice";
+import { Cadastro } from "@/components";
 import { Prisma } from "@prisma/client";
 import { TableColumn } from "react-data-table-component";
+import { useTabs } from "@/lib/stores";
 
 export default function Fazendas() {
   const [nome, setNome] = useState("");
@@ -13,7 +13,7 @@ export default function Fazendas() {
   const [endereco, setEndereco] = useState("");
   const [telefone, setTelefone] = useState("");
   const [id_fazenda, setIdFazenda] = useState("");
-  const dispatch = useDispatch();
+  const newTabs = useTabs((state) => state.setTabs);
 
   function getColumns(): TableColumn<Prisma.FazendaGetPayload<{}>>[] {
     return [
@@ -72,7 +72,7 @@ export default function Fazendas() {
 
   function getData() {
     return {
-      nome: nome,
+      name: nome,
       cnpj: cnpj,
       endereco: endereco,
       telefone: telefone,
@@ -95,29 +95,27 @@ export default function Fazendas() {
 
   function onTableRowClick(e) {
     setIdFazenda(e.id_pk);
-    dispatch(
-      newTabs([
-        { id: "Listar", name: "Listar", icon: "fa-solid fa-list" },
-        { id: "Adicionar", name: "Adicionar", icon: "fa-solid fa-plus" },
-        { id: "Editar", name: "Editar", icon: "fa-solid fa-edit" },
-      ])
-    );
+    newTabs([
+      { id: "Listar", name: "Listar", icon: "fa-solid fa-list" },
+      { id: "Adicionar", name: "Adicionar", icon: "fa-solid fa-plus" },
+      { id: "Editar", name: "Editar", icon: "fa-solid fa-edit" },
+    ]);
   }
 
-  if (id_fazenda) {
+  /*   if (id_fazenda) {
     return <Lotes fk={id_fazenda} />;
-  } else {
-    return (
-      <Cadastro<Prisma.FazendaGetPayload<{}>>
-        columns={getColumns()}
-        addColumns={getAddColumns()}
-        api="api/fazenda"
-        getData={getData()}
-        clearData={clearData}
-        setDataProp={setData}
-        tabTitle="Lista de Fazendas"
-        onTableRowClick={onTableRowClick}
-      />
-    );
-  }
+  } else { */
+  return (
+    <Cadastro<Prisma.FazendaGetPayload<{}>>
+      columns={getColumns()}
+      addColumns={getAddColumns()}
+      api="api/fazenda"
+      getData={getData()}
+      clearData={clearData}
+      setDataProp={setData}
+      tabTitle="Lista de Fazendas"
+      onTableRowClick={onTableRowClick}
+    />
+  );
+  /* } */
 }
