@@ -6,6 +6,8 @@ import { Cadastro } from "@/components";
 import { Prisma } from "@prisma/client";
 import { TableColumn } from "react-data-table-component";
 import { useTabs } from "@/lib/stores";
+import Lotes from "@/components/lotes";
+import { FaEdit, FaList, FaPlus } from "react-icons/fa";
 
 export default function Fazendas() {
   const [nome, setNome] = useState("");
@@ -94,28 +96,28 @@ export default function Fazendas() {
   }
 
   function onTableRowClick(e) {
-    setIdFazenda(e.id_pk);
+    setIdFazenda(e.id);
     newTabs([
-      { id: "Listar", name: "Listar", icon: "fa-solid fa-list" },
-      { id: "Adicionar", name: "Adicionar", icon: "fa-solid fa-plus" },
-      { id: "Editar", name: "Editar", icon: "fa-solid fa-edit" },
+      { id: "Listar", name: "Listar", icon: <FaList /> },
+      { id: "Adicionar", name: "Adicionar", icon: <FaPlus /> },
+      { id: "Editar", name: "Editar", icon: <FaEdit /> },
     ]);
   }
 
-  /*   if (id_fazenda) {
-    return <Lotes fk={id_fazenda} />;
-  } else { */
-  return (
-    <Cadastro<Prisma.FazendaGetPayload<{}>>
-      columns={getColumns()}
-      addColumns={getAddColumns()}
-      api="api/fazenda"
-      getData={getData()}
-      clearData={clearData}
-      setDataProp={setData}
-      tabTitle="Lista de Fazendas"
-      onTableRowClick={onTableRowClick}
-    />
-  );
-  /* } */
+  if (id_fazenda) {
+    return <Lotes fk={Number(id_fazenda)} />;
+  } else {
+    return (
+      <Cadastro<Prisma.FazendaGetPayload<{}>>
+        columns={getColumns()}
+        addColumns={getAddColumns()}
+        api="api/fazenda"
+        getData={getData()}
+        clearData={clearData}
+        setDataProp={setData}
+        tabTitle="Lista de Fazendas"
+        onTableRowClick={onTableRowClick}
+      />
+    );
+  }
 }

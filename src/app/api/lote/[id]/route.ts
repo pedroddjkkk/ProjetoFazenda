@@ -1,6 +1,6 @@
 import { prisma } from "@/lib/db/prisma";
 import { Succes } from "@/lib/responses";
-import { NextRequest } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 
 export async function PUT(
   req: NextRequest,
@@ -29,4 +29,14 @@ export async function DELETE(
   });
 
   return Succes(deletedLote);
+}
+
+export async function GET(_: NextRequest, context: { params: { id: string } }) {
+  const lote = await prisma.lote.findMany({
+    where: {
+      fazendaId: Number(context.params.id),
+    },
+  })
+
+  return NextResponse.json(lote, { status: 200 })
 }

@@ -24,9 +24,12 @@ model Fazenda {
   endereco String
   telefone String
   cnpj     String
+  Lote     Lote[]
 }
 
 model Lote {
-  id   Int    @id @default(autoincrement())
-  name String
+  id        Int     @id @default(autoincrement())
+  name      String
+  fazendaId Int
+  Fazenda   Fazenda @relation(fields: [fazendaId], references: [id])
 }
