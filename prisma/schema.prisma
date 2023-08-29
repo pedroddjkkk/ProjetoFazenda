@@ -25,3 +25,8 @@ model Fazenda {
   telefone String
   cnpj     String
 }
+
+model Lote {
+  id   Int    @id @default(autoincrement())
+  name String
+}
