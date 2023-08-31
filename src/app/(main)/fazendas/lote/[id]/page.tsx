@@ -15,7 +15,12 @@ export default async function LotePage(context: { params: { id: string } }) {
     },
   });
 
+  async function createLote(formData: FormData) {
+    "use server";
+    console.log("formData", formData);
+  }
+
   if (!fazenda) return BadRequest("Fazenda não encontrada");
 
-  return <Lotes lotes={lotes} fazenda={fazenda} />;
+  return <Lotes lotes={lotes} fazenda={fazenda} createAction={createLote} />;
 }

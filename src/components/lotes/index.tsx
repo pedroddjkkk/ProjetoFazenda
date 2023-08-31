@@ -9,9 +9,11 @@ import axios from "axios";
 export default function Lotes({
   lotes,
   fazenda,
+  createAction,
 }: {
   lotes: Prisma.LoteGetPayload<{}>[];
   fazenda: Prisma.FazendaGetPayload<{}>;
+  createAction: any;
 }) {
   const [nome, setNome] = useState("");
   const [idLote, setIdLote] = useState("");
@@ -25,15 +27,19 @@ export default function Lotes({
     return (
       <div className="add-div-group">
         <div className="row">
-          <TextField
-            label="Nome do Lote"
-            id="standard-start-adornment"
-            className="col-sm-3"
-            style={{ marginRight: "40px" }}
-            value={nome}
-            onChange={(e) => setNome(e.target.value)}
-            variant="standard"
-          />
+          <form action={createAction}>
+            <TextField
+              label="Nome do Lote"
+              id="standard-start-adornment"
+              className="col-sm-3"
+              style={{ marginRight: "40px" }}
+              value={nome}
+              name="name"
+              onChange={(e) => setNome(e.target.value)}
+              variant="standard"
+            />
+            <button type="submit">asdsad</button>
+          </form>
         </div>
       </div>
     );
