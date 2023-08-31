@@ -13,6 +13,7 @@ export type CadastroProps<T extends Record<string, any>> = {
   propsNewTabs?: React.ReactNode;
   onTableRowClick?: ((row: T, e: MouseEvent) => void)
   fetchData?: () => any;
+  initialData?: T[];
 };
 
 export type getTabContentAdicionarProps = {

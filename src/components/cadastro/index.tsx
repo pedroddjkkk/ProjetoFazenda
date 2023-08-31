@@ -30,6 +30,7 @@ export default function Cadastro<T extends Record<string, any>>({
   onTableRowClick,
   fetchData,
   tabTitle,
+  initialData,
 }: CadastroProps<T>) {
   const tabs = useTabs((state) => state.tabs);
   const selectedTab = useTabs((state) => state.selectedTab);
@@ -48,7 +49,6 @@ export default function Cadastro<T extends Record<string, any>>({
       return;
     }
     const res = await axios.get(api);
-    console.log("responda", res);
 
     setProgressPending(false);
     setData(res.data);
@@ -156,7 +156,7 @@ export default function Cadastro<T extends Record<string, any>>({
             })}
         </ul>
         {getTabContentListar({
-          data,
+          data: initialData ? initialData : data,
           columns,
           handleClickTable: onTableRowClickMemo
             ? onTableRowClickMemo
