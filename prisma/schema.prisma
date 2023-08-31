@@ -32,12 +32,12 @@ model Lote {
   name      String
   fazendaId Int
   Fazenda   Fazenda @relation(fields: [fazendaId], references: [id])
-  Racao     Racao[]
+  racaoId   Int?
+  Racao     Racao?  @relation(fields: [racaoId], references: [id])
 }
 
 model Racao {
   id     Int    @id @default(autoincrement())
   name   String
-  loteId Int
-  Lote   Lote   @relation(fields: [loteId], references: [id])
+  Lotes  Lote[]
 }

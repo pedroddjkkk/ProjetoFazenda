@@ -2,14 +2,16 @@
 import { TextField } from "@mui/material";
 import { useState } from "react";
 import { Cadastro } from "@/components";
+import { Prisma } from "@prisma/client";
+import { TableColumn } from "react-data-table-component";
 
 export default function Racoes() {
-  const [nome, setNome] = useState();
+  const [name, setName] = useState("");
 
-  function getColumns() {
+  function getColumns(): TableColumn<Prisma.RacaoGetPayload<{}>>[] {
     return [
-      { name: "Identificação", selector: (row) => row.id_pk, width: "10%" },
-      { name: "Nome", selector: (row) => row.nome },
+      { name: "Identificação", selector: (row) => row.id, width: "10%" },
+      { name: "Nome", selector: (row) => row.name },
     ];
   }
 
@@ -22,8 +24,8 @@ export default function Racoes() {
             id="standard-start-adornment"
             className="col-sm-3"
             style={{ marginRight: "40px" }}
-            value={nome}
-            onChange={(e) => setNome(e.target.value)}
+            value={name}
+            onChange={(e) => setName(e.target.value)}
             variant="standard"
           />
         </div>
@@ -33,22 +35,22 @@ export default function Racoes() {
 
   function getData() {
     return {
-      nome: nome,
+      name: name,
     };
   }
 
   function clearData() {
-    setNome("");
+    setName("");
   }
 
   function setData(data) {
-    setNome(data.nome);
+    setName(data.name);
   }
 
   return (
-    <Cadastro
+    <Cadastro<Prisma.RacaoGetPayload<{}>>
       columns={getColumns()}
-      table="tab_racoes"
+      api="/api/racao"
       addColumns={getAddColumns()}
       getData={getData()}
       clearData={clearData}
