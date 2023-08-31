@@ -5,7 +5,7 @@ import { TableColumn } from "react-data-table-component";
 import { Prisma } from "@prisma/client";
 import axios from "axios";
 
-export default function Lotes(props: { fk: number }) {
+export default function Lotes(props: { fazendaId: number }) {
   const [nome, setNome] = useState("");
   const [idLote, setIdLote] = useState("");
 
@@ -35,7 +35,7 @@ export default function Lotes(props: { fk: number }) {
   function getData() {
     return {
       name: nome,
-      fazendaId: props.fk,
+      fazendaId: props.fazendaId,
     };
   }
 
@@ -48,7 +48,7 @@ export default function Lotes(props: { fk: number }) {
   }
 
   async function fetchData() {
-    const ret = await axios.get(`/api/lote/${props.fk}`);
+    const ret = await axios.get(`/api/lote/${props.fazendaId}`);
     return ret;
   }
 

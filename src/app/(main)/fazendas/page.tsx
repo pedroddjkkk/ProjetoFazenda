@@ -105,7 +105,7 @@ export default function Fazendas() {
   }
 
   if (id_fazenda) {
-    return <Lotes fk={Number(id_fazenda)} />;
+    return <Lotes fazendaId={Number(id_fazenda)} />;
   } else {
     return (
       <Cadastro<Prisma.FazendaGetPayload<{}>>
