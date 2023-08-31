@@ -18,19 +18,15 @@ export default function Lotes(props: { fk: number }) {
     return (
       <div className="add-div-group">
         <div className="row">
-          <form action={createAction}>
-            <TextField
-              label="Nome do Lote"
-              id="standard-start-adornment"
-              className="col-sm-3"
-              style={{ marginRight: "40px" }}
-              value={nome}
-              name="name"
-              onChange={(e) => setNome(e.target.value)}
-              variant="standard"
-            />
-            <button type="submit">asdsad</button>
-          </form>
+          <TextField
+            label="Nome do Lote"
+            id="standard-start-adornment"
+            className="col-sm-3"
+            style={{ marginRight: "40px" }}
+            value={nome}
+            onChange={(e) => setNome(e.target.value)}
+            variant="standard"
+          />
         </div>
       </div>
     );

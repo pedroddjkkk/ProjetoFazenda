@@ -35,17 +35,12 @@ export default function Cadastro<T extends Record<string, any>>({
   const selectedTab = useTabs((state) => state.selectedTab);
   const setTabs = useTabs((state) => state.setTabs);
   const selectTab = useTabs((state) => state.selectTab);
-  const [data, setData] = useState<T[]>([]);
+  const [data, setData] = useState([]);
   const fadeInRef = useRef(null);
   const [progressPending, setProgressPending] = useState(true);
   const [selectedId, setSelectedId] = useState<number | null>(null);
 
   const reloadData = async () => {
-    if (initialData) {
-      setData(initialData);
-      setProgressPending(false);
-      return;
-    }
     if (fetchData) {
       const res = await fetchData();
       setProgressPending(false);
@@ -62,7 +57,7 @@ export default function Cadastro<T extends Record<string, any>>({
   useEffect(() => {
     fadeIn(fadeInRef);
     reloadData();
-  }, [fadeInRef]);
+  }, []);
 
   useEffect(() => {
     setTabs([
@@ -107,7 +102,9 @@ export default function Cadastro<T extends Record<string, any>>({
     [setTabs, setSelectedId, setDataProp, selectTab]
   );
 
-  const onTableRowClickMemo = useCallback(onTableRowClick, [onTableRowClick]);
+  const onTableRowClickMemo = onTableRowClick
+    ? useCallback(onTableRowClick, [onTableRowClick])
+    : null;
 
   async function onDelete() {
     await axios.delete(api + "/" + selectedId);
@@ -161,7 +158,7 @@ export default function Cadastro<T extends Record<string, any>>({
         {getTabContentListar({
           data,
           columns,
-          handleClickTable: onTableRowClick
+          handleClickTable: onTableRowClickMemo
             ? onTableRowClickMemo
             : handleClickTable,
           progressPending,
