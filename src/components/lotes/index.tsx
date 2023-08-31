@@ -1,4 +1,3 @@
-"use client";
 import { TextField } from "@mui/material";
 import { Cadastro } from "..";
 import { useState } from "react";
@@ -6,15 +5,7 @@ import { TableColumn } from "react-data-table-component";
 import { Prisma } from "@prisma/client";
 import axios from "axios";
 
-export default function Lotes({
-  lotes,
-  fazenda,
-  createAction,
-}: {
-  lotes: Prisma.LoteGetPayload<{}>[];
-  fazenda: Prisma.FazendaGetPayload<{}>;
-  createAction: any;
-}) {
+export default function Lotes(props: { fk: number }) {
   const [nome, setNome] = useState("");
   const [idLote, setIdLote] = useState("");
 
@@ -48,7 +39,7 @@ export default function Lotes({
   function getData() {
     return {
       name: nome,
-      fazendaId: fazenda.id,
+      fazendaId: props.fk,
     };
   }
 
@@ -58,6 +49,11 @@ export default function Lotes({
 
   function setData(data) {
     setNome(data.nome);
+  }
+
+  async function fetchData() {
+    const ret = await axios.get(`/api/lote/${props.fk}`);
+    return ret;
   }
 
   function onTableRowClick(row) {
@@ -77,7 +73,7 @@ export default function Lotes({
       getData={getData()}
       clearData={clearData}
       setDataProp={setData}
-      initialData={lotes}
+      fetchData={fetchData}
       onTableRowClick={onTableRowClick}
     />
   );
