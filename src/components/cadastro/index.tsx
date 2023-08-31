@@ -102,9 +102,7 @@ export default function Cadastro<T extends Record<string, any>>({
     [setTabs, setSelectedId, setDataProp, selectTab]
   );
 
-  const onTableRowClickMemo = onTableRowClick
-    ? useCallback(onTableRowClick, [onTableRowClick])
-    : null;
+  const onTableRowClickMemo = useCallback(onTableRowClick, [onTableRowClick]);
 
   async function onDelete() {
     await axios.delete(api + "/" + selectedId);
@@ -158,7 +156,7 @@ export default function Cadastro<T extends Record<string, any>>({
         {getTabContentListar({
           data,
           columns,
-          handleClickTable: onTableRowClickMemo
+          handleClickTable: onTableRowClick
             ? onTableRowClickMemo
             : handleClickTable,
           progressPending,
