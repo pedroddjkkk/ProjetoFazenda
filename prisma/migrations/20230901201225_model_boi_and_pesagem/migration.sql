@@ -1,0 +1,24 @@
+-- CreateTable
+CREATE TABLE `Pesagem` (
+    `id` INTEGER NOT NULL AUTO_INCREMENT,
+    `peso` DOUBLE NOT NULL,
+    `boiId` INTEGER NOT NULL,
+
+    PRIMARY KEY (`id`)
+) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
+-- CreateTable
+CREATE TABLE `Boi` (
+    `id` INTEGER NOT NULL AUTO_INCREMENT,
+    `raca` VARCHAR(191) NOT NULL,
+    `peso` DOUBLE NOT NULL,
+    `loteId` INTEGER NOT NULL,
+
+    PRIMARY KEY (`id`)
+) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
+-- AddForeignKey
+ALTER TABLE `Pesagem` ADD CONSTRAINT `Pesagem_boiId_fkey` FOREIGN KEY (`boiId`) REFERENCES `Boi`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE `Boi` ADD CONSTRAINT `Boi_loteId_fkey` FOREIGN KEY (`loteId`) REFERENCES `Lote`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
