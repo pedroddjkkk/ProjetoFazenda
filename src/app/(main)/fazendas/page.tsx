@@ -14,18 +14,8 @@ export default function Fazendas() {
   const [cnpj, setCnpj] = useState("");
   const [endereco, setEndereco] = useState("");
   const [telefone, setTelefone] = useState("");
-  const [id_fazenda, setIdFazenda] = useState("");
+  const [id_fazenda, setIdFazenda] = useState<number | undefined>();
   const newTabs = useTabs((state) => state.setTabs);
-
-  function getColumns(): TableColumn<Prisma.FazendaGetPayload<{}>>[] {
-    return [
-      { name: "Identificação", selector: (row) => row.id, width: "10%" },
-      { name: "Nome", selector: (row) => row.name },
-      { name: "Cnpj", selector: (row) => row.cnpj },
-      { name: "Endereço", selector: (row) => row.endereco },
-      { name: "Telefone", selector: (row) => row.telefone },
-    ];
-  }
 
   function getAddColumns() {
     return (
@@ -88,35 +78,37 @@ export default function Fazendas() {
     setTelefone("");
   }
 
-  function setData(data) {
-    setNome(data.name);
-    setCnpj(data.cnpj);
-    setEndereco(data.endereco);
-    setTelefone(data.telefone);
-  }
-
-  function onTableRowClick(e) {
-    setIdFazenda(e.id);
-    newTabs([
-      { id: "Listar", name: "Listar", icon: <FaList /> },
-      { id: "Adicionar", name: "Adicionar", icon: <FaPlus /> },
-      { id: "Editar", name: "Editar", icon: <FaEdit /> },
-    ]);
-  }
-
   if (id_fazenda) {
     return <Lotes fazendaId={Number(id_fazenda)} />;
   } else {
     return (
       <Cadastro<Prisma.FazendaGetPayload<{}>>
-        columns={getColumns()}
+        columns={[
+          { name: "Identificação", selector: (row) => row.id, width: "10%" },
+          { name: "Nome", selector: (row) => row.name },
+          { name: "Cnpj", selector: (row) => row.cnpj },
+          { name: "Endereço", selector: (row) => row.endereco },
+          { name: "Telefone", selector: (row) => row.telefone },
+        ]}
         addColumns={getAddColumns()}
         api="api/fazenda"
         getData={getData()}
         clearData={clearData}
-        setDataProp={setData}
+        setDataProp={(data) => {
+          setNome(data.name);
+          setCnpj(data.cnpj);
+          setEndereco(data.endereco);
+          setTelefone(data.telefone);
+        }}
         tabTitle="Lista de Fazendas"
-        onTableRowClick={onTableRowClick}
+        onTableRowClick={(row) => {
+          setIdFazenda(row.id);
+          newTabs([
+            { id: "Listar", name: "Listar", icon: <FaList /> },
+            { id: "Adicionar", name: "Adicionar", icon: <FaPlus /> },
+            { id: "Editar", name: "Editar", icon: <FaEdit /> },
+          ]);
+        }}
       />
     );
   }

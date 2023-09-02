@@ -19,7 +19,7 @@ import { Prisma } from "@prisma/client";
 import { TableColumn } from "react-data-table-component";
 
 export default function Bois(props: { loteId: number }) {
-  const [peso, setPeso] = useState("");
+  const [peso, setPeso] = useState<number>();
   const [raca, setRaca] = useState("");
   const [show, setShow] = useState(false);
   const [peso_confirmed, setPesoConfirmed] = useState(false);
@@ -48,10 +48,6 @@ export default function Bois(props: { loteId: number }) {
       { name: "GMD Kg/dia", sortable: true, selector: (row) => row.gmd },
     ];
   }
-
-  const handleMouseDown = (event) => {
-    event.preventDefault();
-  };
 
   const handleClose = () => {
     setShow(false);
@@ -82,7 +78,7 @@ export default function Bois(props: { loteId: number }) {
               className="col-sm-2"
               style={{ marginRight: "40px" }}
               value={peso_confirmed ? new_peso : peso}
-              onChange={(e) => setPeso(e.target.value)}
+              onChange={(e) => setPeso(Number(e.target.value))}
               InputProps={{
                 endAdornment: (
                   <>
@@ -91,7 +87,9 @@ export default function Bois(props: { loteId: number }) {
                       <InputAdornment position="end">
                         <IconButton
                           onClick={handleShow}
-                          onMouseDown={handleMouseDown}
+                          onMouseDown={(event) => {
+                            event.preventDefault();
+                          }}
                           title="Adicionar nova pesagem"
                         >
                           <AiOutlinePlus />
@@ -166,7 +164,7 @@ export default function Bois(props: { loteId: number }) {
 
   function getData() {
     return {
-      peso: parseFloat(peso),
+      peso: peso,
       raca: raca,
       loteId: props.loteId,
     };
@@ -177,15 +175,6 @@ export default function Bois(props: { loteId: number }) {
     setRaca("");
     setId_racao("");
     setNewPeso("");
-  }
-
-  function setData(data) {
-    setPeso(data.peso);
-    setRaca(data.raca);
-    setId_racao(data.id_racao);
-    setNewPeso(data.new_peso);
-    setNomeRacao(data.racao.nome);
-    setPesagens(data.pesagens);
   }
 
   /*   function editBottom() {
@@ -220,12 +209,32 @@ export default function Bois(props: { loteId: number }) {
 
   return (
     <Cadastro<Prisma.BoiGetPayload<{}>>
-      columns={getColumns()}
+      columns={[
+        {
+          name: "Identificação",
+          selector: (row) => row.id,
+          sortable: true,
+          width: "10%",
+        },
+        {
+          name: "Peso (Kg)",
+          sortable: true,
+          right: true,
+          selector: (row) => row.peso,
+          width: "160px",
+        },
+        { name: "Raça", selector: (row) => row.raca },
+        { name: "GMD Kg/dia", sortable: true, selector: (row) => row.gmd },
+      ]}
       api="/api/boi"
       addColumns={getAddColumns()}
       getData={getData()}
       clearData={clearData}
-      setDataProp={setData}
+      setDataProp={(data) => {
+        setPeso(data.peso);
+        setRaca(data.raca); /* 
+        setPesagens(data.pesagens); */
+      }}
       /* editBottom={editBottom()}
       fetchData={fetchData} */
       tabTitle="Lista de Bois"

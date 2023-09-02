@@ -11,18 +11,6 @@ export default function Usuarios() {
   const [login, setLogin] = useState("");
   const [senha, setSenha] = useState("");
 
-  const columns: TableColumn<Prisma.UserGetPayload<{}>>[] = [
-    {
-      name: "Identificação",
-      selector: (row) => row.id,
-      sortable: true,
-      width: "10%",
-    },
-    { name: "Email", selector: (row) => row.email, sortable: true },
-    { name: "Login", selector: (row) => row.login ?? "" },
-    { name: "Nome", selector: (row) => row.name },
-  ];
-
   function getAddColumns() {
     return (
       <div className="add-div-group">
@@ -83,10 +71,20 @@ export default function Usuarios() {
     setLogin("");
     setSenha("");
   }
-  
+
   return (
     <Cadastro<Prisma.UserGetPayload<{}>>
-      columns={columns}
+      columns={[
+        {
+          name: "Identificação",
+          selector: (row) => row.id,
+          sortable: true,
+          width: "10%",
+        },
+        { name: "Email", selector: (row) => row.email, sortable: true },
+        { name: "Login", selector: (row) => row.login ?? "" },
+        { name: "Nome", selector: (row) => row.name },
+      ]}
       addColumns={getAddColumns()}
       api="api/user"
       getData={getData()}

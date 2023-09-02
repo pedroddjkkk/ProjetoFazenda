@@ -8,13 +8,6 @@ import { TableColumn } from "react-data-table-component";
 export default function Racoes() {
   const [name, setName] = useState("");
 
-  function getColumns(): TableColumn<Prisma.RacaoGetPayload<{}>>[] {
-    return [
-      { name: "Identificação", selector: (row) => row.id, width: "10%" },
-      { name: "Nome", selector: (row) => row.name },
-    ];
-  }
-
   function getAddColumns() {
     return (
       <div className="add-div-group">
@@ -43,18 +36,19 @@ export default function Racoes() {
     setName("");
   }
 
-  function setData(data) {
-    setName(data.name);
-  }
-
   return (
     <Cadastro<Prisma.RacaoGetPayload<{}>>
-      columns={getColumns()}
+      columns={[
+        { name: "Identificação", selector: (row) => row.id, width: "10%" },
+        { name: "Nome", selector: (row) => row.name },
+      ]}
       api="/api/racao"
       addColumns={getAddColumns()}
       getData={getData()}
       clearData={clearData}
-      setDataProp={setData}
+      setDataProp={(data) => {
+        setName(data.name);
+      }}
       tabTitle="Lista de Rações"
     />
   );

@@ -84,7 +84,7 @@ export default function ComboEdit<T extends Record<string, any>>({
           />
         </Modal.Body>
         <Modal.Footer>
-          <Button onClick={handleClose}>
+          <Button onClick={handleClose} variant="default">
             Fechar
           </Button>
         </Modal.Footer>

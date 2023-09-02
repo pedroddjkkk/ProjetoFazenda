@@ -11,11 +11,6 @@ export default function Lotes(props: { fazendaId: number }) {
   const [idLote, setIdLote] = useState<number | undefined>();
   const [idRacao, setIdRacao] = useState<string | undefined>();
 
-  const columns: TableColumn<Prisma.LoteGetPayload<{}>>[] = [
-    { name: "Identificação", selector: (row) => row.id, width: "10%" },
-    { name: "Nome", selector: (row) => row.name },
-  ];
-
   function getAddColumns() {
     return (
       <div className="add-div-group">
@@ -71,7 +66,10 @@ export default function Lotes(props: { fazendaId: number }) {
   } else {
     return (
       <Cadastro<Prisma.LoteGetPayload<{}>>
-        columns={columns}
+        columns={[
+          { name: "Identificação", selector: (row) => row.id, width: "10%" },
+          { name: "Nome", selector: (row) => row.name },
+        ]}
         api="api/lote"
         addColumns={getAddColumns()}
         tabTitle="Lista de Lotes"
