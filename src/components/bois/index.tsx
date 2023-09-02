@@ -1,5 +1,5 @@
-import { Cadastro } from "..";
-import "../../App.css";
+import { Cadastro } from ".."; /* 
+import "../../App.css"; */
 import "../../assets/bootstrap/css/bootstrap.min.css";
 import { IconButton, InputAdornment, TextField } from "@mui/material";
 /* import ComboEdit from "../ComboEdit/ComboEdit"; */
@@ -15,8 +15,10 @@ import {
 import { FaCheck, FaTimes } from "react-icons/fa";
 import { AiOutlinePlus } from "react-icons/ai";
 import { useTabs } from "@/lib/stores";
+import { Prisma } from "@prisma/client";
+import { TableColumn } from "react-data-table-component";
 
-export default function Bois(props) {
+export default function Bois(props: { loteId: number }) {
   const [peso, setPeso] = useState("");
   const [raca, setRaca] = useState("");
   const [show, setShow] = useState(false);
@@ -27,11 +29,11 @@ export default function Bois(props) {
   const [pesagens, setPesagens] = useState("");
   const selectedTab = useTabs((state) => state.selectedTab);
 
-  function getColumns() {
+  function getColumns(): TableColumn<Prisma.BoiGetPayload<{}>>[] {
     return [
       {
         name: "Identificação",
-        selector: (row) => row.id_pk,
+        selector: (row) => row.id,
         sortable: true,
         width: "10%",
       },
@@ -43,7 +45,6 @@ export default function Bois(props) {
         width: "100px",
       },
       { name: "Raça", selector: (row) => row.raca },
-      { name: "Ração", selector: (row) => row.racao.nome },
       { name: "GMD Kg/dia", sortable: true, selector: (row) => row.gmd },
     ];
   }
@@ -54,7 +55,7 @@ export default function Bois(props) {
 
   const handleClose = () => {
     setShow(false);
-    setNewPeso();
+    setNewPeso("");
   };
 
   const handleConfirm = () => {
@@ -123,14 +124,14 @@ export default function Bois(props) {
               style={{ marginRight: "40px" }}
               variant="standard"
             />
-            <ComboEdit
+            {/*             <ComboEdit
               label="Ração"
               tabela="tab_racoes"
               setValue={setId_racao}
               value={nome_racao}
               className="col-sm-2"
               columns={getComboColumns()}
-            />
+            /> */}
           </div>
         </div>
         <Modal show={show} onHide={handleClose}>
@@ -185,11 +186,9 @@ export default function Bois(props) {
 
   function getData() {
     return {
-      peso: peso,
+      peso: parseFloat(peso),
       raca: raca,
-      id_racao: id_racao,
-      new_peso: new_peso,
-      id_lote: props.fk,
+      loteId: props.loteId,
     };
   }
 
@@ -209,7 +208,7 @@ export default function Bois(props) {
     setPesagens(data.pesagens);
   }
 
-  function editBottom() {
+  /*   function editBottom() {
     if (!pesagens) return null;
     const getData = () => {
       return pesagens.map((pesagem) => {
@@ -231,24 +230,24 @@ export default function Bois(props) {
         </div>
       </div>
     );
-  }
+  } */
 
-  async function fetchData() {
+  /*   async function fetchData() {
     const ret = await api.get("tab_bois", null, props.fk);
     console.log(ret);
     return ret;
-  }
+  } */
 
   return (
-    <Cadastro
+    <Cadastro<Prisma.BoiGetPayload<{}>>
       columns={getColumns()}
-      table="tab_bois"
+      api="/api/boi"
       addColumns={getAddColumns()}
       getData={getData()}
       clearData={clearData}
       setDataProp={setData}
-      editBottom={editBottom()}
-      fetchData={fetchData}
+      /* editBottom={editBottom()}
+      fetchData={fetchData} */
       tabTitle="Lista de Bois"
     />
   );

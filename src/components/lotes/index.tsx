@@ -4,10 +4,11 @@ import { useState } from "react";
 import { TableColumn } from "react-data-table-component";
 import { Prisma } from "@prisma/client";
 import axios from "axios";
+import Bois from "../bois";
 
 export default function Lotes(props: { fazendaId: number }) {
   const [nome, setNome] = useState("");
-  const [idLote, setIdLote] = useState("");
+  const [idLote, setIdLote] = useState<number | undefined>();
 
   const columns: TableColumn<Prisma.LoteGetPayload<{}>>[] = [
     { name: "Identificação", selector: (row) => row.id, width: "10%" },
@@ -57,21 +58,21 @@ export default function Lotes(props: { fazendaId: number }) {
     setNome(row.name);
   }
 
-  /*   if (idLote) {
-    return <Bois fk={idLote} />;
-  } else { */
-  return (
-    <Cadastro<Prisma.LoteGetPayload<{}>>
-      columns={columns}
-      api="api/lote"
-      addColumns={getAddColumns()}
-      tabTitle="Lista de Lotes"
-      getData={getData()}
-      clearData={clearData}
-      setDataProp={setData}
-      fetchData={fetchData}
-      onTableRowClick={onTableRowClick}
-    />
-  );
-  /*   } */
+  if (idLote) {
+    return <Bois loteId={idLote} />;
+  } else {
+    return (
+      <Cadastro<Prisma.LoteGetPayload<{}>>
+        columns={columns}
+        api="api/lote"
+        addColumns={getAddColumns()}
+        tabTitle="Lista de Lotes"
+        getData={getData()}
+        clearData={clearData}
+        setDataProp={setData}
+        fetchData={fetchData}
+        onTableRowClick={onTableRowClick}
+      />
+    );
+  }
 }
