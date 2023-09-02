@@ -1,10 +1,11 @@
-import { Button, IconButton, InputAdornment, TextField } from "@mui/material";
+import { IconButton, InputAdornment, TextField } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import Modal from "react-bootstrap/Modal";
 import DataTable from "react-data-table-component";
 import { FaMagnifyingGlass } from "react-icons/fa6";
 import { ComboEditProps } from "@/types/combo-edit";
 import axios from "axios";
+import { Button } from "../ui/button";
 
 export default function ComboEdit<T extends Record<string, any>>({
   apiUrl,
@@ -83,7 +84,7 @@ export default function ComboEdit<T extends Record<string, any>>({
           />
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="contained" onClick={handleClose}>
+          <Button onClick={handleClose}>
             Fechar
           </Button>
         </Modal.Footer>
