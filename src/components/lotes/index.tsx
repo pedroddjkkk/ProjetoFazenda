@@ -50,6 +50,7 @@ export default function Lotes(props: { fazendaId: number }) {
     return {
       name: nome,
       fazendaId: props.fazendaId,
+      racaoId: racao?.id,
     };
   }
 
