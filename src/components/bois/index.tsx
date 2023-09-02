@@ -42,7 +42,7 @@ export default function Bois(props: { loteId: number }) {
         sortable: true,
         right: true,
         selector: (row) => row.peso,
-        width: "100px",
+        width: "160px",
       },
       { name: "Raça", selector: (row) => row.raca },
       { name: "GMD Kg/dia", sortable: true, selector: (row) => row.gmd },
@@ -64,18 +64,6 @@ export default function Bois(props: { loteId: number }) {
   };
 
   const handleShow = () => setShow(true);
-
-  function getComboColumns() {
-    return [
-      {
-        name: "Identificação",
-        selector: (row) => row.id_pk,
-        sortable: true,
-        width: "10%",
-      },
-      { name: "Nome", selector: (row) => row.nome },
-    ];
-  }
 
   useEffect(() => {
     if (selectedTab === "Editar") {
@@ -124,14 +112,6 @@ export default function Bois(props: { loteId: number }) {
               style={{ marginRight: "40px" }}
               variant="standard"
             />
-            {/*             <ComboEdit
-              label="Ração"
-              tabela="tab_racoes"
-              setValue={setId_racao}
-              value={nome_racao}
-              className="col-sm-2"
-              columns={getComboColumns()}
-            /> */}
           </div>
         </div>
         <Modal show={show} onHide={handleClose}>
