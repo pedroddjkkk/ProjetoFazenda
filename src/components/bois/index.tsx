@@ -29,26 +29,6 @@ export default function Bois(props: { loteId: number }) {
   const [pesagens, setPesagens] = useState("");
   const selectedTab = useTabs((state) => state.selectedTab);
 
-  function getColumns(): TableColumn<Prisma.BoiGetPayload<{}>>[] {
-    return [
-      {
-        name: "Identificação",
-        selector: (row) => row.id,
-        sortable: true,
-        width: "10%",
-      },
-      {
-        name: "Peso (Kg)",
-        sortable: true,
-        right: true,
-        selector: (row) => row.peso,
-        width: "160px",
-      },
-      { name: "Raça", selector: (row) => row.raca },
-      { name: "GMD Kg/dia", sortable: true, selector: (row) => row.gmd },
-    ];
-  }
-
   const handleClose = () => {
     setShow(false);
     setNewPeso("");
@@ -171,7 +151,7 @@ export default function Bois(props: { loteId: number }) {
   }
 
   function clearData() {
-    setPeso("");
+    setPeso(undefined);
     setRaca("");
     setId_racao("");
     setNewPeso("");
@@ -224,7 +204,7 @@ export default function Bois(props: { loteId: number }) {
           width: "160px",
         },
         { name: "Raça", selector: (row) => row.raca },
-        { name: "GMD Kg/dia", sortable: true, selector: (row) => row.gmd },
+        { name: "GMD Kg/dia", sortable: true, selector: () => 0 },
       ]}
       api="/api/boi"
       addColumns={getAddColumns()}

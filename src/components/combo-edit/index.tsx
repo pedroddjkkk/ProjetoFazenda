@@ -14,11 +14,10 @@ export default function ComboEdit<T extends Record<string, any>>({
   className,
   setValue,
   value,
+  setTextValue,
 }: ComboEditProps<T>) {
   const [show, setShow] = useState(false);
   const [data, setData] = useState<T[]>([]);
-  const [id, setId] = useState("");
-  const [nome, setNome] = useState("");
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -32,20 +31,13 @@ export default function ComboEdit<T extends Record<string, any>>({
     reloadData();
   }, [apiUrl]);
 
-  useEffect(() => {
-    setValue(id);
-  }, [id, setValue]);
-
   return (
     <>
       <TextField
         label={label}
         className="col-sm-2"
-        value={nome ? nome : value}
-        focused={id ? true : false}
-        onChange={(e) => {
-          setId(id);
-        }}
+        value={value}
+        onChange={(e) => setTextValue && setTextValue(e)}
         InputProps={{
           endAdornment: (
             <InputAdornment position="end">
@@ -72,8 +64,7 @@ export default function ComboEdit<T extends Record<string, any>>({
             columns={columns}
             data={data}
             onRowClicked={(e) => {
-              setId(e.id_pk);
-              setNome(e.nome);
+              setValue(e);
               handleClose();
             }}
             pagination

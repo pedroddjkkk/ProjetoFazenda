@@ -9,7 +9,8 @@ import Bois from "../bois";
 export default function Lotes(props: { fazendaId: number }) {
   const [nome, setNome] = useState("");
   const [idLote, setIdLote] = useState<number | undefined>();
-  const [idRacao, setIdRacao] = useState<string | undefined>();
+  const [racao, setRacao] = useState<Prisma.RacaoGetPayload<{}>>();
+  const [racaoName, setRacaoName] = useState<string>();
 
   function getAddColumns() {
     return (
@@ -27,8 +28,8 @@ export default function Lotes(props: { fazendaId: number }) {
           <ComboEdit<Prisma.RacaoGetPayload<{}>>
             label="Ração"
             apiUrl="/api/racao"
-            setValue={(value) => setIdRacao(value)}
-            value={"213213"}
+            setValue={(row) => setRacao(row)}
+            value={racao?.name ?? ""}
             className="col-sm-2"
             columns={[
               {

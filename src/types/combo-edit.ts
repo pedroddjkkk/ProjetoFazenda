@@ -5,6 +5,9 @@ export type ComboEditProps<T extends Record<string, any>> = {
   label: string;
   columns: TableColumn<T>[];
   className?: string;
-  setValue: (value: string) => void;
+  setValue: (row: T) => void;
+  setTextValue?: (
+    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => void;
   value: string;
 };
