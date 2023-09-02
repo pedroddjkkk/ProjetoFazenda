@@ -11,51 +11,69 @@ datasource db {
 }
 
 model User {
-  id       Int     @id @default(autoincrement())
-  name     String
-  login    String?
-  password String
-  email    String  @unique
+  id        Int       @id @default(autoincrement())
+  name      String
+  login     String?
+  password  String
+  email     String    @unique
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  deletedAt DateTime?
 }
 
 model Fazenda {
-  id       Int    @id @default(autoincrement())
-  name     String
-  endereco String
-  telefone String
-  cnpj     String
-  Lote     Lote[]
+  id        Int       @id @default(autoincrement())
+  name      String
+  endereco  String
+  telefone  String
+  cnpj      String
+  Lote      Lote[]
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  deletedAt DateTime?
 }
 
 model Lote {
-  id        Int     @id @default(autoincrement())
+  id        Int       @id @default(autoincrement())
   name      String
   fazendaId Int
-  Fazenda   Fazenda @relation(fields: [fazendaId], references: [id])
+  Fazenda   Fazenda   @relation(fields: [fazendaId], references: [id])
   racaoId   Int?
-  Racao     Racao?  @relation(fields: [racaoId], references: [id])
+  Racao     Racao?    @relation(fields: [racaoId], references: [id])
   Bois      Boi[]
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  deletedAt DateTime?
 }
 
 model Racao {
-  id    Int    @id @default(autoincrement())
-  name  String
-  Lotes Lote[]
+  id        Int       @id @default(autoincrement())
+  name      String
+  Lotes     Lote[]
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  deletedAt DateTime?
 }
 
 model Pesagem {
   id   Int   @id @default(autoincrement())
   peso Float
 
-  Boi   Boi @relation(fields: [boiId], references: [id])
-  boiId Int
+  Boi       Boi       @relation(fields: [boiId], references: [id])
+  boiId     Int
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  deletedAt DateTime?
 }
 
 model Boi {
-  id       Int       @id @default(autoincrement())
-  raca     String
-  peso     Float
-  pesagens Pesagem[]
-  Lote     Lote      @relation(fields: [loteId], references: [id])
-  loteId   Int
+  id        Int       @id @default(autoincrement())
+  raca      String
+  peso      Float
+  pesagens  Pesagem[]
+  Lote      Lote      @relation(fields: [loteId], references: [id])
+  loteId    Int
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  deletedAt DateTime?
 }
