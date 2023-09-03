@@ -1,11 +1,12 @@
 import {
   FaGaugeHigh,
   FaHouseUser,
-  FaUtensils,
   FaChartLine,
   FaLock,
+  FaWheatAwn,
 } from "react-icons/fa6";
 import { FaUserAlt } from "react-icons/fa";
+import { GiMeal } from "react-icons/gi";
 
 export const pages = [
   {
@@ -26,7 +27,12 @@ export const pages = [
   {
     name: "Rações",
     path: "/racoes",
-    icon: FaUtensils,
+    icon: FaWheatAwn,
+  },
+  {
+    name: "Dieta",
+    path: "/dieta",
+    icon: GiMeal,
   },
   {
     name: "Acompanhar Bovinos",

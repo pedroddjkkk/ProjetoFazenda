@@ -39,20 +39,20 @@ model Lote {
   fazendaId Int
   Fazenda   Fazenda   @relation(fields: [fazendaId], references: [id])
   racaoId   Int?
-  Racao     Racao?    @relation(fields: [racaoId], references: [id])
   Bois      Boi[]
   createdAt DateTime  @default(now())
   updatedAt DateTime  @updatedAt
   deletedAt DateTime?
+  dieta     Dieta[]
 }
 
 model Racao {
   id        Int       @id @default(autoincrement())
   name      String
-  Lotes     Lote[]
   createdAt DateTime  @default(now())
   updatedAt DateTime  @updatedAt
   deletedAt DateTime?
+  dieta     Dieta[]
 }
 
 model Pesagem {
@@ -76,4 +76,18 @@ model Boi {
   createdAt DateTime  @default(now())
   updatedAt DateTime  @updatedAt
   deletedAt DateTime?
+}
+
+model Dieta {
+  id          Int       @id @default(autoincrement())
+  initialDate DateTime
+  finalDate   DateTime
+  loteId      Int
+  lote        Lote      @relation(fields: [loteId], references: [id])
+  racaoId     Int
+  racao       Racao     @relation(fields: [racaoId], references: [id])
+  quantidade  Float
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  deletedAt   DateTime?
 }

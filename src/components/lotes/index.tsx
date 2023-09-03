@@ -10,7 +10,6 @@ export default function Lotes(props: { fazendaId: number }) {
   const [nome, setNome] = useState("");
   const [idLote, setIdLote] = useState<number | undefined>();
   const [racao, setRacao] = useState<Prisma.RacaoGetPayload<{}>>();
-  const [racaoName, setRacaoName] = useState<string>();
 
   function getAddColumns() {
     return (

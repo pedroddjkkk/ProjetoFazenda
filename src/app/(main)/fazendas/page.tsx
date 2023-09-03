@@ -4,7 +4,6 @@ import { TextField } from "@mui/material";
 import { useState } from "react";
 import { Cadastro } from "@/components";
 import { Prisma } from "@prisma/client";
-import { TableColumn } from "react-data-table-component";
 import { useTabs } from "@/lib/stores";
 import Lotes from "@/components/lotes";
 import { FaEdit, FaList, FaPlus } from "react-icons/fa";
