@@ -254,7 +254,7 @@ export function getTabContentListar({
             title={tabTitle ? tabTitle : "Lista de registros"}
             onRowClicked={handleClickTable}
             pagination
-            keyField="id_pk"
+            keyField="id"
             paginationComponentOptions={{
               rowsPerPageText: "Registros por paginas:",
               rangeSeparatorText: "de",

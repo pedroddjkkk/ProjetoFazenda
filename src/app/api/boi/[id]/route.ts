@@ -12,7 +12,18 @@ export async function PUT(
     where: {
       id: Number(context.params.id),
     },
-    data: body,
+    data: {
+      ...(body.newPeso
+        ? {
+            pesagens: {
+              create: {
+                peso: body.newPeso,
+              },
+            },
+          }
+        : null),
+      ...body,
+    },
   });
 
   return Succes(updatedBoi);

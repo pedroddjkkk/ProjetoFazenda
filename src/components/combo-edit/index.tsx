@@ -1,4 +1,4 @@
-import { IconButton, InputAdornment, TextField } from "@mui/material";
+import { CircularProgress, IconButton, InputAdornment, TextField } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import Modal from "react-bootstrap/Modal";
 import DataTable from "react-data-table-component";
@@ -18,6 +18,7 @@ export default function ComboEdit<T extends Record<string, any>>({
 }: ComboEditProps<T>) {
   const [show, setShow] = useState(false);
   const [data, setData] = useState<T[]>([]);
+  const [progressPending, setProgressPending] = useState(true);
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -25,7 +26,9 @@ export default function ComboEdit<T extends Record<string, any>>({
   useEffect(() => {
     async function reloadData() {
       const ret = await axios.get(apiUrl);
+
       setData(ret.data);
+      setProgressPending(false);
     }
 
     reloadData();
@@ -67,6 +70,24 @@ export default function ComboEdit<T extends Record<string, any>>({
               setValue(e);
               handleClose();
             }}
+            paginationComponentOptions={{
+              rowsPerPageText: "Registros por paginas:",
+              rangeSeparatorText: "de",
+              noRowsPerPage: false,
+              selectAllRowsItem: false,
+              selectAllRowsItemText: "All",
+            }}
+            noDataComponent={
+              <span style={{ padding: "20px 0 40px 0" }}>
+                Sem dados para a tabela
+              </span>
+            }
+            progressPending={progressPending}
+            progressComponent={
+              <div style={{ padding: "40px 0 40px 0" }}>
+                <CircularProgress />
+              </div>
+            }
             pagination
             highlightOnHover
             pointerOnHover

@@ -147,6 +147,7 @@ export default function Bois(props: { loteId: number }) {
       peso: peso,
       raca: raca,
       loteId: props.loteId,
+      newPeso: new_peso,
     };
   }
 
