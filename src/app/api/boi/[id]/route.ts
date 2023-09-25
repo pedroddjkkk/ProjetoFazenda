@@ -17,7 +17,7 @@ export async function PUT(
         ? {
             pesagens: {
               create: {
-                peso: body.newPeso,
+                peso: parseFloat(body.newPeso),
               },
             },
           }

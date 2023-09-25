@@ -142,12 +142,21 @@ export default function Bois(props: { loteId: number }) {
     );
   }
 
-  function getData() {
+  function getData(): Prisma.BoiCreateArgs {
     return {
-      peso: peso,
-      raca: raca,
-      loteId: props.loteId,
-      newPeso: new_peso,
+      data: {
+        peso: peso_confirmed ? Number(new_peso) : peso,
+        raca: raca,
+        ...(peso_confirmed
+          ? {
+              pesagens: {
+                create: {
+                  peso: Number(new_peso),
+                },
+              },
+            }
+          : null),
+      },
     };
   }
 
