@@ -1,23 +1,13 @@
-import { Cadastro } from ".."; /* 
-import "../../App.css"; */
+import { Cadastro } from "..";
 import "../../assets/bootstrap/css/bootstrap.min.css";
 import { IconButton, InputAdornment, TextField } from "@mui/material";
-/* import ComboEdit from "../ComboEdit/ComboEdit"; */
 import { Modal } from "react-bootstrap";
 import { useEffect, useState } from "react";
-import {
-  CartesianGrid,
-  Line,
-  LineChart,
-  ResponsiveContainer,
-  Tooltip,
-} from "recharts";
 import { FaCheck, FaTimes } from "react-icons/fa";
 import { AiOutlinePlus } from "react-icons/ai";
 import { useTabs } from "@/lib/stores";
 import { Prisma } from "@prisma/client";
 import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
 import z from "zod";
 
 const schema = z.object({
@@ -27,36 +17,26 @@ const schema = z.object({
 });
 
 export default function Bois(props: { loteId: number }) {
-  const [peso, setPeso] = useState<number>();
-  const [raca, setRaca] = useState("");
   const [show, setShow] = useState(false);
-  const [peso_confirmed, setPesoConfirmed] = useState(false);
-  const [id_racao, setId_racao] = useState("");
-  const [new_peso, setNewPeso] = useState("");
-  const [nome_racao, setNomeRacao] = useState("");
-  const [pesagens, setPesagens] = useState("");
   const [selectedId, setSelectedId] = useState<number>();
   const selectedTab = useTabs((state) => state.selectedTab);
-  const { register, watch, setValue, control } =
+  const { register, reset, setValue, getValues } =
     useForm<z.infer<typeof schema>>();
 
   const handleClose = () => {
     setShow(false);
-    setNewPeso("");
     setValue("novo_peso", undefined);
   };
 
   const handleConfirm = () => {
     setShow(false);
-    setPesoConfirmed(true);
-    setValue("peso", watch("novo_peso") ?? 0);
+    setValue("peso", getValues("novo_peso") ?? 0);
   };
 
   const handleShow = () => setShow(true);
 
   useEffect(() => {
     if (selectedTab === "Editar") {
-      setPesoConfirmed(false);
     }
   }, [selectedTab]);
 
@@ -155,7 +135,7 @@ export default function Bois(props: { loteId: number }) {
   }
 
   function getData(): Prisma.BoiCreateArgs | Prisma.BoiUpdateArgs["data"] {
-    const data = watch();
+    const data = getValues();
 
     if (selectedId) {
       return {
@@ -187,10 +167,7 @@ export default function Bois(props: { loteId: number }) {
   }
 
   function clearData() {
-    setPeso(undefined);
-    setRaca("");
-    setId_racao("");
-    setNewPeso("");
+    reset();
   }
 
   /*   function editBottom() {
