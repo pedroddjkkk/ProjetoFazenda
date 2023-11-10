@@ -31,7 +31,8 @@ export default function Cadastro<T extends Record<string, any>>({
   onTableRowClick,
   fetchData,
   onSelectItem,
-  tabTitle
+  tabTitle,
+  control,
 }: CadastroProps<T>) {
   const tabs = useTabs((state) => state.tabs);
   const selectedTab = useTabs((state) => state.selectedTab);
@@ -78,6 +79,23 @@ export default function Cadastro<T extends Record<string, any>>({
 
   async function onConfirm(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
+    let res;
+    if (selectedId) {
+      res = await axios.put(api + "/" + selectedId, getData);
+    } else {
+      res = await axios.post(api, getData);
+    }
+    if (res.status === 200) {
+      toast.success("Salvo com sucesso!");
+    } else {
+      toast.error("Erro ao salvar!");
+    }
+    await reloadData();
+    selectTab("Listar");
+    clearData();
+  }
+
+  async function onFormControlConfirm() {
     let res;
     if (selectedId) {
       res = await axios.put(api + "/" + selectedId, getData);
@@ -173,7 +191,13 @@ export default function Cadastro<T extends Record<string, any>>({
           <TabContent
             id="Editar"
             component={
-              <form onSubmit={onConfirm}>
+              <form
+                onSubmit={
+                  control
+                    ? control.handleSubmit(onFormControlConfirm)
+                    : onConfirm
+                }
+              >
                 <div
                   className="add-section"
                   style={{ margin: "0 auto", width: "95%" }}

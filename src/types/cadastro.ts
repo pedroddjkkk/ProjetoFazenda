@@ -15,6 +15,7 @@ export type CadastroProps<T extends Record<string, any>> = {
   onTableRowClick?: (row: T, e: MouseEvent) => void;
   fetchData?: () => any;
   onSelectItem?: (id: number) => void;
+  control?: Control<any>;
 };
 
 export type getTabContentAdicionarProps = {

@@ -1,5 +1,5 @@
 import { prisma } from "@/lib/db/prisma";
-import { Succes } from "@/lib/responses";
+import { BadRequest, Succes } from "@/lib/responses";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function PUT(
@@ -8,16 +8,18 @@ export async function PUT(
 ) {
   const body = await req.json();
 
-  const updatedBoi = await prisma.boi.update({
-    where: {
-      id: Number(context.params.id),
-    },
-    data: {
-      
-    },
-  });
+  try {
+    await prisma.boi.update({
+      where: {
+        id: Number(context.params.id),
+      },
+      data: body,
+    });
+  } catch (error) {
+    return BadRequest();
+  }
 
-  return Succes(updatedBoi);
+  return Succes();
 }
 
 export async function DELETE(

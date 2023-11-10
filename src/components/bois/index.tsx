@@ -20,7 +20,7 @@ export default function Bois(props: { loteId: number }) {
   const [show, setShow] = useState(false);
   const [selectedId, setSelectedId] = useState<number>();
   const selectedTab = useTabs((state) => state.selectedTab);
-  const { register, reset, setValue, getValues } =
+  const { register, reset, setValue, watch, control } =
     useForm<z.infer<typeof schema>>();
 
   const handleClose = () => {
@@ -30,7 +30,7 @@ export default function Bois(props: { loteId: number }) {
 
   const handleConfirm = () => {
     setShow(false);
-    setValue("peso", getValues("novo_peso") ?? 0);
+    setValue("peso", watch("novo_peso") ?? 0);
   };
 
   const handleShow = () => setShow(true);
@@ -135,7 +135,7 @@ export default function Bois(props: { loteId: number }) {
   }
 
   function getData(): Prisma.BoiCreateArgs | Prisma.BoiUpdateArgs["data"] {
-    const data = getValues();
+    const data = watch();
 
     if (selectedId) {
       return {
@@ -156,6 +156,11 @@ export default function Bois(props: { loteId: number }) {
         data: {
           peso: data.peso,
           raca: data.raca,
+          pesagens: {
+            create: {
+              peso: data.peso,
+            },
+          },
           Lote: {
             connect: {
               id: props.loteId,
@@ -227,6 +232,7 @@ export default function Bois(props: { loteId: number }) {
         setValue("peso", data.peso);
         setValue("raca", data.raca);
       }}
+      control={control}
       /* editBottom={editBottom()}
       fetchData={fetchData} */
       onSelectItem={(id) => setSelectedId(id)}
