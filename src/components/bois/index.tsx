@@ -37,16 +37,19 @@ export default function Bois(props: { loteId: number }) {
   const [pesagens, setPesagens] = useState("");
   const [selectedId, setSelectedId] = useState<number>();
   const selectedTab = useTabs((state) => state.selectedTab);
-  const { register, watch, setValue, control } = useForm<z.infer<typeof schema>>();
+  const { register, watch, setValue, control } =
+    useForm<z.infer<typeof schema>>();
 
   const handleClose = () => {
     setShow(false);
     setNewPeso("");
+    setValue("novo_peso", undefined);
   };
 
   const handleConfirm = () => {
     setShow(false);
     setPesoConfirmed(true);
+    setValue("peso", watch("novo_peso") ?? 0);
   };
 
   const handleShow = () => setShow(true);
@@ -156,20 +159,20 @@ export default function Bois(props: { loteId: number }) {
 
     if (selectedId) {
       return {
-        peso: data.novo_peso ? Number(data.novo_peso) : data.peso,
-        raca: raca,
-        ...(peso_confirmed
+        peso: data.peso,
+        raca: data.raca,
+        ...(data.novo_peso
           ? {
               pesagens: {
                 create: {
-                  peso: Number(new_peso),
+                  peso: data.novo_peso,
                 },
               },
             }
           : null),
       };
     } else {
-      return {
+      const returna = {
         data: {
           peso: data.peso,
           raca: data.raca,
@@ -179,7 +182,12 @@ export default function Bois(props: { loteId: number }) {
             },
           },
         },
-      };
+      }
+
+      console.log(returna);
+      
+
+      return returna;
     }
   }
 
@@ -244,9 +252,8 @@ export default function Bois(props: { loteId: number }) {
       getData={getData()}
       clearData={clearData}
       setDataProp={(data) => {
-        setPeso(data.peso);
-        setRaca(data.raca); /* 
-        setPesagens(data.pesagens); */
+        setValue("peso", data.peso);
+        setValue("raca", data.raca);
       }}
       /* editBottom={editBottom()}
       fetchData={fetchData} */

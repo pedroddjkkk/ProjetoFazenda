@@ -31,8 +31,7 @@ export default function Cadastro<T extends Record<string, any>>({
   onTableRowClick,
   fetchData,
   onSelectItem,
-  tabTitle,
-  control
+  tabTitle
 }: CadastroProps<T>) {
   const tabs = useTabs((state) => state.tabs);
   const selectedTab = useTabs((state) => state.selectedTab);
