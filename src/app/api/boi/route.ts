@@ -16,7 +16,11 @@ export async function POST(req: NextRequest) {
 }
 
 export async function GET() {
-  const bois = await prisma.boi.findMany();
+  const bois = await prisma.boi.findMany({
+    include: {
+      pesagens: true,
+    },
+  });
 
   return NextResponse.json(bois);
 }

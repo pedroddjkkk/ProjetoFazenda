@@ -8,6 +8,16 @@ import { AiOutlinePlus } from "react-icons/ai";
 import { useTabs } from "@/lib/stores";
 import { Prisma } from "@prisma/client";
 import { useForm } from "react-hook-form";
+import {
+  LineChart,
+  Line,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
+  Legend,
+  ResponsiveContainer,
+} from "recharts";
 import z from "zod";
 
 const schema = z.object({
@@ -19,6 +29,7 @@ const schema = z.object({
 export default function Bois(props: { loteId: number }) {
   const [show, setShow] = useState(false);
   const [selectedId, setSelectedId] = useState<number>();
+  const [pesagens, setPesagens] = useState<Prisma.PesagemGetPayload<{}>[]>();
   const selectedTab = useTabs((state) => state.selectedTab);
   const { register, reset, setValue, watch, control } =
     useForm<z.infer<typeof schema>>();
@@ -175,38 +186,51 @@ export default function Bois(props: { loteId: number }) {
     reset();
   }
 
-  /*   function editBottom() {
+  function editBottom() {
     if (!pesagens) return null;
-    const getData = () => {
-      return pesagens.map((pesagem) => {
-        return {
-          peso: pesagem.peso,
-        };
-      });
-    };
+
     return (
       <div className="row">
         <div className="col-sm-12">
-          <ResponsiveContainer height={200} width="100%">
-            <LineChart data={getData()}>
+          <ResponsiveContainer width="100%" height="100%">
+            <LineChart
+              width={500}
+              height={300}
+              data={pesagens}
+              margin={{
+                top: 5,
+                right: 30,
+                left: 20,
+                bottom: 5,
+              }}
+            >
+              <CartesianGrid strokeDasharray="3 3" />
+              <XAxis dataKey="createdAt" />
+              <YAxis />
               <Tooltip />
-              <Line type="monotone" dataKey="peso" stroke="#8884d8" />
-              <CartesianGrid stroke="#ccc" strokeDasharray="5 5" />
+              <Legend />
+              <Line
+                type="monotone"
+                dataKey="peso"
+                stroke="#8884d8"
+                activeDot={{ r: 8 }}
+              />
+              <Line type="monotone" dataKey="uv" stroke="#82ca9d" />
             </LineChart>
           </ResponsiveContainer>
         </div>
       </div>
     );
-  } */
-
-  /*   async function fetchData() {
-    const ret = await api.get("tab_bois", null, props.fk);
-    console.log(ret);
-    return ret;
-  } */
+  }
 
   return (
-    <Cadastro<Prisma.BoiGetPayload<{}>>
+    <Cadastro<
+      Prisma.BoiGetPayload<{
+        include: {
+          pesagens: true;
+        };
+      }>
+    >
       columns={[
         {
           name: "Identificação",
@@ -231,10 +255,12 @@ export default function Bois(props: { loteId: number }) {
       setDataProp={(data) => {
         setValue("peso", data.peso);
         setValue("raca", data.raca);
+        setPesagens(data.pesagens);
+        console.log(data.pesagens);
+        
       }}
       control={control}
-      /* editBottom={editBottom()}
-      fetchData={fetchData} */
+      editBottom={editBottom()}
       onSelectItem={(id) => setSelectedId(id)}
       tabTitle="Lista de Bois"
     />
