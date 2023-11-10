@@ -96,6 +96,8 @@ export default function Cadastro<T extends Record<string, any>>({
   }
 
   async function onFormControlConfirm() {
+    console.log("basduyabsduybuydsab");
+    
     let res;
     if (selectedId) {
       res = await axios.put(api + "/" + selectedId, getData);
