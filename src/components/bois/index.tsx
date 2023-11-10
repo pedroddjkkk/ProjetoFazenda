@@ -16,7 +16,15 @@ import { FaCheck, FaTimes } from "react-icons/fa";
 import { AiOutlinePlus } from "react-icons/ai";
 import { useTabs } from "@/lib/stores";
 import { Prisma } from "@prisma/client";
-import { TableColumn } from "react-data-table-component";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import z from "zod";
+
+const schema = z.object({
+  peso: z.number(),
+  raca: z.string(),
+  novo_peso: z.number().optional(),
+});
 
 export default function Bois(props: { loteId: number }) {
   const [peso, setPeso] = useState<number>();
@@ -27,7 +35,9 @@ export default function Bois(props: { loteId: number }) {
   const [new_peso, setNewPeso] = useState("");
   const [nome_racao, setNomeRacao] = useState("");
   const [pesagens, setPesagens] = useState("");
+  const [selectedId, setSelectedId] = useState<number>();
   const selectedTab = useTabs((state) => state.selectedTab);
+  const { register, watch, setValue, control } = useForm<z.infer<typeof schema>>();
 
   const handleClose = () => {
     setShow(false);
@@ -57,8 +67,6 @@ export default function Bois(props: { loteId: number }) {
               id="standard-start-adornment"
               className="col-sm-2"
               style={{ marginRight: "40px" }}
-              value={peso_confirmed ? new_peso : peso}
-              onChange={(e) => setPeso(Number(e.target.value))}
               InputProps={{
                 endAdornment: (
                   <>
@@ -80,15 +88,15 @@ export default function Bois(props: { loteId: number }) {
                 ),
               }}
               variant="standard"
+              {...register("peso")}
             />
             <TextField
               label="Raça"
               id="standard-start-adornment"
               className="col-sm-2"
-              value={raca}
-              onChange={(e) => setRaca(e.target.value)}
               style={{ marginRight: "40px" }}
               variant="standard"
+              {...register("raca")}
             />
           </div>
         </div>
@@ -102,8 +110,9 @@ export default function Bois(props: { loteId: number }) {
               id="standard-start-adornment"
               className="col-sm-3"
               style={{ marginRight: "40px" }}
-              value={new_peso}
-              onChange={(e) => setNewPeso(e.target.value)}
+              onChange={(e) =>
+                setValue("novo_peso", parseFloat(e.target.value))
+              }
               InputProps={{
                 endAdornment: (
                   <>
@@ -142,10 +151,12 @@ export default function Bois(props: { loteId: number }) {
     );
   }
 
-  function getData(): Prisma.BoiCreateArgs {
-    return {
-      data: {
-        peso: peso_confirmed ? Number(new_peso) : peso ?? 0,
+  function getData(): Prisma.BoiCreateArgs | Prisma.BoiUpdateArgs["data"] {
+    const data = watch();
+
+    if (selectedId) {
+      return {
+        peso: data.novo_peso ? Number(data.novo_peso) : data.peso,
         raca: raca,
         ...(peso_confirmed
           ? {
@@ -156,8 +167,20 @@ export default function Bois(props: { loteId: number }) {
               },
             }
           : null),
-      },
-    };
+      };
+    } else {
+      return {
+        data: {
+          peso: data.peso,
+          raca: data.raca,
+          Lote: {
+            connect: {
+              id: props.loteId,
+            },
+          },
+        },
+      };
+    }
   }
 
   function clearData() {
@@ -227,6 +250,7 @@ export default function Bois(props: { loteId: number }) {
       }}
       /* editBottom={editBottom()}
       fetchData={fetchData} */
+      onSelectItem={(id) => setSelectedId(id)}
       tabTitle="Lista de Bois"
     />
   );

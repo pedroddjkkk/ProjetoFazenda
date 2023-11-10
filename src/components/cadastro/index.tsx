@@ -17,6 +17,7 @@ import exportToExcel from "@/utils/xlsx";
 import { TabContent } from "..";
 import axios from "axios";
 import { CadastroProps, getTabContentAdicionarProps } from "@/types/cadastro";
+import { SubmitHandler } from "react-hook-form";
 
 export default function Cadastro<T extends Record<string, any>>({
   columns,
@@ -29,7 +30,9 @@ export default function Cadastro<T extends Record<string, any>>({
   propsNewTabs,
   onTableRowClick,
   fetchData,
+  onSelectItem,
   tabTitle,
+  control
 }: CadastroProps<T>) {
   const tabs = useTabs((state) => state.tabs);
   const selectedTab = useTabs((state) => state.selectedTab);
@@ -98,6 +101,8 @@ export default function Cadastro<T extends Record<string, any>>({
       selectTab("Editar");
       setSelectedId(e.id);
       setDataProp(e);
+
+      if (onSelectItem) onSelectItem(e.id);
     },
     [setTabs, setSelectedId, setDataProp, selectTab]
   );

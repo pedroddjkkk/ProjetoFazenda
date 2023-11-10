@@ -13,16 +13,7 @@ export async function PUT(
       id: Number(context.params.id),
     },
     data: {
-      ...(body.newPeso
-        ? {
-            pesagens: {
-              create: {
-                peso: parseFloat(body.newPeso),
-              },
-            },
-          }
-        : null),
-      ...body,
+      
     },
   });
 
