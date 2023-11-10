@@ -13,8 +13,6 @@ export async function POST(req: NextRequest) {
   const body = await req.json();
 
   try {
-    body.data.peso = parseFloat(body.data.peso)
-
     await prisma.boi.create(body);
   } catch (error: any) {
     return BadRequest();

@@ -91,7 +91,7 @@ export default function Bois(props: { loteId: number }) {
                 ),
               }}
               variant="standard"
-              {...register("peso")}
+              {...register("peso", { valueAsNumber: true })}
             />
             <TextField
               label="Raça"
@@ -172,7 +172,7 @@ export default function Bois(props: { loteId: number }) {
           : null),
       };
     } else {
-      const returna = {
+      return {
         data: {
           peso: data.peso,
           raca: data.raca,
@@ -182,12 +182,7 @@ export default function Bois(props: { loteId: number }) {
             },
           },
         },
-      }
-
-      console.log(returna);
-      
-
-      return returna;
+      };
     }
   }
 
