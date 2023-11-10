@@ -17,7 +17,6 @@ import exportToExcel from "@/utils/xlsx";
 import { TabContent } from "..";
 import axios from "axios";
 import { CadastroProps, getTabContentAdicionarProps } from "@/types/cadastro";
-import { SubmitHandler } from "react-hook-form";
 
 export default function Cadastro<T extends Record<string, any>>({
   columns,
@@ -97,7 +96,7 @@ export default function Cadastro<T extends Record<string, any>>({
 
   async function onFormControlConfirm() {
     console.log("basduyabsduybuydsab");
-    
+
     let res;
     if (selectedId) {
       res = await axios.put(api + "/" + selectedId, getData);
@@ -189,7 +188,13 @@ export default function Cadastro<T extends Record<string, any>>({
           tabTitle: tabTitle ? tabTitle : "Lista de Registros",
         })}
         <div className="tab-content">
-          {getTabContentAdicionar({ onConfirm, addColumns, selectTab })}
+          {getTabContentAdicionar({
+            onConfirm: control
+              ? control.handleSubmit(onFormControlConfirm)
+              : onConfirm,
+            addColumns,
+            selectTab,
+          })}
           <TabContent
             id="Editar"
             component={
