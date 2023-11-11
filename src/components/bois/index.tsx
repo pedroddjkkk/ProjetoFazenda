@@ -191,7 +191,6 @@ export default function Bois(props: { loteId: number }) {
 
     const formatedPesagens = pesagens.map((pesagem) => {
       const createdAt = new Date(pesagem.createdAt).toLocaleDateString("pt-BR");
-      
 
       return {
         ...pesagem,
@@ -215,7 +214,7 @@ export default function Bois(props: { loteId: number }) {
           >
             <CartesianGrid strokeDasharray="3 3" />
             <XAxis dataKey="createdAt" />
-            <YAxis unit={" kg"}/>
+            <YAxis unit={" kg"} />
             <Tooltip />
             <Legend />
             <Line
