@@ -263,7 +263,6 @@ export default function Bois(props: { loteId: number }) {
         setValue("peso", data.peso);
         setValue("raca", data.raca);
         setPesagens(data.pesagens);
-        console.log(data.pesagens);
       }}
       control={control}
       editBottom={editBottom()}
