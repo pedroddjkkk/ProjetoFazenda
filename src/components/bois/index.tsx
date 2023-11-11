@@ -189,36 +189,44 @@ export default function Bois(props: { loteId: number }) {
   function editBottom() {
     if (!pesagens) return null;
 
+    const formatedPesagens = pesagens.map((pesagem) => {
+      const createdAt = new Date(pesagem.createdAt).toLocaleDateString("pt-BR");
+      
+
+      return {
+        ...pesagem,
+        createdAt,
+      };
+    });
+
     return (
-      <div className="row">
-        <div className="col-sm-12">
-          <ResponsiveContainer width="100%" height="100%">
-            <LineChart
-              width={500}
-              height={300}
-              data={pesagens}
-              margin={{
-                top: 5,
-                right: 30,
-                left: 20,
-                bottom: 5,
-              }}
-            >
-              <CartesianGrid strokeDasharray="3 3" />
-              <XAxis dataKey="createdAt" />
-              <YAxis />
-              <Tooltip />
-              <Legend />
-              <Line
-                type="monotone"
-                dataKey="peso"
-                stroke="#8884d8"
-                activeDot={{ r: 8 }}
-              />
-              <Line type="monotone" dataKey="uv" stroke="#82ca9d" />
-            </LineChart>
-          </ResponsiveContainer>
-        </div>
+      <div className="w-full h-full">
+        <ResponsiveContainer width="100%" height={300}>
+          <LineChart
+            width={500}
+            height={300}
+            data={formatedPesagens}
+            margin={{
+              top: 5,
+              right: 30,
+              left: 20,
+              bottom: 5,
+            }}
+          >
+            <CartesianGrid strokeDasharray="3 3" />
+            <XAxis dataKey="createdAt" />
+            <YAxis unit={"kg"}/>
+            <Tooltip />
+            <Legend />
+            <Line
+              type="monotone"
+              dataKey="peso"
+              stroke="#8884d8"
+              unit={"kg"}
+              activeDot={{ r: 8 }}
+            />
+          </LineChart>
+        </ResponsiveContainer>
       </div>
     );
   }
@@ -257,7 +265,6 @@ export default function Bois(props: { loteId: number }) {
         setValue("raca", data.raca);
         setPesagens(data.pesagens);
         console.log(data.pesagens);
-        
       }}
       control={control}
       editBottom={editBottom()}
