@@ -215,14 +215,14 @@ export default function Bois(props: { loteId: number }) {
           >
             <CartesianGrid strokeDasharray="3 3" />
             <XAxis dataKey="createdAt" />
-            <YAxis unit={"kg"}/>
+            <YAxis unit={" kg"}/>
             <Tooltip />
             <Legend />
             <Line
               type="monotone"
               dataKey="peso"
               stroke="#8884d8"
-              unit={"kg"}
+              unit={" kg"}
               activeDot={{ r: 8 }}
             />
           </LineChart>
