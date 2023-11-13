@@ -19,6 +19,7 @@ import {
   ResponsiveContainer,
 } from "recharts";
 import z from "zod";
+import axios from "axios";
 
 const schema = z.object({
   peso: z.number(),
@@ -186,6 +187,11 @@ export default function Bois(props: { loteId: number }) {
     reset();
   }
 
+  async function fetchData() {
+    const ret = await axios.get(`/api/boi/${props.loteId}`);
+    return ret;
+  }
+
   function editBottom() {
     if (!pesagens) return null;
 
@@ -265,6 +271,7 @@ export default function Bois(props: { loteId: number }) {
         setPesagens(data.pesagens);
       }}
       control={control}
+      fetchData={fetchData}
       editBottom={editBottom()}
       onSelectItem={(id) => setSelectedId(id)}
       tabTitle="Lista de Bois"

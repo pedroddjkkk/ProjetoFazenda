@@ -34,3 +34,16 @@ export async function DELETE(
 
   return Succes(deletedBoi);
 }
+
+export async function GET(_: NextRequest, context: { params: { id: string } }) {
+  const lote = await prisma.boi.findMany({
+    where: {
+      loteId: Number(context.params.id),
+    },
+    include: {
+      pesagens: true,
+    },
+  });
+
+  return NextResponse.json(lote, { status: 200 });
+}
