@@ -1,34 +1,59 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Sistema de Gerenciamento de Fazendas e Gados
 
-## Getting Started
+O Sistema de Gerenciamento de Fazendas e Gados é feito para ajudar fazendeiros a gerenciar suas fazendas e gados de forma mais eficiente. Com ele é possível realizar o cadastro de gados, dietas e pesagens dos animais, além de gerar relatórios para análises de produtividade dos animais.
 
-First, run the development server:
+## Tecnologias Utilizadas
+
+- **Next.js**: Framework de React para produção.
+- **Prisma**: ORM para consultas de banco de dados.
+- **TailwindCSS**: Framework de CSS para design rápido e responsivo.
+- **PostgreSQL**: Sistema de gerenciamento de banco de dados relacional.
+
+## Funcionalidades
+
+As principais funcionalidades do sistema são:
+
+- Gerenciamento de gados e dietas (cadastro, edição, exclusão).
+- Monitoramento de produtividade dos animais.
+- Gestão de lotes da fazenda.
+- Relatórios e análises.
+
+## Instalação e Execução
+
+Instruções passo a passo sobre como configurar o ambiente de desenvolvimento e executar o projeto localmente.
+
+### Pré-requisitos
+
+- Node.js (20 ou maior)
+- PostgreSQL
+- npm
+
+### Configuração
 
 ```bash
+# Clone o repositório
+git clone https://github.com/pedroddjkkk/ProjetoFazenda.git
+
+# Instale as dependências
+cd ProjetoFazenda
+npm install
+
+# Configure o banco de dados e o JWT no .env
+# Instruções para configurar o PostgreSQL e o Prisma
+npx prisma migrate dev
+
+# Execute o projeto
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Imagens do Projeto
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+![Lista de Usuários](/images/main.png)
+![Cadastro de Pesagens](/images/pesagem.png)
 
-## Learn More
+## Contato
 
-To learn more about Next.js, take a look at the following resources:
+Pedro Valério - contato@pedrovalerio.com
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+Link do Projeto: [fazenda](https://github.com/pedroddjkkk/ProjetoFazenda)

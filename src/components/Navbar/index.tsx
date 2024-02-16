@@ -36,10 +36,10 @@ function Navbar({ children }: { children: React.ReactNode }) {
 
   return (
     <div id="page-top">
-      <div id="wrapper">
+      <div id="wrapper" className="w-screen">
         <div id="nav-transition">
           <nav
-            className={`navbar navbar-dark align-items-start sidebar sidebar-dark accordion bg-gradient-primary p-0 fixed-top ${
+            className={`navbar navbar-dark align-items-start sidebar sidebar-dark accordion p-0 fixed-top from-[#538D22] to-[#245501] bg-gradient-to-b ${
               navbarVisible ? "" : "hidden"
             }`}
             id="navbar"

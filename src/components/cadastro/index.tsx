@@ -29,7 +29,9 @@ export default function Cadastro<T extends Record<string, any>>({
   propsNewTabs,
   onTableRowClick,
   fetchData,
+  onSelectItem,
   tabTitle,
+  control,
 }: CadastroProps<T>) {
   const tabs = useTabs((state) => state.tabs);
   const selectedTab = useTabs((state) => state.selectedTab);
@@ -92,12 +94,33 @@ export default function Cadastro<T extends Record<string, any>>({
     clearData();
   }
 
+  async function onFormControlConfirm() {
+    console.log("basduyabsduybuydsab");
+
+    let res;
+    if (selectedId) {
+      res = await axios.put(api + "/" + selectedId, getData);
+    } else {
+      res = await axios.post(api, getData);
+    }
+    if (res.status === 200) {
+      toast.success("Salvo com sucesso!");
+    } else {
+      toast.error("Erro ao salvar!");
+    }
+    await reloadData();
+    selectTab("Listar");
+    clearData();
+  }
+
   const handleClickTable = useCallback(
     async (e) => {
       setTabs([{ id: "Editar", name: "Editar", icon: <FaEdit /> }]);
       selectTab("Editar");
       setSelectedId(e.id);
       setDataProp(e);
+
+      if (onSelectItem) onSelectItem(e.id);
     },
     [setTabs, setSelectedId, setDataProp, selectTab]
   );
@@ -165,11 +188,23 @@ export default function Cadastro<T extends Record<string, any>>({
           tabTitle: tabTitle ? tabTitle : "Lista de Registros",
         })}
         <div className="tab-content">
-          {getTabContentAdicionar({ onConfirm, addColumns, selectTab })}
+          {getTabContentAdicionar({
+            onConfirm: control
+              ? control.handleSubmit(onFormControlConfirm)
+              : onConfirm,
+            addColumns,
+            selectTab,
+          })}
           <TabContent
             id="Editar"
             component={
-              <form onSubmit={onConfirm}>
+              <form
+                onSubmit={
+                  control
+                    ? control.handleSubmit(onFormControlConfirm)
+                    : onConfirm
+                }
+              >
                 <div
                   className="add-section"
                   style={{ margin: "0 auto", width: "95%" }}
@@ -254,7 +289,7 @@ export function getTabContentListar({
             title={tabTitle ? tabTitle : "Lista de registros"}
             onRowClicked={handleClickTable}
             pagination
-            keyField="id_pk"
+            keyField="id"
             paginationComponentOptions={{
               rowsPerPageText: "Registros por paginas:",
               rangeSeparatorText: "de",

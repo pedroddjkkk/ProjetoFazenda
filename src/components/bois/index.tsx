@@ -1,49 +1,54 @@
-import { Cadastro } from ".."; /* 
-import "../../App.css"; */
+import { Cadastro } from "..";
 import "../../assets/bootstrap/css/bootstrap.min.css";
 import { IconButton, InputAdornment, TextField } from "@mui/material";
-/* import ComboEdit from "../ComboEdit/ComboEdit"; */
 import { Modal } from "react-bootstrap";
 import { useEffect, useState } from "react";
-import {
-  CartesianGrid,
-  Line,
-  LineChart,
-  ResponsiveContainer,
-  Tooltip,
-} from "recharts";
 import { FaCheck, FaTimes } from "react-icons/fa";
 import { AiOutlinePlus } from "react-icons/ai";
 import { useTabs } from "@/lib/stores";
 import { Prisma } from "@prisma/client";
-import { TableColumn } from "react-data-table-component";
+import { useForm } from "react-hook-form";
+import {
+  LineChart,
+  Line,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
+  Legend,
+  ResponsiveContainer,
+} from "recharts";
+import z from "zod";
+import axios from "axios";
+
+const schema = z.object({
+  peso: z.number(),
+  raca: z.string(),
+  novo_peso: z.number().optional(),
+});
 
 export default function Bois(props: { loteId: number }) {
-  const [peso, setPeso] = useState<number>();
-  const [raca, setRaca] = useState("");
   const [show, setShow] = useState(false);
-  const [peso_confirmed, setPesoConfirmed] = useState(false);
-  const [id_racao, setId_racao] = useState("");
-  const [new_peso, setNewPeso] = useState("");
-  const [nome_racao, setNomeRacao] = useState("");
-  const [pesagens, setPesagens] = useState("");
+  const [selectedId, setSelectedId] = useState<number>();
+  const [pesagens, setPesagens] = useState<Prisma.PesagemGetPayload<{}>[]>();
   const selectedTab = useTabs((state) => state.selectedTab);
+  const { register, reset, setValue, watch, control } =
+    useForm<z.infer<typeof schema>>();
 
   const handleClose = () => {
     setShow(false);
-    setNewPeso("");
+    setValue("novo_peso", undefined);
   };
 
   const handleConfirm = () => {
     setShow(false);
-    setPesoConfirmed(true);
+    setValue("peso", watch("novo_peso") ?? 0);
   };
 
   const handleShow = () => setShow(true);
 
   useEffect(() => {
     if (selectedTab === "Editar") {
-      setPesoConfirmed(false);
     }
   }, [selectedTab]);
 
@@ -57,8 +62,6 @@ export default function Bois(props: { loteId: number }) {
               id="standard-start-adornment"
               className="col-sm-2"
               style={{ marginRight: "40px" }}
-              value={peso_confirmed ? new_peso : peso}
-              onChange={(e) => setPeso(Number(e.target.value))}
               InputProps={{
                 endAdornment: (
                   <>
@@ -80,15 +83,15 @@ export default function Bois(props: { loteId: number }) {
                 ),
               }}
               variant="standard"
+              {...register("peso", { valueAsNumber: true })}
             />
             <TextField
               label="Raça"
               id="standard-start-adornment"
               className="col-sm-2"
-              value={raca}
-              onChange={(e) => setRaca(e.target.value)}
               style={{ marginRight: "40px" }}
               variant="standard"
+              {...register("raca")}
             />
           </div>
         </div>
@@ -102,8 +105,9 @@ export default function Bois(props: { loteId: number }) {
               id="standard-start-adornment"
               className="col-sm-3"
               style={{ marginRight: "40px" }}
-              value={new_peso}
-              onChange={(e) => setNewPeso(e.target.value)}
+              onChange={(e) =>
+                setValue("novo_peso", parseFloat(e.target.value))
+              }
               InputProps={{
                 endAdornment: (
                   <>
@@ -142,53 +146,104 @@ export default function Bois(props: { loteId: number }) {
     );
   }
 
-  function getData() {
-    return {
-      peso: peso,
-      raca: raca,
-      loteId: props.loteId,
-    };
+  function getData(): Prisma.BoiCreateArgs | Prisma.BoiUpdateArgs["data"] {
+    const data = watch();
+
+    if (selectedId) {
+      return {
+        peso: data.peso,
+        raca: data.raca,
+        ...(data.novo_peso
+          ? {
+              pesagens: {
+                create: {
+                  peso: data.novo_peso,
+                },
+              },
+            }
+          : null),
+      };
+    } else {
+      return {
+        data: {
+          peso: data.peso,
+          raca: data.raca,
+          pesagens: {
+            create: {
+              peso: data.peso,
+            },
+          },
+          Lote: {
+            connect: {
+              id: props.loteId,
+            },
+          },
+        },
+      };
+    }
   }
 
   function clearData() {
-    setPeso(undefined);
-    setRaca("");
-    setId_racao("");
-    setNewPeso("");
+    reset();
   }
 
-  /*   function editBottom() {
+  async function fetchData() {
+    const ret = await axios.get(`/api/boi/${props.loteId}`);
+    return ret;
+  }
+
+  function editBottom() {
     if (!pesagens) return null;
-    const getData = () => {
-      return pesagens.map((pesagem) => {
-        return {
-          peso: pesagem.peso,
-        };
-      });
-    };
+
+    const formatedPesagens = pesagens.map((pesagem) => {
+      const createdAt = new Date(pesagem.createdAt).toLocaleDateString("pt-BR");
+
+      return {
+        ...pesagem,
+        createdAt,
+      };
+    });
+
     return (
-      <div className="row">
-        <div className="col-sm-12">
-          <ResponsiveContainer height={200} width="100%">
-            <LineChart data={getData()}>
-              <Tooltip />
-              <Line type="monotone" dataKey="peso" stroke="#8884d8" />
-              <CartesianGrid stroke="#ccc" strokeDasharray="5 5" />
-            </LineChart>
-          </ResponsiveContainer>
-        </div>
+      <div className="w-full h-full">
+        <ResponsiveContainer width="100%" height={300}>
+          <LineChart
+            width={500}
+            height={300}
+            data={formatedPesagens}
+            margin={{
+              top: 5,
+              right: 30,
+              left: 20,
+              bottom: 5,
+            }}
+          >
+            <CartesianGrid strokeDasharray="3 3" />
+            <XAxis dataKey="createdAt" />
+            <YAxis unit={" kg"} />
+            <Tooltip />
+            <Legend />
+            <Line
+              type="monotone"
+              dataKey="peso"
+              stroke="#8884d8"
+              unit={" kg"}
+              activeDot={{ r: 8 }}
+            />
+          </LineChart>
+        </ResponsiveContainer>
       </div>
     );
-  } */
-
-  /*   async function fetchData() {
-    const ret = await api.get("tab_bois", null, props.fk);
-    console.log(ret);
-    return ret;
-  } */
+  }
 
   return (
-    <Cadastro<Prisma.BoiGetPayload<{}>>
+    <Cadastro<
+      Prisma.BoiGetPayload<{
+        include: {
+          pesagens: true;
+        };
+      }>
+    >
       columns={[
         {
           name: "Identificação",
@@ -211,12 +266,14 @@ export default function Bois(props: { loteId: number }) {
       getData={getData()}
       clearData={clearData}
       setDataProp={(data) => {
-        setPeso(data.peso);
-        setRaca(data.raca); /* 
-        setPesagens(data.pesagens); */
+        setValue("peso", data.peso);
+        setValue("raca", data.raca);
+        setPesagens(data.pesagens);
       }}
-      /* editBottom={editBottom()}
-      fetchData={fetchData} */
+      control={control}
+      fetchData={fetchData}
+      editBottom={editBottom()}
+      onSelectItem={(id) => setSelectedId(id)}
       tabTitle="Lista de Bois"
     />
   );

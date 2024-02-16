@@ -1,5 +1,3 @@
-import { cookies } from "next/headers";
-
 export const metadata = {
   title: "Beefy",
   description: "Sistema de gerenciamento de bovinos",
